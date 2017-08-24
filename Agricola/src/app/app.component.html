@@ -1,0 +1,29 @@
+<div id="wrapper">
+
+
+  <!-- Menú de Navegación Lateral -->
+  <app-navigation></app-navigation>
+
+
+
+
+  <!-- Main page wrapper -->
+  <div id="page-wrapper" class="gray-bg">
+
+    <!-- Top navigation -->
+    <app-topnavbar></app-topnavbar>
+<router-outlet></router-outlet>
+    <!-- Footer -->
+    <app-footer></app-footer>
+
+  </div>
+
+
+  <!-- End page wrapper-->
+  <div id="right-sidebar" class="animated">
+    <app-configuration></app-configuration>
+  </div>
+
+  <app-smallchat></app-smallchat>
+
+</div>

@@ -41,10 +41,6 @@ campos: Campo[] = [];
 
 }
 
-
-
-
-
 export interface Campo {
 
   codigo: number;
@@ -54,9 +50,8 @@ export interface Campo {
 
   }
 
-
-
 export interface Coordenada {
       latitud: number;
       longitud: number;
+      nroOrden: number;
 }

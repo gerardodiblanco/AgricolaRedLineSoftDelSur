@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {CampoService ,Campo ,Coordenada} from '../../service/campo.service';
+import {CampoService ,Campo ,Coordenada} from '../../service/campo-service/campo.service';
 
 import { ActivatedRoute } from '@angular/router';
-import {MapaService} from '../../service/mapa.service';
+import {MapaService} from '../../service/mapa-service/mapa.service';
 
 @Component({
   selector: 'app-campo',
@@ -12,7 +12,6 @@ import {MapaService} from '../../service/mapa.service';
 export class CampoComponent implements OnInit {
 campos: Campo[];
 
-
   constructor(private campoService: CampoService,   private route: ActivatedRoute,
      private mapaService: MapaService) {
 
@@ -21,12 +20,9 @@ campos: Campo[];
      console.log("dentro de component")
  console.log(this.campoService.campos)
  }
-
-
-
   ngOnInit() {
   this.campos = this.campoService.campos
-  
+ 
     }
     clickVerMapa(coord: Coordenada[] ){
 this.mapaService.cargarArea(coord);

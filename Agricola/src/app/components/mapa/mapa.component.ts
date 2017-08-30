@@ -1,13 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Component,OnInit } from '@angular/core';
 import { AgmCoreModule } from '@agm/core';
-import {CampoService,Coordenada} from '../../service/campo.service'
-import {MapaService} from '../../service/mapa.service'
+import {CampoService,Coordenada} from '../../service/campo-service/campo.service'
+import {MapaService} from '../../service/mapa-service/mapa.service'
 
 import { AfterContentInit, Directive, EventEmitter, OnChanges, OnDestroy, SimpleChanges, Input, Output } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { LatLng, LatLngLiteral, PolyMouseEvent } from '../../../../node_modules/@agm/core';
-import { PolygonManager } from '../../../../node_modules/@agm/core';
+//import { PolygonManager } from '../../../../node_modules/@agm/core';
 
 @Component({
   selector: 'app-mapa',

@@ -1,12 +1,11 @@
 import { Injectable,OnInit } from '@angular/core';
-import { LatLng, LatLngLiteral, PolyMouseEvent } from '../../../node_modules/@agm/core';
-import {CampoService,Coordenada} from '../service/campo.service';
+import { LatLng, LatLngLiteral, PolyMouseEvent } from '../../../../node_modules/@agm/core';
+import {CampoService,Coordenada} from '../../service/campo-service/campo.service';
 import { Router } from '@angular/router';
 
 @Injectable()
 export class MapaService implements OnInit {
   paths: Array<LatLngLiteral> = [];
-
   latInicio: number; 
   lngInicio: number;
   coordAux: Coordenada;

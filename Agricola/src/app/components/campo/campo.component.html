@@ -4,23 +4,26 @@
 <table class="table table-sm table-inverse">
   <thead>
     <tr class="success">
-      <th>#</th>
+      
       <th>Nombre</th>
       <th>Codigo</th>
       <th>Hectareas</th>
       <th>CUIT</th>
       <th></th> 
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor = "let campo of campos">
-      <th scope="row">{{campo.indez}}</th> 
+       
       <td>{{campo.nombre}}</td>
       <td>{{campo.codigo}}</td>
       <td>{{campo.hectarea}}</td>
-      <td >{{campo.CUIT}}</td>
-      <td> <button type="button" class="btn btn-success" (click)= "clickVerMapa(campo.coordenadaModel)">Ver Mapa</button></td>
+      <td >{{campo.cuit}}</td>
+      <td> <button type="button" class="btn btn-info" (click)= "clickVerMapa(campo.coordenadaModel)">Ver Mapa</button></td>
+      <td> <button type="button" class="btn btn-danger">Eliminar Campo</button> </td>
     </tr>
   </tbody>
 </table>
+<button type="button" class="btn btn-primary"  routerLink="/nuevo-campo" routerLinkActive="active">Crear Campo</button>
 </div>

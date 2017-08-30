@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { RestBaseService } from '../tools/rest.tools';
+
 import { Http, Response, Headers } from '@angular/http';  
 import 'rxjs/add/operator/map';
 import { Observable }     from 'rxjs/Observable';
@@ -42,10 +42,10 @@ campos: Campo[] = [];
 }
 
 export interface Campo {
-
   codigo: number;
   hectarea: number;
   nombre: string;
+  cuit: string;
   coordenadas: Coordenada[];
 
   }

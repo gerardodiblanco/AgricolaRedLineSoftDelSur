@@ -22,9 +22,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
 
-import {CampoService /*,Campo*/ } from './service/campo.service';
-import {MapaService /*,Campo*/ } from './service/mapa.service';
+import {CampoService /*,Campo*/ } from './service/campo-service/campo.service';
+import {MapaService /*,Campo*/ } from './service/mapa-service/mapa.service';
 import { HttpModule,Http, Response } from '@angular/http';
+import { NuevoCampoComponent } from './components/campo/nuevo-campo/nuevo-campo.component';
+
+
+
 
 @NgModule({
   declarations: [
@@ -39,7 +43,8 @@ import { HttpModule,Http, Response } from '@angular/http';
     MailComponent,
     SmallchatComponent,
     CampoComponent,
-    MapaComponent
+    MapaComponent,
+    NuevoCampoComponent
   ],
   imports: [
 BrowserModule,
@@ -47,10 +52,10 @@ BrowserModule,
     FormsModule,
     HttpModule,
     AgmCoreModule.forRoot({
-      apiKey: ' AIzaSyCt5d9j8H1Im0mG4N__TG7s30PenkB7cbg '
+      apiKey: 'AIzaSyCt5d9j8H1Im0mG4N__TG7s30PenkB7cbg'
     }),
     BrowserModule,
-    APP_ROUTING
+    APP_ROUTING,
 
   ],
   providers: [CampoService, MapaService],

@@ -1,29 +1,66 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+    
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+       <div class="ibox-title">
+           <h5>Campos</h5>
+    
+           <div class="ibox-tools">
+              <a class="collapse-link">
+                 <i class="fa fa-chevron-up"></i>
+               </a>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-wrench"></i>
+                </a>
+                   <ul class="dropdown-menu dropdown-user">
+                       <li><a href="#">Config option 1</a>
+                        </li>
+                   </ul>
+                    <a class="close-link">
+                       <i class="fa fa-times"></i>
+                    </a>
+            </div>
+          </div>
+        <div class="ibox-content">
 
+                          <div class="table-responsive">
+                          <table class="table table-stripped toggle-arrow-tiny">
+                            <thead>
+                              <tr class="success">
+                                
+                                <th>Nombre</th>
+                                <th>Codigo</th>
+                                <th>Hectareas</th>
+                                <th>CUIT</th>
+                                <th></th> 
+                                <th></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor = "let campo of campos">
+                                
+                                <td>{{campo.nombre}}</td>
+                                <td>{{campo.codigo}}</td>
+                                <td>{{campo.hectarea}}</td>
+                                <td >{{campo.cuit}}</td>
+                                <td> <button type="button" class="btn btn-info" (click)= "clickVerMapa(campo.coordenadaModel)">Ver Mapa</button></td>
+                                <td> <button type="button" class="btn btn-danger">Eliminar Campo</button> </td>
+                              </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="5">
+                                        <ul class="pagination pull-right"></ul>
+                                    </td>
+                                </tr>
+                            </tfoot>
 
-<div class="table-responsive">
-<table class="table table-sm table-inverse">
-  <thead>
-    <tr class="success">
-      
-      <th>Nombre</th>
-      <th>Codigo</th>
-      <th>Hectareas</th>
-      <th>CUIT</th>
-      <th></th> 
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor = "let campo of campos">
-       
-      <td>{{campo.nombre}}</td>
-      <td>{{campo.codigo}}</td>
-      <td>{{campo.hectarea}}</td>
-      <td >{{campo.cuit}}</td>
-      <td> <button type="button" class="btn btn-info" (click)= "clickVerMapa(campo.coordenadaModel)">Ver Mapa</button></td>
-      <td> <button type="button" class="btn btn-danger">Eliminar Campo</button> </td>
-    </tr>
-  </tbody>
-</table>
-<button type="button" class="btn btn-primary"  routerLink="/nuevo-campo" routerLinkActive="active">Crear Campo</button>
+                          </table>
+                          <button type="button" class="btn btn-primary"  routerLink="/nuevo-campo" routerLinkActive="active">Crear Campo</button>
+                          </div>
+          </div>
+      </div>
+    </div>
+  </div>
 </div>

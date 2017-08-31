@@ -4,6 +4,9 @@ import {CampoService ,Campo ,Coordenada} from '../../service/campo-service/campo
 import { ActivatedRoute } from '@angular/router';
 import {MapaService} from '../../service/mapa-service/mapa.service';
 
+declare var jQuery: any;
+declare var $:any;
+
 @Component({
   selector: 'app-campo',
      templateUrl: './campo.component.html',
@@ -19,15 +22,25 @@ campos: Campo[];
       
      console.log("dentro de component")
  console.log(this.campoService.campos)
- }
+
+
+ 
+ $('.footable').footable();
+   
+ 
+
+}
   ngOnInit() {
   this.campos = this.campoService.campos
  
+
     }
     clickVerMapa(coord: Coordenada[] ){
 this.mapaService.cargarArea(coord);
 
     }
+
+
 
 }
 

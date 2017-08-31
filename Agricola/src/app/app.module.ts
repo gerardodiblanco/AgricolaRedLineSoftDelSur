@@ -18,6 +18,8 @@ import { CampoComponent } from './components/campo/campo.component';
 import { MapaComponent } from './components/mapa/mapa.component';
 
 
+
+
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
@@ -56,6 +58,7 @@ BrowserModule,
     }),
     BrowserModule,
     APP_ROUTING,
+    
 
   ],
   providers: [CampoService, MapaService],

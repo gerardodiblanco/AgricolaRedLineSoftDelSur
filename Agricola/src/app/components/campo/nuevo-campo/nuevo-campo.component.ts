@@ -25,7 +25,7 @@ export class NuevoCampoComponent implements OnInit {
 onSubmit(){
   // Mostramos el objeto usuario
   console.log("onSubmit");
-  console.log(this.model)
+  console.log(this.model);
 }
 
 ngOnInit() {

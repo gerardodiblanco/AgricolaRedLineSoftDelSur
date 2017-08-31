@@ -1,75 +1,82 @@
+<div class="container">
 <h1>Nuevo Campo</h1>
 
-<agm-map 
-[latitude]="latInicio" 
-[longitude]="lngInicio"
-[zoom]="14"
-(mapClick)="mapClickeado($event)"
->
-    
+        <agm-map 
+        [latitude]="latInicio" 
+        [longitude]="lngInicio"
+        [zoom]="14"
+        (mapClick)="mapClickeado($event)"
+        >
+        <agm-marker
+        *ngFor= "let m of markers; let i = index"
+        (markerClick)="marcadorClicleado(m,i)"
+        [latitude]="m.lati"
+        [longitude]="m.longi"
+        [markerDraggable]="true"
+        iconUrl="assets/img/iconoMarcador.png"
+        (dragEnd)="posicionFinalMarcador(m,$event,i)"
+        >
 
-<agm-marker
-*ngFor= "let m of markers; let i = index"
-(markerClick)="marcadorClicleado(m,i)"
-[latitude]="m.lati"
-[longitude]="m.longi"
-[markerDraggable]="m.arrastrable"
-iconUrl="assets/img/iconoMarcador.png"
-(dragEnd)="posicionFinalMarcador(m,$event,i)"
->
+            <agm-polygon
+            [paths]="paths"
+            fillOpacity = 0.1
+            fillColor  = #21AF04
+            >
+            </agm-polygon>
 
-    <agm-polygon
-     [paths]="paths"
-     fillOpacity = 0.1
-     fillColor  = #21AF04
-     editable = true
-     >
-    </agm-polygon>
+            <agm-info-window>
+                <strong>{{m.nombre}}</strong>
+            </agm-info-window>
+        </agm-marker>
+        </agm-map>
 
-    <agm-info-window>
-        <strong>{{m.nombre}}</strong>
-    </agm-info-window>
-</agm-marker>
-</agm-map>
+   
+    <p>The panel-group class clears the bottom-margin. Try to remove the class and see what happens.</p>
+        <div class="panel-group">
+          <div class="panel panel-primary">
+            <div class="panel-heading">Datos del Campo</div>
+            <div class="panel-body">
+                <form  class="form-horizontal" (ngSubmit)="onSubmit()"  >
+                            
+                    <div class="form-group">
+                       <label for="txtNombre" class="col-lg-2 control-label" >Nombre: </label>
+                        <div class="col-sm-10">
+                             <input type="text"  required [(ngModel)]="model.nombre" name="txtNombre" />
+                        </div>
+                    </div>         
+                    <div class="form-group">
+                         <label for="txtCuit" class="col-lg-2 control-label">CUIT:</label>
+                         <div class="col-sm-10">
+                            <input type="text"  required [(ngModel)]="model.cuit" name="txtCuit"  />
+                    
+                        </div>
+                    </div>          
+                    <div class="form-group">
+                          <label for="txtHcta" class="col-lg-2 control-label">Hectarea:</label>
+                          <div class="col-sm-10">
+                            <input type="number" required [(ngModel)]="model.hectarea" name="txtHcta" />
+                   
+                        </div>
+                    </div>          
+                    <div class="form-group">
+                            <label for="txtCod" class="col-lg-2 control-label">Codigo:</label>
+                            <div class="col-sm-10">
+                            <input type="number"  required [(ngModel)]="model.codigo" name="txtCod" />
+                    
+                        </div>
+                    </div>          
+                    <div>
+                                  
+                        <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary" >Guardar</button>
+                    </div>
+                                  
+                  </div>
+                  
+                </form>
 
-
-
-<div>
-        <h2>Datos del campo</h2>
-<form  class="form-inline" (ngSubmit)="onSubmit()"  >
-  
-    <div class="form-group">
-           <label for="txtNombre" class="col-lg-2 control-label" >Nombre: </label>
-           <input type="text" class="form-control" required [(ngModel)]="model.nombre" name="txtNombre" />
-
+            </div>
     </div>
-    
-   <div class="form-group">
-           <label for="txtCuit" class="col-lg-2 control-label">CUIT:</label>
-           <input type="text" class="form-control" required [(ngModel)]="model.cuit" name="txtCuit"  />
-       </div>
-    
-    
-   <div class="form-group">
-           <label for="txtHcta" class="col-lg-2 control-label">Hectarea:</label>
-           <input type="number" class="form-control" required [(ngModel)]="model.hectarea" name="txtHcta" />
-       </div>
-    
-    
-   <div class="form-group">
-           <label for="txtCod" class="col-lg-2 control-label">Codigo:</label>
-           <input type="number" class="form-control" required [(ngModel)]="model.codigo" name="txtCod" />
-       </div>
-    
-
-    <div>
-        
-       <div class="col-sm-10 col-sm-offset-2">
-                   <button type="submit" class="btn btn-primary" >Guardar</button>
-        </div>
-        
-     </div>
-   </form>
-
 </div>
 
+      

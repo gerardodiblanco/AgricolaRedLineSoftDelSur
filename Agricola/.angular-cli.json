@@ -21,7 +21,9 @@
       "styles": [
         "assets/css/bootstrap.min.css",
         "assets/font-awesome/css/font-awesome.css",
+        "assets/css/plugins/footable/footable.core.css",
         "assets/css/animate.css",
+        "assets/css/style.css",
         "styles.css"
       ],
       "scripts": [
@@ -30,7 +32,8 @@
         "assets/js/plugins/metisMenu/jquery.metisMenu.js",
         "assets/js/plugins/slimscroll/jquery.slimscroll.min.js",
         "assets/js/inspinia.js",
-        "assets/js/plugins/pace/pace.min.js"
+        "assets/js/plugins/pace/pace.min.js",
+        "assets/js/plugins/footable/footable.all.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

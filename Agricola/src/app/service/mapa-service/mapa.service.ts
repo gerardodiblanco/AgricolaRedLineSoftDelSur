@@ -1,19 +1,20 @@
 import { Injectable,OnInit } from '@angular/core';
 import { LatLng, LatLngLiteral, PolyMouseEvent } from '../../../../node_modules/@agm/core';
-import {CampoService,Coordenada} from '../../service/campo-service/campo.service';
+import {CampoService} from '../../service/campo-service/campo.service';
 import { Router } from '@angular/router';
+import {CoordenadaClass} from '../../class/coordenada';
 
 @Injectable()
 export class MapaService implements OnInit {
   paths: Array<LatLngLiteral> = [];
   latInicio: number; 
   lngInicio: number;
-  coordAux: Coordenada;
+  coordAux: CoordenadaClass;
   constructor( private router: Router,) { }
 
   ngOnInit (){}
 
-  cargarArea(coord: Coordenada[]){
+  cargarArea(coord: CoordenadaClass[]){
 
     coord = this.ordebarArray(coord);
 
@@ -33,7 +34,7 @@ export class MapaService implements OnInit {
    this.router.navigate(['/mapa'])
   } 
 
-  ordebarArray(coord: Coordenada[]) {
+  ordebarArray(coord: CoordenadaClass[]) {
       
     for(let i=0;i<(coord.length-1);i++){
       for(let j=i+1;j<coord.length;j++){

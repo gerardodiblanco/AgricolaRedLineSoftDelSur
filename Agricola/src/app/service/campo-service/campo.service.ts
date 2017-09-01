@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
-
-
 import { Http, Response, Headers } from '@angular/http';  
 import 'rxjs/add/operator/map';
 import { Observable }     from 'rxjs/Observable';
+import {CampoClass} from '../../class/campo';
+
+
 
 @Injectable()
 export class CampoService { 
-campos: Campo[] = [];
+campos: CampoClass[] = [];
 
   constructor(private http:Http) {
 
@@ -41,17 +42,3 @@ campos: Campo[] = [];
 
 }
 
-export interface Campo {
-  codigo: number;
-  hectarea: number;
-  nombre: string;
-  cuit: string;
-  coordenadas: Coordenada[];
-
-  }
-
-export interface Coordenada {
-      latitud: number;
-      longitud: number;
-      nroOrden: number;
-}

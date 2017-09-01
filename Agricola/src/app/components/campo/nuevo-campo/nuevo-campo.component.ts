@@ -1,9 +1,9 @@
-import { Component, OnInit,Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { CampoClass } from '../../../class/campo'
 import {DomicilioClass} from '../../../class/domicilio'
-import { ActivatedRoute } from '@angular/router';
-import { LatLng, LatLngLiteral, PolyMouseEvent } from '../../../../../node_modules/@agm/core';
-import { PolygonManager } from '../../../../../node_modules/@agm/core';
+//import { ActivatedRoute } from '@angular/router';
+import { LatLng, LatLngLiteral } from '../../../../../node_modules/@agm/core';
+//import { PolygonManager } from '../../../../../node_modules/@agm/core';
 
 
 @Component({
@@ -19,7 +19,7 @@ export class NuevoCampoComponent implements OnInit {
   latInicio = -32.880913 ; 
   lngInicio = -68.83319;
 
-  constructor(private activatedRoute: ActivatedRoute ) { }
+  constructor() { }
 
 
 onSubmit(){

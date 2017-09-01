@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {CampoService ,Campo ,Coordenada} from '../../service/campo-service/campo.service';
+import {CampoService} from '../../service/campo-service/campo.service';
 
 import { ActivatedRoute } from '@angular/router';
 import {MapaService} from '../../service/mapa-service/mapa.service';
 
-declare var jQuery: any;
-declare var $:any;
+import {CampoClass} from '../../class/campo';
+import {CoordenadaClass} from '../../class/coordenada';
+
 
 @Component({
   selector: 'app-campo',
@@ -13,7 +14,7 @@ declare var $:any;
   styleUrls: ['./campo.component.css']
 })
 export class CampoComponent implements OnInit {
-campos: Campo[];
+campos: CampoClass[];
 
   constructor(private campoService: CampoService,   private route: ActivatedRoute,
      private mapaService: MapaService) {
@@ -23,19 +24,14 @@ campos: Campo[];
      console.log("dentro de component")
  console.log(this.campoService.campos)
 
-
- 
- $('.footable').footable();
-   
- 
-
 }
   ngOnInit() {
   this.campos = this.campoService.campos
  
 
     }
-    clickVerMapa(coord: Coordenada[] ){
+    clickVerMapa(coord: CoordenadaClass[] ){
+
 this.mapaService.cargarArea(coord);
 
     }

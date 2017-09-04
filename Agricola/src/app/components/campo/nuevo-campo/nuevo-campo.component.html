@@ -30,13 +30,12 @@
         </agm-marker>
         </agm-map>
 
-   
     <p>The panel-group class clears the bottom-margin. Try to remove the class and see what happens.</p>
         <div class="panel-group">
           <div class="panel panel-primary">
             <div class="panel-heading">Datos del Campo</div>
             <div class="panel-body">
-                <form  class="form-horizontal" (ngSubmit)="onSubmit()"  >
+                <form class="form-inline" (ngSubmit)="onSubmit()"  >
                             
                     <div class="form-group">
                        <label for="txtNombre" class="col-lg-2 control-label" >Nombre: </label>
@@ -73,7 +72,7 @@
                     <div class="form-group">
                             <label for="txtCod" class="col-lg-2 control-label">Calle:</label>
                         <div class="col-sm-10">
-                            <input type="number"  required [(ngModel)]="domicilio.calle" name="txtCod" />
+                            <input type="number"  required [(ngModel)]="campo.domicilio.calle" name="txtCod" />
                     
                         </div>
                     </div>  
@@ -81,7 +80,7 @@
                     <div class="form-group">
                         <label for="txtCod" class="col-lg-2 control-label">Numero:</label>
                     <div class="col-sm-10">
-                        <input type="number"  required [(ngModel)]="domicilio.numero" name="txtCod" />
+                        <input type="number"  required [(ngModel)]="campo.domicilio.numero" name="txtCod" />
                 
                     </div>
                     </div> 

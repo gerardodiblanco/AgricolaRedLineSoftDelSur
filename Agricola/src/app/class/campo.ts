@@ -7,6 +7,6 @@ export class CampoClass {
     hectarea: number;
     nombre: string;
     cuit: string;
-    coordenadas: CoordenadaClass[];
+    coordenadaList: CoordenadaClass[];
   
     }

@@ -6,7 +6,7 @@ import {MapaService} from '../../service/mapa-service/mapa.service';
 
 import {CampoClass} from '../../class/campo';
 import {CoordenadaClass} from '../../class/coordenada';
-
+import {NuevoCampoService} from '../../service/campo-service/nuevo-campo.service';
 
 @Component({
   selector: 'app-campo',
@@ -15,9 +15,10 @@ import {CoordenadaClass} from '../../class/coordenada';
 })
 export class CampoComponent implements OnInit {
 campos: CampoClass[];
+campo: CampoClass = new CampoClass();
 
   constructor(private campoService: CampoService,   private route: ActivatedRoute,
-     private mapaService: MapaService) {
+     private mapaService: MapaService,private nuevoCampoService: NuevoCampoService) {
 
   this.campoService.getcampos();
       
@@ -35,7 +36,19 @@ campos: CampoClass[];
 this.mapaService.cargarArea(coord);
 
     }
+    clickEditarCampo(campo: CampoClass){
+      console.log("EditarCampo");
+      console.log(campo);
+      this.campo = campo;
+     this.nuevoCampoService.editarCampo(campo);
+    }
 
+    clickNuevoCampo(){
+      this.campo = null;
+      console.log("clickNuevoCampo");
+      console.log(this.campo);
+      this.nuevoCampoService.editarCampo(this.campo);
+    }
 
 
 }

@@ -12,7 +12,8 @@ import { LatLng, LatLngLiteral } from '../../../../../node_modules/@agm/core';
   styleUrls: ['./nuevo-campo.component.css']
 })
 export class NuevoCampoComponent implements OnInit {
-  model: CampoClass = new CampoClass();
+  campo: CampoClass = new CampoClass();
+  domicilio: DomicilioClass = new DomicilioClass();
   markers: marker[] = [];
   paths: Array<LatLngLiteral> = [];
 
@@ -25,7 +26,7 @@ export class NuevoCampoComponent implements OnInit {
 onSubmit(){
   // Mostramos el objeto usuario
   console.log("onSubmit");
-  console.log(this.model);
+  
 }
 
 ngOnInit() {

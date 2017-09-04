@@ -10,7 +10,7 @@ export class MapaService implements OnInit {
   latInicio: number; 
   lngInicio: number;
   coordAux: CoordenadaClass;
-  constructor( private router: Router,) { }
+  constructor( private router: Router) { }
 
   ngOnInit (){}
 

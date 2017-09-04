@@ -41,30 +41,55 @@
                     <div class="form-group">
                        <label for="txtNombre" class="col-lg-2 control-label" >Nombre: </label>
                         <div class="col-sm-10">
-                             <input type="text"  required [(ngModel)]="model.nombre" name="txtNombre" />
+                             <input type="text"  required [(ngModel)]="campo.nombre" name="txtNombre" />
                         </div>
                     </div>         
                     <div class="form-group">
                          <label for="txtCuit" class="col-lg-2 control-label">CUIT:</label>
                          <div class="col-sm-10">
-                            <input type="text"  required [(ngModel)]="model.cuit" name="txtCuit"  />
+                            <input type="text"  required [(ngModel)]="campo.cuit" name="txtCuit"  />
                     
                         </div>
                     </div>          
                     <div class="form-group">
                           <label for="txtHcta" class="col-lg-2 control-label">Hectarea:</label>
                           <div class="col-sm-10">
-                            <input type="number" required [(ngModel)]="model.hectarea" name="txtHcta" />
+                            <input type="number" required [(ngModel)]="campo.hectarea" name="txtHcta" />
                    
                         </div>
                     </div>          
                     <div class="form-group">
                             <label for="txtCod" class="col-lg-2 control-label">Codigo:</label>
-                            <div class="col-sm-10">
-                            <input type="number"  required [(ngModel)]="model.codigo" name="txtCod" />
+                        <div class="col-sm-10">
+                            <input type="number"  required [(ngModel)]="campo.codigo" name="txtCod" />
                     
                         </div>
-                    </div>          
+                    </div>  
+                    
+
+
+
+                    
+                    <div class="form-group">
+                            <label for="txtCod" class="col-lg-2 control-label">Calle:</label>
+                        <div class="col-sm-10">
+                            <input type="number"  required [(ngModel)]="domicilio.calle" name="txtCod" />
+                    
+                        </div>
+                    </div>  
+
+                    <div class="form-group">
+                        <label for="txtCod" class="col-lg-2 control-label">Numero:</label>
+                    <div class="col-sm-10">
+                        <input type="number"  required [(ngModel)]="domicilio.numero" name="txtCod" />
+                
+                    </div>
+                    </div> 
+
+ 
+
+
+
                     <div>
                                   
                         <div class="col-sm-offset-2 col-sm-10">

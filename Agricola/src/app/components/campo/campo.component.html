@@ -25,7 +25,7 @@
         <div class="ibox-content">
 
                           <div class="table-responsive">
-                          <table class="table table-stripped toggle-arrow-tiny">
+                          <table class="table table-hover toggle-arrow-tiny">
                             <thead>
                               <tr class="success">
                                 
@@ -35,16 +35,18 @@
                                 <th>CUIT</th>
                                 <th></th> 
                                 <th></th>
+                                
                               </tr>
                             </thead>
                             <tbody>
-                              <tr *ngFor = "let campo of campos">
+                              <tr *ngFor = "let campo of campos" (click)="clickEditarCampo(campo)">
                                 
                                 <td>{{campo.nombre}}</td>
                                 <td>{{campo.codigo}}</td>
                                 <td>{{campo.hectarea}}</td>
                                 <td >{{campo.cuit}}</td>
                                 <td> <button type="button" class="btn btn-info" (click)= "clickVerMapa(campo.coordenadaList)">Ver Mapa</button></td>
+                                
                                 <td> <button type="button" class="btn btn-danger">Eliminar Campo</button> </td>
                               </tr>
                             </tbody>
@@ -57,7 +59,7 @@
                             </tfoot>
 
                           </table>
-                          <button type="button" class="btn btn-primary"  routerLink="/nuevo-campo" routerLinkActive="active">Crear Campo</button>
+                          <button type="button" class="btn btn-primary"  (click)= "clickNuevoCampo()">Crear Campo</button>
                           </div>
           </div>
       </div>

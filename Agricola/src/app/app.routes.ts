@@ -4,7 +4,8 @@ import { InicioComponent } from './views/inicio/inicio.component';
 import { MapaComponent } from './components/mapa/mapa.component';
 
 import { CampoComponent } from './components/campo/campo.component';
-import {NuevoCampoComponent} from './components/campo/nuevo-campo/nuevo-campo.component'
+import {NuevoCampoComponent} from './components/campo/nuevo-campo/nuevo-campo.component';
+import {CampoClass} from './class/campo'
 
 
 const APP_ROUTES: Routes = [
@@ -12,7 +13,6 @@ const APP_ROUTES: Routes = [
   { path: 'campo', component: CampoComponent },
   {path: 'mapa', component: MapaComponent },
   {path: 'nuevo-campo', component: NuevoCampoComponent},
-  
   { path: '**', pathMatch: 'full', redirectTo: 'inicio' }
 ];
 

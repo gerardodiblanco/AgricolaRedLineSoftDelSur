@@ -15,10 +15,12 @@ import {NuevoCampoService} from '../../../service/campo-service/nuevo-campo.serv
 
 })
 export class NuevoCampoComponent implements OnInit {
-  campo: CampoClass = new CampoClass();
+  campo: CampoClass;
+  domicilio: DomicilioClass;
+  coordenadas: Array<CoordenadaClass>;
   coordAux: CoordenadaClass;
  
-  domicilio: DomicilioClass = new DomicilioClass();
+ 
   markers: marker[] = [];
   paths: Array<LatLngLiteral> = [];
 
@@ -27,7 +29,25 @@ export class NuevoCampoComponent implements OnInit {
 
   constructor(private nuevoCampoService:NuevoCampoService) {
     
+    if(this.nuevoCampoService.campo != null){
     this.actualizarMarker();
+    }else{
+      this.campo = new CampoClass();
+      this.domicilio = new DomicilioClass();
+      this.campo.domicilio = this.domicilio;
+      this.campo.altitud = null;
+      this.campo.tipo = null;
+      this.campo.cuartelList = null;
+      this.campo.idCampo = null;
+
+      this.campo.domicilio.idDomicilio = null;
+      this.campo.domicilio.localidad = null;
+      this.campo.domicilio.otro = null;
+      this.campo.domicilio.piso = null;
+      
+
+     
+    }
    
   }
 
@@ -37,7 +57,9 @@ onSubmit(){
   console.log("onSubmit");
   //llamar a nuevo-campoService para guardar el campo
   this.actualizarCoordenadas();
-  console.log(this.campo.coordenadaList);
+  console.log(this.campo);
+
+  this.nuevoCampoService.guardarCampo(this.campo);
 }
 
 ngOnInit() {
@@ -55,11 +77,14 @@ ngOnInit() {
         nroOrden: this.markers.length + 1,
         lati: $event.coords.lat,
         longi: $event.coords.lng,
+        id: $event.id,
         arrastrable: true
       }
     
       this.markers.push(nuevoMarker);
       this.actualizarPaths();
+     
+      
      
 
     }
@@ -86,7 +111,7 @@ actualizarMarker(){
   console.log("ACTUALIZAR MARKER");
   console.log(this.campo); 
 for(let c of this.ordebarArray(this.campo.coordenadaList)){
- this.markers.push({'nroOrden':c.nroOrden,'lati':c.latitud,'longi':c.longitud})
+ this.markers.push({'id':c.id,'nroOrden':c.nroOrden,'lati':c.latitud,'longi':c.longitud})
 }
 this.actualizarPaths();
   }
@@ -110,15 +135,19 @@ this.actualizarPaths();
   }
 
   actualizarCoordenadas(){
-    this.nuevoCampoService.campo.coordenadaList = [];
+    console.log("dentro de actualizar");
+    this.campo.coordenadaList = [];
+    console.log("this.nuevoCampoService.campo.coordenadaList = [];");
     for(let m of this.markers){
-      this.campo.coordenadaList.push({'nroOrden':m.nroOrden, 'latitud':m.lati, 'longitud': m.longi});
+      console.log("dentro del for");
+      this.campo.coordenadaList.push({'id':m.id,'nroOrden':m.nroOrden, 'latitud':m.lati, 'longitud': m.longi});
     }
   }
 
 }
 
 interface marker {
+  id:string
   nroOrden:number;
   lati:number;
   longi: number;

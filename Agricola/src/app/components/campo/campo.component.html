@@ -39,7 +39,7 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr *ngFor = "let campo of campos" (click)="clickEditarCampo(campo)">
+                              <tr *ngFor = "let campo of campos" [routerLink]="['/nuevo-campo']">
                                 
                                 <td>{{campo.nombre}}</td>
                                 <td>{{campo.codigo}}</td>
@@ -59,7 +59,7 @@
                             </tfoot>
 
                           </table>
-                          <button type="button" class="btn btn-primary"  (click)= "clickNuevoCampo()">Crear Campo</button>
+                          <button type="button" class="btn btn-primary"  [routerLink]="['/nuevo-campo']">Crear Campo</button>
                           </div>
           </div>
       </div>

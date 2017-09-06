@@ -3,7 +3,7 @@ import {DomicilioClass} from './domicilio';
 
 export class CampoClass {
     idCampo: string;
-    altitud:number;
+ 
     codigo: number;
     hectarea: number;
     nombre: string;

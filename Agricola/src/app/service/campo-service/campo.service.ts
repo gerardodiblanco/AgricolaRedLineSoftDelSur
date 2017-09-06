@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';  
 import 'rxjs/add/operator/map';
 import { Observable }     from 'rxjs/Observable';
-import {CampoClass} from '../../class/campo';
+import {CampoDTO} from '../../components/campo/campo';
 
 
 
@@ -10,14 +10,14 @@ import {CampoClass} from '../../class/campo';
 
 @Injectable()
 export class CampoService { 
-campos: CampoClass[] = [];
+camposDTO: CampoDTO[] = [];
 
   constructor(private http:Http) {
 
 }
 
     getcampos(){
-   this.campos = [];
+   this.camposDTO = [];
      let promesa = new Promise( ( resolve, reject ) => {
         let url = "http://192.168.3.175:8086/campo/all"; 
         this.http.get( url )               
@@ -29,8 +29,8 @@ campos: CampoClass[] = [];
             //Aqui hay un problema    
             console.log( "hay un error" );              
           }else{                    
-            this.campos.push( ...data );                    
-            console.log( this.campos );
+            this.camposDTO.push( ...data );                    
+            console.log( this.camposDTO );
                      
           }                
         })                

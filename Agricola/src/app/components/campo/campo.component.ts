@@ -27,7 +27,7 @@ campo: CampoClass = new CampoClass();
 
 }
   ngOnInit() {
-  this.campos = this.campoService.campos
+  this.campos = this.campoService.camposDTO
  
 
     }

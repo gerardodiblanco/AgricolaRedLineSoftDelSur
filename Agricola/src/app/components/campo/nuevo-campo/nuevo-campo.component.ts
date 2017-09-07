@@ -6,7 +6,8 @@ import {CoordenadaClass} from '../../../class/coordenada';
 import { LatLng, LatLngLiteral } from '../../../../../node_modules/@agm/core';
 //import { PolygonManager } from '../../../../../node_modules/@agm/core';
 import {NuevoCampoService} from '../../../service/campo-service/nuevo-campo.service';
-
+import { ActivatedRoute } from '@angular/router';
+import {Observable} from 'rxjs/Observable'
 
 @Component({
   selector: 'app-nuevo-campo',
@@ -15,7 +16,7 @@ import {NuevoCampoService} from '../../../service/campo-service/nuevo-campo.serv
 
 })
 export class NuevoCampoComponent implements OnInit {
-  campo: CampoClass;
+  campo: any;
   domicilio: DomicilioClass;
   coordenadas: Array<CoordenadaClass>;
   coordAux: CoordenadaClass;
@@ -27,29 +28,32 @@ export class NuevoCampoComponent implements OnInit {
   latInicio = -32.880913 ; 
   lngInicio = -68.83319;
 
-  constructor(private nuevoCampoService:NuevoCampoService) {
-    
-    if(this.nuevoCampoService.campo != null){
-    this.actualizarMarker();
-    }else{
-      this.campo = new CampoClass();
-      this.domicilio = new DomicilioClass();
-      this.campo.domicilio = this.domicilio;
-      this.campo.altitud = null;
-      this.campo.tipo = null;
-      this.campo.cuartelList = null;
-      this.campo.idCampo = null;
-
-      this.campo.domicilio.idDomicilio = null;
-      this.campo.domicilio.localidad = null;
-      this.campo.domicilio.otro = null;
-      this.campo.domicilio.piso = null;
-      
-
-     
-    }
+  constructor(private nuevoCampoService:NuevoCampoService,private route: ActivatedRoute ) {
+    const id: Observable<string> = route.params.map(p => p.id);
+    id.subscribe(id =>console.log(id))
    
-  }
+    }
+
+ngOnInit() {
+
+  const id: Observable<string> = this.route.params.map(p => p.id);
+  id.subscribe(id =>
+    this.nuevoCampoService
+    .buscarCampo(id)
+    .then( (campo) =>{
+      console.log(campo);
+    this.campo = campo;
+    }))
+    
+    console.log("this.console")
+  console.log(this.campo);
+  console.log("this.nuevoCampoService")
+  console.log(this.nuevoCampoService.campo);
+  console.log("this.console2")
+  console.log(this.campo);
+}
+
+
 
 
 onSubmit(){
@@ -62,9 +66,6 @@ onSubmit(){
   this.nuevoCampoService.guardarCampo(this.campo);
 }
 
-ngOnInit() {
-
-    }
 
     marcadorClicleado(marcador:marker,index:number){
       console.log("Marcador clickeado: "+marcador.nroOrden +" en el index: "+index);

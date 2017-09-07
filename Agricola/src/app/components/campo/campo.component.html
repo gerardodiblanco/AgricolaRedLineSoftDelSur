@@ -30,21 +30,22 @@
                               <tr class="success">
                                 
                                 <th>Nombre</th>
-                                <th>Codigo</th>
                                 <th>Hectareas</th>
                                 <th>CUIT</th>
+                                <th>Tipo de Campo</th>
                                 <th></th> 
                                 <th></th>
                                 
                               </tr>
                             </thead>
                             <tbody>
-                              <tr *ngFor = "let campo of campos" [routerLink]="['/nuevo-campo']">
+                              <tr *ngFor = "let campo of campos" [routerLink]="['/nuevo-campo', campo.idCampo]">
                                 
                                 <td>{{campo.nombre}}</td>
-                                <td>{{campo.codigo}}</td>
+                                
                                 <td>{{campo.hectarea}}</td>
                                 <td >{{campo.cuit}}</td>
+                                <td>{{campo.tipo}}</td>
                                 <td> <button type="button" class="btn btn-info" (click)= "clickVerMapa(campo.coordenadaList)">Ver Mapa</button></td>
                                 
                                 <td> <button type="button" class="btn btn-danger">Eliminar Campo</button> </td>

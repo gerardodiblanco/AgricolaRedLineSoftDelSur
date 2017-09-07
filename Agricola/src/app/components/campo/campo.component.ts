@@ -4,7 +4,7 @@ import {CampoService} from '../../service/campo-service/campo.service';
 import { ActivatedRoute } from '@angular/router';
 import {MapaService} from '../../service/mapa-service/mapa.service';
 
-import {CampoClass} from '../../class/campo';
+import {CampoDTO} from './campo';
 import {CoordenadaClass} from '../../class/coordenada';
 import {NuevoCampoService} from '../../service/campo-service/nuevo-campo.service';
 
@@ -14,16 +14,14 @@ import {NuevoCampoService} from '../../service/campo-service/nuevo-campo.service
   styleUrls: ['./campo.component.css']
 })
 export class CampoComponent implements OnInit {
-campos: CampoClass[];
-campo: CampoClass = new CampoClass();
+campos: CampoDTO[];
+//campo: CampoClass = new CampoClass();
 
   constructor(private campoService: CampoService,   private route: ActivatedRoute,
      private mapaService: MapaService,private nuevoCampoService: NuevoCampoService) {
 
   this.campoService.getcampos();
-      
-     console.log("dentro de component")
- console.log(this.campoService.campos)
+  
 
 }
   ngOnInit() {
@@ -31,6 +29,8 @@ campo: CampoClass = new CampoClass();
  
 
     }
+
+    /*
     clickVerMapa(coord: CoordenadaClass[] ){
 
 this.mapaService.cargarArea(coord);
@@ -50,7 +50,7 @@ this.mapaService.cargarArea(coord);
       this.nuevoCampoService.editarCampo(this.campo);
     }
 
-
+*/
 }
 
 

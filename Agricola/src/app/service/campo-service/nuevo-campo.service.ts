@@ -11,7 +11,7 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class NuevoCampoService { 
-      campo: CampoClass;
+      campo: any;
        url = "http://192.168.3.175:8086/campo/nuevo";
        urlBuscarCampo = "http://192.168.3.175:8086/campo/";
 
@@ -23,7 +23,7 @@ export class NuevoCampoService {
             console.log(this.urlBuscarCampo + idCampo);
             return this.http.get(this.urlBuscarCampo + idCampo)
                        .toPromise()
-                       .then(response => response.json() as CampoClass )
+                       .then(response => {return response.json() })
                        .catch(this.handleError);
                      
           }
@@ -34,13 +34,9 @@ export class NuevoCampoService {
           }
 
 
-  editarCampo(campo:CampoClass){
-    this.campo = campo;
-        this.router.navigate(['/nuevo-campo'])
-        
-      }
+  
     
-        guardarCampo(campo:CampoClass) {
+        guardarCampo(campo:any) {
             console.log(campo);
 
             let headers = new Headers({ 'Content-Type': 'application/json' });
@@ -61,45 +57,3 @@ export class NuevoCampoService {
 
 }
 
-export interface ICampo {
-    idCampo: string;
- 
-    codigo: number;
-    hectarea: number;
-    nombre: string;
-    tipo: TipoCampo;
-   
-    cuit: string;
-    coordenadaList: CoordenadaClass[];
-    domicilio:DomicilioClass;
-    cuartelList:any;
-    }
-    export interface CoordenadaClass{
-        id: string;
-        latitud: number;
-        longitud: number;
-        nroOrden: number;
-    }
-
-    export interface DomicilioClass{
-        idDomicilio:string;
-        calle: string;
-        dto: number;
-        numero: number;
-        piso: string;
-        otro: string;
-        localidad: LocalidadClass;
-    }
-
-    
-export interface LocalidadClass{
-    idLocalidad:string;
-    codPostal: number;
-    nombreLocalidad: string;
-}
-
-export interface TipoCampo{
-    idTipo: string;
-    codigo: number;
-    nombre: string;
-}

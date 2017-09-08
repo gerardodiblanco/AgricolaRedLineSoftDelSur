@@ -20,6 +20,7 @@ export class NuevoCampoComponent implements OnInit {
   domicilio: DomicilioClass;
   coordenadas: Array<CoordenadaClass>;
   coordAux: CoordenadaClass;
+  isDataAvailable: boolean;
  
  
   markers: marker[] = [];
@@ -29,39 +30,33 @@ export class NuevoCampoComponent implements OnInit {
   lngInicio = -68.83319;
 
   constructor(private nuevoCampoService:NuevoCampoService,private route: ActivatedRoute ) {
-    const id: Observable<string> = route.params.map(p => p.id);
-    id.subscribe(id =>console.log(id))
+this.isDataAvailable = false;
+    const id: Observable<string> = this.route.params.map(p => p.id);
+    id.subscribe(id =>
+      this.nuevoCampoService
+      .buscarCampo(id)
+      .then( campo => {
+     
+      this.campo = campo;
+      } ))
+  
    
     }
 
 ngOnInit() {
-
-  const id: Observable<string> = this.route.params.map(p => p.id);
-  id.subscribe(id =>
-    this.nuevoCampoService
-    .buscarCampo(id)
-    .then( (campo) =>{
-      console.log(campo);
-    this.campo = campo;
-    }))
-    
-    console.log("this.console")
-  console.log(this.campo);
-  console.log("this.nuevoCampoService")
-  console.log(this.nuevoCampoService.campo);
-  console.log("this.console2")
-  console.log(this.campo);
+ 
 }
 
 
 
-
 onSubmit(){
+
   // Mostramos el objeto usuario
   console.log("onSubmit");
+  
   //llamar a nuevo-campoService para guardar el campo
   this.actualizarCoordenadas();
-  console.log(this.campo);
+ console.log(this.campo);
 
   this.nuevoCampoService.guardarCampo(this.campo);
 }
@@ -98,26 +93,26 @@ onSubmit(){
 
 actualizarPaths(){
   this.paths = [];
+  console.log("actualizarPaths");
   for(let m of this.markers){
+    console.log(m);
     this.paths.push({'lat':m.lati,'lng':m.longi});
   }
+  console.log("paths");
+  console.log(this.paths);
 }
 
 actualizarMarker(){
- if(this.nuevoCampoService.campo == null){console.log("this.nuevoCampoService.campo == null");
-}else{
-  this.campo = null;
-  this.campo =  this.nuevoCampoService.campo;
+
   this.markers = [];
   console.log("ACTUALIZAR MARKER");
   console.log(this.campo); 
 for(let c of this.ordebarArray(this.campo.coordenadaList)){
+  console.log(c);
  this.markers.push({'id':c.id,'nroOrden':c.nroOrden,'lati':c.latitud,'longi':c.longitud})
-}
-this.actualizarPaths();
   }
+this.actualizarPaths();
 }
-    
 
   ordebarArray(coord: CoordenadaClass[]) {
     
@@ -138,7 +133,7 @@ this.actualizarPaths();
   actualizarCoordenadas(){
     console.log("dentro de actualizar");
     this.campo.coordenadaList = [];
-    console.log("this.nuevoCampoService.campo.coordenadaList = [];");
+    
     for(let m of this.markers){
       console.log("dentro del for");
       this.campo.coordenadaList.push({'id':m.id,'nroOrden':m.nroOrden, 'latitud':m.lati, 'longitud': m.longi});

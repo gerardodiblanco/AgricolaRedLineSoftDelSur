@@ -1,7 +1,9 @@
 <div class="container">
 <h1>Nuevo Campo</h1>
 
-        <agm-map 
+
+<div *ngIf="campo"> 
+        <agm-map (mapReady)= actualizarMarker()
         [latitude]="latInicio" 
         [longitude]="lngInicio"
         [zoom]="14"
@@ -18,14 +20,14 @@
         >
 
             <agm-polygon
-            [paths]="paths"
+            [paths]= "paths"
             fillOpacity = 0.1
             fillColor  = #21AF04
             >
             </agm-polygon>
 
             <agm-info-window>
-                <strong>{{m.nombre}}</strong>
+            <strong>{{m.nombre}}</strong>
             </agm-info-window>
         </agm-marker>
         </agm-map>
@@ -90,6 +92,10 @@
                         <div class="col-sm-offset-2 col-sm-10">
                         <button type="submit" class="btn btn-primary" >Guardar</button>
                     </div>
+
+                    
+                                  
+                       
                                   
                   </div>
                   
@@ -97,5 +103,5 @@
 
             </div>
     </div>
-
+        </div>
 </div>

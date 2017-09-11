@@ -8,6 +8,7 @@ import { LatLng, LatLngLiteral } from '../../../../../node_modules/@agm/core';
 import {NuevoCampoService} from '../../../service/campo-service/nuevo-campo.service';
 import { ActivatedRoute } from '@angular/router';
 import {Observable} from 'rxjs/Observable'
+import {TipoCampoService} from '../../../service/tipoCampo-service/tipo-campo-service.service'
 
 @Component({
   selector: 'app-nuevo-campo',
@@ -18,9 +19,10 @@ import {Observable} from 'rxjs/Observable'
 export class NuevoCampoComponent implements OnInit {
   campo: any;
   domicilio: DomicilioClass;
-  coordenadas: Array<CoordenadaClass>;
-  coordAux: CoordenadaClass;
-  isDataAvailable: boolean;
+  coordenadas: Array<any>;
+  coordAux: any;
+ tipoCampo: any;
+ tipoCampoSeleccionado : any;
  
  
   markers: marker[] = [];
@@ -29,21 +31,28 @@ export class NuevoCampoComponent implements OnInit {
   latInicio = -32.880913 ; 
   lngInicio = -68.83319;
 
-  constructor(private nuevoCampoService:NuevoCampoService,private route: ActivatedRoute ) {
-this.isDataAvailable = false;
-    const id: Observable<string> = this.route.params.map(p => p.id);
-    id.subscribe(id =>
-      this.nuevoCampoService
-      .buscarCampo(id)
-      .then( campo => {
-     
-      this.campo = campo;
-      } ))
-  
+  constructor(private nuevoCampoService:NuevoCampoService,private route: ActivatedRoute, private tipoCampoService:TipoCampoService ) {
+
+ 
+
    
     }
 
 ngOnInit() {
+  const id: Observable<string> = this.route.params.map(p => p.id);
+  id.subscribe(id =>
+    this.nuevoCampoService
+    .buscarCampo(id)
+    .then( campo => {
+   
+    this.campo = campo;
+    } ));
+
+       
+    this.tipoCampoService.getTiposCampo()
+    .then(tipoCampo => {this.tipoCampo = tipoCampo})
+
+    
  
 }
 

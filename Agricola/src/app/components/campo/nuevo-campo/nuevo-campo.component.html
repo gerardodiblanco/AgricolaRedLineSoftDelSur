@@ -70,7 +70,7 @@
                     <div class="form-group">
                             <label for="txtCod" class="col-lg-2 control-label">Calle:</label>
                         <div class="col-sm-10">
-                            <input type="number"  required [(ngModel)]="campo.domicilio.calle" name="txtCod" />
+                            <input type="number"  required [(ngModel)]="campo.calle" name="nroCalla" />
                     
                         </div>
                     </div>  
@@ -78,12 +78,22 @@
                     <div class="form-group">
                         <label for="txtCod" class="col-lg-2 control-label">Numero:</label>
                     <div class="col-sm-10">
-                        <input type="number"  required [(ngModel)]="campo.domicilio.numero" name="txtCod" />
+                        <input type="number"  required [(ngModel)]="campo.numeroDomicilio" name="nroDomicilio" />
                 
                     </div>
                     </div> 
 
  
+
+                    <div class="form-group">
+                        <label for="tipoCampo">Tipo de Campo: </label>
+                            <select [(ngModel)]="campo.tipo" [ngModelOptions]="{standalone: true}" >
+                              <option *ngFor="let tipo of tipoCampo"  [selected]="tipo.nombre == campo.tipo">{{tipo.nombre}}</option>
+                            </select>
+                        
+                    </div> 
+
+
 
 
 

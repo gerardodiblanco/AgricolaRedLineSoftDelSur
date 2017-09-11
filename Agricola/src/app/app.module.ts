@@ -29,6 +29,7 @@ import {MapaService /*,Campo*/ } from './service/mapa-service/mapa.service';
 import { HttpModule,Http, Response } from '@angular/http';
 import { NuevoCampoComponent } from './components/campo/nuevo-campo/nuevo-campo.component';
 import {NuevoCampoService} from './service/campo-service/nuevo-campo.service';
+import {TipoCampoService} from './service/tipoCampo-service/tipo-campo-service.service'
 
 
 
@@ -61,7 +62,7 @@ BrowserModule,
     
 
   ],
-  providers: [CampoService, MapaService, NuevoCampoService],
+  providers: [CampoService, MapaService, NuevoCampoService,TipoCampoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

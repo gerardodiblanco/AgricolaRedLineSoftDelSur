@@ -19,7 +19,7 @@ export class NuevoCampoService {
         
         }
 
-        buscarCampo(idCampo): Promise<CampoClass> {
+        buscarCampo(idCampo): Promise<any> {
             console.log(this.urlBuscarCampo + idCampo);
             return this.http.get(this.urlBuscarCampo + idCampo)
                        .toPromise()

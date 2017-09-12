@@ -33,13 +33,13 @@ export class NuevoCampoComponent implements OnInit {
 
   constructor(private nuevoCampoService:NuevoCampoService,private route: ActivatedRoute, private tipoCampoService:TipoCampoService ) {
 
- 
-
    
     }
 
 ngOnInit() {
+
   const id: Observable<string> = this.route.params.map(p => p.id);
+
   id.subscribe(id =>
     this.nuevoCampoService
     .buscarCampo(id)
@@ -47,13 +47,11 @@ ngOnInit() {
    
     this.campo = campo;
     } ));
-
+  
        
     this.tipoCampoService.getTiposCampo()
     .then(tipoCampo => {this.tipoCampo = tipoCampo})
-
-    
- 
+  
 }
 
 
@@ -94,8 +92,7 @@ onSubmit(){
 
     }
     posicionFinalMarcador(m,$event,i){
-      console.log($event);
-      this.markers[i].lati = $event.coords.lat;
+       this.markers[i].lati = $event.coords.lat;
       this.markers[i].longi = $event.coords.lng;
       this.actualizarPaths();
     }
@@ -104,23 +101,21 @@ actualizarPaths(){
   this.paths = [];
   console.log("actualizarPaths");
   for(let m of this.markers){
-    console.log(m);
     this.paths.push({'lat':m.lati,'lng':m.longi});
   }
-  console.log("paths");
-  console.log(this.paths);
+
 }
 
 actualizarMarker(){
-
+if(this.campo.coordenadaList != []){
   this.markers = [];
   console.log("ACTUALIZAR MARKER");
-  console.log(this.campo); 
-for(let c of this.ordebarArray(this.campo.coordenadaList)){
-  console.log(c);
- this.markers.push({'id':c.id,'nroOrden':c.nroOrden,'lati':c.latitud,'longi':c.longitud})
+
+  for(let c of this.ordebarArray(this.campo.coordenadaList)){
+  this.markers.push({'id':c.id,'nroOrden':c.nroOrden,'lati':c.latitud,'longi':c.longitud})
+    }
+  this.actualizarPaths();
   }
-this.actualizarPaths();
 }
 
   ordebarArray(coord: CoordenadaClass[]) {
@@ -140,13 +135,17 @@ this.actualizarPaths();
   }
 
   actualizarCoordenadas(){
-    console.log("dentro de actualizar");
     this.campo.coordenadaList = [];
     
     for(let m of this.markers){
-      console.log("dentro del for");
-      this.campo.coordenadaList.push({'id':m.id,'nroOrden':m.nroOrden, 'latitud':m.lati, 'longitud': m.longi});
+     this.campo.coordenadaList.push({'id':m.id,'nroOrden':m.nroOrden, 'latitud':m.lati, 'longitud': m.longi});
     }
+  }
+
+  eliminarMarcador(){
+    console.log("click derecho");
+    this.markers.pop();
+    this.actualizarPaths();
   }
 
 }

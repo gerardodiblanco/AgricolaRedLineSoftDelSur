@@ -12,7 +12,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class NuevoCampoService { 
       campo: any;
-       url = "http://192.168.3.175:8086/campo/nuevo";
+       url = "http://192.168.3.175:8086/campo/save";
        urlBuscarCampo = "http://192.168.3.175:8086/campo/";
 
     constructor(private http:Http, private router: Router) {
@@ -20,12 +20,13 @@ export class NuevoCampoService {
         }
 
         buscarCampo(idCampo): Promise<any> {
+ 
             console.log(this.urlBuscarCampo + idCampo);
             return this.http.get(this.urlBuscarCampo + idCampo)
                        .toPromise()
                        .then(response => {return response.json() })
                        .catch(this.handleError);
-                     
+            
           }
            
           private handleError(error: any): Promise<any> {

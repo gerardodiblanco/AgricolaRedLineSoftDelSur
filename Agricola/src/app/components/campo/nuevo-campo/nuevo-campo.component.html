@@ -8,6 +8,7 @@
         [longitude]="lngInicio"
         [zoom]="14"
         (mapClick)="mapClickeado($event)"
+        (mapRightClick)="eliminarMarcador()"
         >
         <agm-marker
         *ngFor= "let m of markers; let i = index"

@@ -94,7 +94,13 @@
                         
                     </div> 
 
-
+                    <div class="form-group">
+                        <label for="localidades">Localidad: </label>
+                            <select [(ngModel)]="campo.localidad" [ngModelOptions]="{standalone: true}" >
+                              <option *ngFor="let localidad of localidades"  [selected]="localidad.nombre == campo.localidad">{{localidad.nombre}}</option>
+                            </select>
+                        
+                    </div> 
 
 
 
@@ -104,10 +110,7 @@
                         <button type="submit" class="btn btn-primary" >Guardar</button>
                     </div>
 
-                    
-                                  
-                       
-                                  
+                              
                   </div>
                   
                 </form>

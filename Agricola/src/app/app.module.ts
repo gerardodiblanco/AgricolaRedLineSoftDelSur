@@ -30,7 +30,7 @@ import { HttpModule,Http, Response } from '@angular/http';
 import { NuevoCampoComponent } from './components/campo/nuevo-campo/nuevo-campo.component';
 import {NuevoCampoService} from './service/campo-service/nuevo-campo.service';
 import {TipoCampoService} from './service/tipoCampo-service/tipo-campo-service.service'
-
+import {LocalidadService} from './service/localidad-service/localidad.service'
 
 
 @NgModule({
@@ -62,7 +62,7 @@ BrowserModule,
     
 
   ],
-  providers: [CampoService, MapaService, NuevoCampoService,TipoCampoService],
+  providers: [CampoService, MapaService, NuevoCampoService,TipoCampoService,LocalidadService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

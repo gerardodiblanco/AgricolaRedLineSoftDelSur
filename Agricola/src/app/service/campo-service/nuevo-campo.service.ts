@@ -20,12 +20,18 @@ export class NuevoCampoService {
         }
 
         buscarCampo(idCampo): Promise<any> {
+
+            if(idCampo){
  
             console.log(this.urlBuscarCampo + idCampo);
             return this.http.get(this.urlBuscarCampo + idCampo)
                        .toPromise()
                        .then(response => {return response.json() })
                        .catch(this.handleError);
+            }else{
+                return Promise.resolve({ calle:'', codigo:'',coordenadaList:[], cuartelList:[], cuit:"", hectarea:'',idCampo:null,localidad:"",
+                nombre:"",numeroDomicilio:'',tipo:""});
+            }
             
           }
            

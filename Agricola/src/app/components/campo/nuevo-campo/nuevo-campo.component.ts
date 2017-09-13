@@ -10,6 +10,8 @@ import { ActivatedRoute } from '@angular/router';
 import {Observable} from 'rxjs/Observable'
 import {TipoCampoService} from '../../../service/tipoCampo-service/tipo-campo-service.service'
 
+import {LocalidadService} from '../../../service/localidad-service/localidad.service'
+
 @Component({
   selector: 'app-nuevo-campo',
   templateUrl: './nuevo-campo.component.html',
@@ -23,6 +25,7 @@ export class NuevoCampoComponent implements OnInit {
   coordAux: any;
  tipoCampo: any;
  tipoCampoSeleccionado : any;
+ localidades: any;
  
  
   markers: marker[] = [];
@@ -31,15 +34,18 @@ export class NuevoCampoComponent implements OnInit {
   latInicio = -32.880913 ; 
   lngInicio = -68.83319;
 
-  constructor(private nuevoCampoService:NuevoCampoService,private route: ActivatedRoute, private tipoCampoService:TipoCampoService ) {
+  constructor(private nuevoCampoService:NuevoCampoService,
+    private route: ActivatedRoute, private tipoCampoService:TipoCampoService,
+  private localidadService: LocalidadService ) { 
 
-   
-    }
+  }
 
 ngOnInit() {
 
-  const id: Observable<string> = this.route.params.map(p => p.id);
 
+  let id: Observable<string> = this.route.params.map(p => p.id);
+
+  console.log("id = " +id);
   id.subscribe(id =>
     this.nuevoCampoService
     .buscarCampo(id)
@@ -48,10 +54,12 @@ ngOnInit() {
     this.campo = campo;
     } ));
   
-       
+       //busca los tipos de campo
     this.tipoCampoService.getTiposCampo()
     .then(tipoCampo => {this.tipoCampo = tipoCampo})
-  
+    // busca las localidades
+  this.localidadService.getLocalidades()
+  .then(localidad => {this.localidades = localidad})
 }
 
 

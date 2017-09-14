@@ -30,6 +30,10 @@ campos: CampoDTO[];
 
     }
 
+    eliminarCampo(){
+      console.log("eliminar Campo");
+    }
+
     /*
     clickVerMapa(coord: CoordenadaClass[] ){
 

@@ -1,5 +1,5 @@
-<div class="container">
-<h1>Nuevo Campo</h1>
+<div class="container wrapper wrapper-content animated fadeInRight">
+<h1>{{titulo}}</h1>
 
 
 <div *ngIf="campo"> 
@@ -15,7 +15,7 @@
         (markerClick)="marcadorClicleado(m,i)"
         [latitude]="m.lati"
         [longitude]="m.longi"
-        [markerDraggable]="true"
+        [markerDraggable]="editable"
         iconUrl="assets/img/iconoMarcador.png"
         (dragEnd)="posicionFinalMarcador(m,$event,i)"
         >
@@ -43,27 +43,27 @@
                     <div class="form-group">
                        <label for="txtNombre" class="col-lg-2 control-label" >Nombre: </label>
                         <div class="col-sm-10">
-                             <input type="text"  required [(ngModel)]="campo.nombre" name="txtNombre" />
+                             <input type="text"  required [(ngModel)]="campo.nombre" name="txtNombre"[disabled]="!editable" />
                         </div>
                     </div>         
                     <div class="form-group">
                          <label for="txtCuit" class="col-lg-2 control-label">CUIT:</label>
                          <div class="col-sm-10">
-                            <input type="text"  required [(ngModel)]="campo.cuit" name="txtCuit"  />
+                            <input type="text"  required [(ngModel)]="campo.cuit" name="txtCuit" [disabled]="!editable" />
                     
                         </div>
                     </div>          
                     <div class="form-group">
                           <label for="txtHcta" class="col-lg-2 control-label">Hectarea:</label>
                           <div class="col-sm-10">
-                            <input type="number" required [(ngModel)]="campo.hectarea" name="txtHcta" />
+                            <input type="number" required [(ngModel)]="campo.hectarea" name="txtHcta" [disabled]="!editable" />
                    
                         </div>
                     </div>          
                     <div class="form-group">
                             <label for="txtCod" class="col-lg-2 control-label">Codigo:</label>
                         <div class="col-sm-10">
-                            <input type="number"  required [(ngModel)]="campo.codigo" name="txtCod" />
+                            <input type="number"  required [(ngModel)]="campo.codigo" name="txtCod" [disabled]="!editable" />
                     
                         </div>
                     </div>  
@@ -71,7 +71,7 @@
                     <div class="form-group">
                             <label for="txtCod" class="col-lg-2 control-label">Calle:</label>
                         <div class="col-sm-10">
-                            <input type="number"  required [(ngModel)]="campo.calle" name="nroCalla" />
+                            <input type="number"  required [(ngModel)]="campo.calle" name="nroCalla" [disabled]="!editable" />
                     
                         </div>
                     </div>  
@@ -79,7 +79,7 @@
                     <div class="form-group">
                         <label for="txtCod" class="col-lg-2 control-label">Numero:</label>
                     <div class="col-sm-10">
-                        <input type="number"  required [(ngModel)]="campo.numeroDomicilio" name="nroDomicilio" />
+                        <input type="number"  required [(ngModel)]="campo.numeroDomicilio" name="nroDomicilio" [disabled]="!editable"   />
                 
                     </div>
                     </div> 
@@ -88,7 +88,7 @@
 
                     <div class="form-group">
                         <label for="tipoCampo">Tipo de Campo: </label>
-                            <select [(ngModel)]="campo.tipo" [ngModelOptions]="{standalone: true}" >
+                            <select [(ngModel)]="campo.tipo" [ngModelOptions]="{standalone: true}" [disabled]="!editable">
                               <option *ngFor="let tipo of tipoCampo"  [selected]="tipo.nombre == campo.tipo">{{tipo.nombre}}</option>
                             </select>
                         
@@ -96,7 +96,7 @@
 
                     <div class="form-group">
                         <label for="localidades">Localidad: </label>
-                            <select [(ngModel)]="campo.localidad" [ngModelOptions]="{standalone: true}" >
+                            <select [(ngModel)]="campo.localidad" [ngModelOptions]="{standalone: true}" [disabled]="!editable">
                               <option *ngFor="let localidad of localidades"  [selected]="localidad.nombre == campo.localidad">{{localidad.nombre}}</option>
                             </select>
                         
@@ -106,16 +106,23 @@
 
                     <div>
                                   
-                        <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-primary" >Guardar</button>
+                        <div class="col-sm-offset-2 col-sm-10" [hidden] = "!editable" >
+                        <button type="submit" class="btn btn-primary" [disabled]="!editable" >Guardar</button>
                     </div>
-
-                              
+    
                   </div>
+                  <div>
+                        
+              <div class="col-sm-offset-2 col-sm-10" [hidden] = "editable">
+              <button (click)="editar()" class="btn btn-warning" [disabled]="editable" >Editar</button>
+          </div>
+
+        </div>
                   
                 </form>
 
             </div>
     </div>
         </div>
+</div>
 </div>

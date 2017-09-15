@@ -75,9 +75,9 @@ export class NuevoCampoComponent implements OnInit {
 
     //llamar a nuevo-campoService para guardar el campo
     this.actualizarCoordenadas();
-    console.log(this.campo);
     this.nuevoCampoService.guardarCampo(this.campo);
-    this.router.navigate(['/campo']);
+   
+   // this.router.navigate(['/campo']);
   }
 
 

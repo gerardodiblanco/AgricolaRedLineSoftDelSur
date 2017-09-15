@@ -46,7 +46,7 @@
                                 <td >{{campo.cuit}}</td>
                                 <td>{{campo.tipo}}</td>
                                 <td> <button type="button" class="btn btn-info" [routerLink]="['/nuevo-campo', campo.idCampo]">Ver Campo</button></td>
-                                <td> <button type="button" class="btn btn-danger"  (click)="eliminarCampo()">Eliminar Campo</button> </td>
+                                <td> <button type="button" class="btn btn-danger"  (click)="eliminarCampo(campo.idCampo)">Eliminar Campo</button> </td>
                               </tr>
                             </tbody>
                             <tfoot>

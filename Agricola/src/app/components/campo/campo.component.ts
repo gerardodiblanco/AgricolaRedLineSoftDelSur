@@ -30,8 +30,8 @@ campos: CampoDTO[];
 
     }
 
-    eliminarCampo(){
-      console.log("eliminar Campo");
+    eliminarCampo(idCampo){
+      this.campoService.eliminarCampo(idCampo);
     }
 
     /*

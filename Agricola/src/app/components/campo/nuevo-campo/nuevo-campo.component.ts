@@ -76,7 +76,7 @@ export class NuevoCampoComponent implements OnInit {
     //llamar a nuevo-campoService para guardar el campo
     this.actualizarCoordenadas();
     this.nuevoCampoService.guardarCampo(this.campo);
-   
+   alert("hecho");
    // this.router.navigate(['/campo']);
   }
 
@@ -86,8 +86,9 @@ export class NuevoCampoComponent implements OnInit {
 
   }
   mapClickeado($event: any) {
+    
     console.log("Mapa Clickeado");
-
+    if(this.editable){
     var nuevoMarker = {
       nroOrden: this.markers.length + 1,
       lati: $event.coords.lat,
@@ -99,7 +100,7 @@ export class NuevoCampoComponent implements OnInit {
     this.markers.push(nuevoMarker);
     this.actualizarPaths();
 
-
+  }
 
 
   }
@@ -113,9 +114,10 @@ export class NuevoCampoComponent implements OnInit {
     this.paths = [];
     console.log("actualizarPaths");
     for (let m of this.markers) {
+      console.log("dentro del for");
       this.paths.push({ 'lat': m.lati, 'lng': m.longi });
     }
-
+console.log()
   }
 
   actualizarMarker() {

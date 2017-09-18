@@ -7,6 +7,9 @@ import {MapaService} from '../../service/mapa-service/mapa.service';
 import {CampoDTO} from './campo';
 import {CoordenadaClass} from '../../class/coordenada';
 import {NuevoCampoService} from '../../service/campo-service/nuevo-campo.service';
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-campo',
@@ -14,11 +17,12 @@ import {NuevoCampoService} from '../../service/campo-service/nuevo-campo.service
   styleUrls: ['./campo.component.css']
 })
 export class CampoComponent implements OnInit {
-campos: CampoDTO[];
+campos:any = null;
 //campo: CampoClass = new CampoClass();
 
   constructor(private campoService: CampoService,   private route: ActivatedRoute,
-     private mapaService: MapaService,private nuevoCampoService: NuevoCampoService) {
+     private mapaService: MapaService,private nuevoCampoService: NuevoCampoService
+     , private router: Router) {
 
   this.campoService.getcampos();
   
@@ -32,6 +36,7 @@ campos: CampoDTO[];
 
     eliminarCampo(idCampo){
       this.campoService.eliminarCampo(idCampo);
+      this.router.navigate(["/campo"])
     }
 
     /*

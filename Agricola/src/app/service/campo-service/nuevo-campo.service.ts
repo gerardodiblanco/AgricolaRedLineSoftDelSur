@@ -4,15 +4,15 @@ import 'rxjs/add/operator/map';
 import {CampoClass} from '../../class/campo';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-
+import {URL_BASE} from '../../config/url.sevice';
 import 'rxjs/add/operator/toPromise';
 
 
 @Injectable()
 export class NuevoCampoService { 
       campo: any;
-       url = "http://192.168.3.175:8086/campo/save";
-       urlBuscarCampo = "http://192.168.3.175:8086/campo/";
+       urlSave = "/campo/save";
+       urlBuscarCampo = "/campo/";
 
     constructor(private http:Http, private router: Router) {
         
@@ -23,7 +23,7 @@ export class NuevoCampoService {
             if(idCampo){
  
             console.log(this.urlBuscarCampo + idCampo);
-            return this.http.get(this.urlBuscarCampo + idCampo)
+            return this.http.get(`${URL_BASE}${this.urlBuscarCampo}${idCampo}` )
                        .toPromise()
                        .then(response => {return response.json() })
                        .catch(this.handleError);
@@ -47,7 +47,7 @@ export class NuevoCampoService {
 
             let headers = new Headers({ 'Content-Type': 'application/json' });
                 let options = new RequestOptions( { headers: headers } );
-                return this.http.post(this.url, campo, options)
+                return this.http.post(`${URL_BASE}${this.urlSave}`, campo, options)
                            .map(this.extractData)
                            .toPromise()
                            .catch(this.handleErrorObservable);

@@ -11,6 +11,7 @@ import { Observable } from 'rxjs/Observable'
 import { TipoCampoService } from '../../../service/tipoCampo-service/tipo-campo-service.service'
 import { Router } from '@angular/router';
 import { LocalidadService } from '../../../service/localidad-service/localidad.service'
+import { CampoService } from '../../../service/campo-service/campo.service';
 
 @Component({
   selector: 'app-nuevo-campo',
@@ -39,23 +40,29 @@ export class NuevoCampoComponent implements OnInit {
   latInicio = -32.880913;
   lngInicio = -68.83319;
 
-    constructor(private nuevoCampoService: NuevoCampoService,
+  constructor(private nuevoCampoService: NuevoCampoService,
     private route: ActivatedRoute, private tipoCampoService: TipoCampoService,
     private localidadService: LocalidadService,
+    private _campoService: CampoService,
     private router: Router) {
-    this.editable  = false;
+
+    this.editable = false;
+
+    this.llamarServicios();
+
+
   }
 
-  ngOnInit() {
-    let id: Observable<string> = this.route.params.map(p => p.id );
+  llamarServicios() {
+    let id: Observable<string> = this.route.params.map(p => p.id);
     console.log("id = " + id);
     id.subscribe(id =>
       this.nuevoCampoService
         .buscarCampo(id)
         .then(campo => {
-          this.campo = campo;    
-          if(campo.idCampo == null){ this.editable  = true; this.titulo = "Nuevo Campo"}
-          this.titulo += campo.nombre   
+          this.campo = campo;
+          if (campo.idCampo == null) { this.editable = true; this.titulo = "Nuevo Campo" }
+          this.titulo += campo.nombre
         }));
 
 
@@ -69,15 +76,25 @@ export class NuevoCampoComponent implements OnInit {
 
 
 
-  onSubmit() {
-    // Mostramos el objeto usuario
-    console.log("onSubmit");
 
-    //llamar a nuevo-campoService para guardar el campo
-    this.actualizarCoordenadas();
-    this.nuevoCampoService.guardarCampo(this.campo);
-   alert("hecho");
-   // this.router.navigate(['/campo']);
+  ngOnInit() {
+
+  }
+
+
+
+  onSubmit() {
+    if (confirm("confirmar")) {
+      console.log("onSubmit");
+
+      //llamar a nuevo-campoService para guardar el campo
+      this.actualizarCoordenadas();
+      this.nuevoCampoService.guardarCampo(this.campo);
+      //confirm("confirmar");
+      this._campoService.getcampos();
+      this.router.navigate(['/campo']);
+
+    }
   }
 
 
@@ -86,21 +103,21 @@ export class NuevoCampoComponent implements OnInit {
 
   }
   mapClickeado($event: any) {
-    
+
     console.log("Mapa Clickeado");
-    if(this.editable){
-    var nuevoMarker = {
-      nroOrden: this.markers.length + 1,
-      lati: $event.coords.lat,
-      longi: $event.coords.lng,
-      id: $event.id,
-     
+    if (this.editable) {
+      var nuevoMarker = {
+        nroOrden: this.markers.length + 1,
+        lati: $event.coords.lat,
+        longi: $event.coords.lng,
+        id: $event.id,
+
+      }
+
+      this.markers.push(nuevoMarker);
+      this.actualizarPaths();
+
     }
-
-    this.markers.push(nuevoMarker);
-    this.actualizarPaths();
-
-  }
 
 
   }
@@ -117,7 +134,7 @@ export class NuevoCampoComponent implements OnInit {
       console.log("dentro del for");
       this.paths.push({ 'lat': m.lati, 'lng': m.longi });
     }
-console.log()
+
   }
 
   actualizarMarker() {
@@ -162,7 +179,7 @@ console.log()
     this.actualizarPaths();
   }
 
-  editar(){
+  editar() {
     this.editable = true;
   }
 

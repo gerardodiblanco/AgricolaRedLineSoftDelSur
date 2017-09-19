@@ -7,9 +7,6 @@ import { URL_BASE } from '../../config/url.sevice';
 
 
 
-
-
-
 @Injectable()
 export class CampoService {
   camposDTO: CampoDTO[] = [];
@@ -21,37 +18,24 @@ export class CampoService {
 
   }
 
-  getcampos() {
-    this.camposDTO = [];
-    let promesa = new Promise((resolve, reject) => {
+  getcampos(): Promise<any> {
+    return this.http.get(`${URL_BASE}${this.urlGetCampo}`)
+      .toPromise()
+      .then(response => { return response.json() })
+      .catch(this.handleError);
 
-      this.http.get(`${URL_BASE}${this.urlGetCampo}`)
-        .map(resp => resp.json())
-        .subscribe(data => {
-          console.log(data);
-          console.log("No hay error");
-          if (data.error) {
-            //Aqui hay un problema    
-            console.log("hay un error");
-          } else {
-            this.camposDTO.push(...data);
-            console.log(this.camposDTO);
+  };
 
-          }
-        })
-      resolve();
-    })
-
-
-    return promesa;
-  }
 
   eliminarCampo(idCampo): Promise<any> {
 
     console.log(`${URL_BASE}${this.urlEliminarCampo}${idCampo}`);
     return this.http.delete(`${URL_BASE}${this.urlEliminarCampo}${idCampo}`)
       .toPromise()
-      .then(response => { return response })
+      .then(response => {
+        this.getcampos();
+        return response
+      })
       .catch(this.handleError);
 
   }

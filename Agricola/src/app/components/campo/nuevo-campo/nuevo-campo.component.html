@@ -1,123 +1,122 @@
 <div class="container wrapper wrapper-content animated fadeInRight" *ngIf="campo">
 
-    
+
     <h1>{{titulo}}</h1>
     <div class="panel panel-primary">
 
-            <div class="panel-heading">{{titulo}}</div>
+        <div class="panel-heading">{{titulo}}</div>
 
-    <div *ngIf="campo">
-        <agm-map (mapReady)="actualizarMarker()" [latitude]="latInicio" [longitude]="lngInicio" [zoom]="14" (mapClick)="mapClickeado($event)"
-            (mapRightClick)="eliminarMarcador()"
-           >
-            <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="marcadorClicleado(m,i)" [latitude]="m.lati" [longitude]="m.longi"
-                [markerDraggable]="editable" iconUrl="assets/img/iconoMarcador.png" (dragEnd)="posicionFinalMarcador(m,$event,i)">
+        <div *ngIf="campo">
+            <agm-map (mapReady)="actualizarMarker()" [latitude]="latInicio" [longitude]="lngInicio" [zoom]="14" (mapClick)="mapClickeado($event)"
+                (mapRightClick)="eliminarMarcador()">
+                <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="marcadorClicleado(m,i)" [latitude]="m.lati" [longitude]="m.longi"
+                    [markerDraggable]="editable" iconUrl="assets/img/iconoMarcador.png" (dragEnd)="posicionFinalMarcador(m,$event,i)">
 
-                <agm-polygon [paths]="paths" fillOpacity=0.1 fillColor=#21AF04>
-                </agm-polygon>
+                    <agm-polygon [paths]="paths" fillOpacity=0.1 fillColor=#21AF04>
+                    </agm-polygon>
 
-                <agm-info-window>
-                    <strong>{{m.nombre}}</strong>
-                </agm-info-window>
-            </agm-marker>
-        </agm-map>
-       
+                    <agm-info-window>
+                        <strong>{{m.nombre}}</strong>
+                    </agm-info-window>
+                </agm-marker>
+            </agm-map>
+
+        </div>
     </div>
-    </div>
-            <div class="panel panel-primary">
-                <div class="panel-heading">Datos del Campo</div>
-                <div class="panel-body">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Datos del Campo</div>
+        <div class="panel-body">
 
-                    
-                    <form (ngSubmit)="onSubmit()" class="form-horizontal">
-  
 
-                        <div class="form-group  ">
-                                <div class="col-xs-1">
-                            <label for="txtNombre" >Nombre:</label>
-                                </div>
-                               
-                                <input  type="text"  required [(ngModel)]="campo.nombre" name="txtNombre" [disabled]="!editable" /> 
-                        
-                        </div>
-                        <div class="form-group">
-                                <div class="col-xs-1">
-                            <label for="txtCuit" >CUIT:</label>
-                                </div>
-                                <input type="text" required [(ngModel)]="campo.cuit" name="txtCuit" [disabled]="!editable" />
+            <form (ngSubmit)="onSubmit()" class="form-horizontal">
 
-                        </div>
-                        <div class="form-group">
-                                <div class="col-xs-1">
-                            <label for="txtHcta" >Hectarea:</label>
-                                </div>
-                                <input type="number" required [(ngModel)]="campo.hectarea" name="txtHcta" [disabled]="!editable" />
 
-                        </div>
-                        <div class="form-group">
-                                <div class="col-xs-1">
-                            <label for="txtCod">Codigo:</label>
-                                </div>
-                                <input type="number" required [(ngModel)]="campo.codigo" name="numCod" [disabled]="!editable" />
+                <div class="form-group  ">
+                    <div class="col-xs-1">
+                        <label for="txtNombre">Nombre:</label>
+                    </div>
 
-                        </div>
+                    <input type="text" required [(ngModel)]="campo.nombre" name="txtNombre" [disabled]="!editable" />
 
-                        <div class="form-group">
-                                <div class="col-xs-1">
-                            <label for="txtCod" >Calle:</label>
-                                </div>
-                                <input type="text" required [(ngModel)]="campo.calle" name="nroCalla" [disabled]="!editable" />
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-1">
+                        <label for="txtCuit">CUIT:</label>
+                    </div>
+                    <input type="text" required [(ngModel)]="campo.cuit" name="txtCuit" [disabled]="!editable" />
 
-                        </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-1">
+                        <label for="txtHcta">Hectarea:</label>
+                    </div>
+                    <input type="number" required [(ngModel)]="campo.hectarea" name="txtHcta" [disabled]="!editable" />
 
-                        <div class="form-group">
-                                <div class="col-xs-1">
-                            <label for="txtCod" >Numero:</label>
-                                </div>
-                                <input type="number" required [(ngModel)]="campo.numeroDomicilio" name="nroDomicilio" [disabled]="!editable" />
-                        </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-1">
+                        <label for="txtCod">Codigo:</label>
+                    </div>
+                    <input type="number" required [(ngModel)]="campo.codigo" name="numCod" [disabled]="!editable" />
 
-                        <div class="form-group">
-                                <div class="col-xs-1">
-                            <label for="tipoCampo">Tipo de Campo: </label>
-                                </div>
-                            <select [(ngModel)]="campo.tipo" [ngModelOptions]="{standalone: true}" [disabled]="!editable">
+                </div>
+
+                <div class="form-group">
+                    <div class="col-xs-1">
+                        <label for="txtCod">Calle:</label>
+                    </div>
+                    <input type="text" required [(ngModel)]="campo.calle" name="nroCalla" [disabled]="!editable" />
+
+                </div>
+
+                <div class="form-group">
+                    <div class="col-xs-1">
+                        <label for="txtCod">Numero:</label>
+                    </div>
+                    <input type="number" required [(ngModel)]="campo.numeroDomicilio" name="nroDomicilio" [disabled]="!editable" />
+                </div>
+
+                <div class="form-group">
+                    <div class="col-xs-1">
+                        <label for="tipoCampo">Tipo de Campo: </label>
+                    </div>
+                    <select [(ngModel)]="campo.tipo" [ngModelOptions]="{standalone: true}" [disabled]="!editable">
                               <option *ngFor="let tipo of tipoCampo"  [selected]="tipo.nombre == campo.tipo">{{tipo.nombre}}</option>
                             </select>
 
-                        </div>
+                </div>
 
-                        <div class="form-group">
-                                <div class="col-xs-1">
-                            <label for="localidades">Localidad: </label>
-                                </div>
-                            <select [(ngModel)]="campo.localidad" [ngModelOptions]="{standalone: true}" [disabled]="!editable">
+                <div class="form-group">
+                    <div class="col-xs-1">
+                        <label for="localidades">Localidad: </label>
+                    </div>
+                    <select [(ngModel)]="campo.localidad" [ngModelOptions]="{standalone: true}" [disabled]="!editable">
                               <option *ngFor="let localidad of localidades" [selected]="localidad.nombre == campo.localidad">{{localidad.nombre}}</option>
                             </select>
 
-                        </div>
+                </div>
 
 
 
-                        <div>
+                <div>
 
-                                <div class="col-xs-1" [hidden]="!editable">
-                                <button type="submit"  class="btn btn-primary" [disabled]="!editable">Guardar</button>
-                            </div>
+                    <div class="col-xs-1" [hidden]="!editable">
+                        <button type="submit" class="btn btn-primary" [disabled]="!editable">Guardar</button>
+                    </div>
 
-                        </div>
-                        <div>
+                </div>
+                <div>
 
-                                <div class="col-xs-1"  [hidden]="editable">
-                                <button (click)="editar()" class="btn btn-warning" [disabled]="editable">Editar</button>
-                            </div>
+                    <div class="col-xs-1" [hidden]="editable">
+                        <button (click)="editar()" class="btn btn-warning" [disabled]="editable">Editar</button>
+                    </div>
 
-                        </div>
+                </div>
 
-                    </form>
+            </form>
 
-             
-         
+
+
         </div>
     </div>
 </div>

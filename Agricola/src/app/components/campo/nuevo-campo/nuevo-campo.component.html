@@ -96,6 +96,15 @@
 
                 </div>
 
+                <div class="form-group">
+                    <div class="col-xs-1">
+                        <label for="proveedores">Proveedor: </label>
+                    </div>
+                    <select [(ngModel)]="campo.proveedorRazonSocial" [ngModelOptions]="{standalone: true}" [disabled]="!editable">
+                              <option *ngFor="let proveedor of proveedores" [selected]="proveedor.razonSocial == campo.proveedorRazonSocial">{{proveedor.razonSocial}}</option>
+                            </select>
+
+                </div>
 
 
                 <div>

@@ -31,7 +31,7 @@ import { NuevoCampoComponent } from './components/campo/nuevo-campo/nuevo-campo.
 import {NuevoCampoService} from './service/campo-service/nuevo-campo.service';
 import {TipoCampoService} from './service/tipoCampo-service/tipo-campo-service.service'
 import {LocalidadService} from './service/localidad-service/localidad.service'
-
+import { ProveedorService } from './service/proveedor-service/poroveedor.service';
 
 @NgModule({
   declarations: [
@@ -62,7 +62,7 @@ BrowserModule,
     
 
   ],
-  providers: [CampoService, MapaService, NuevoCampoService,TipoCampoService,LocalidadService],
+  providers: [CampoService, MapaService, NuevoCampoService,TipoCampoService,LocalidadService,ProveedorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -12,6 +12,7 @@ import { TipoCampoService } from '../../../service/tipoCampo-service/tipo-campo-
 import { Router } from '@angular/router';
 import { LocalidadService } from '../../../service/localidad-service/localidad.service'
 import { CampoService } from '../../../service/campo-service/campo.service';
+import { ProveedorService } from '../../../service/proveedor-service/poroveedor.service';
 
 @Component({
   selector: 'app-nuevo-campo',
@@ -30,6 +31,7 @@ export class NuevoCampoComponent implements OnInit {
   tipoCampo: any;
   tipoCampoSeleccionado: any;
   localidades: any;
+  proveedores:any;
 
   editable: boolean;
 
@@ -44,7 +46,8 @@ export class NuevoCampoComponent implements OnInit {
     private route: ActivatedRoute, private tipoCampoService: TipoCampoService,
     private localidadService: LocalidadService,
     private _campoService: CampoService,
-    private router: Router) {
+    private router: Router,
+  private proveedorService: ProveedorService) {
 
     this.editable = false;
 
@@ -61,6 +64,7 @@ export class NuevoCampoComponent implements OnInit {
         .buscarCampo(id)
         .then(campo => {
           this.campo = campo;
+          console.log(this.campo);
           if (campo.idCampo == null) { this.editable = true; this.titulo = "Nuevo Campo" }
           this.titulo += campo.nombre
         }));
@@ -72,6 +76,10 @@ export class NuevoCampoComponent implements OnInit {
     // busca las localidades
     this.localidadService.getLocalidades()
       .then(localidad => { this.localidades = localidad })
+
+          // busca las proveedores
+    this.proveedorService.getProveedores()
+    .then(proveedor => { this.proveedores = proveedor })
   }
 
 

@@ -1,4 +1,4 @@
-<div class="wrapper wrapper-content animated fadeInRight" *ngIf="campos">
+<div class="wrapper wrapper-content animated fadeInRight">
 
   <div class="row">
     <div class="col-lg-12">
@@ -39,7 +39,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let campo of campos">
+                <tr *ngFor="let campo of campos" >
 
                   <td>{{campo.nombre}}</td>
                   <td>{{campo.hectarea}}</td>

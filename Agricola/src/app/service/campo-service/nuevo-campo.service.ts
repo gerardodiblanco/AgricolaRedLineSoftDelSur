@@ -56,12 +56,10 @@ export class NuevoCampoService {
             .toPromise()
             .catch(this.handleErrorObservable);
 
-
-        return;
     }
     private extractData(res: Response) {
-        let body = res.json();
-        return body.data || {};
+        let body = res.text();
+        return body || {};
     }
     private handleErrorObservable(error: Response | any) {
         console.error(error.message || error);

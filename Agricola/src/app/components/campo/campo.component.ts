@@ -33,22 +33,25 @@ export class CampoComponent implements OnInit {
     this.campos = [];
     this.campoService.getcampos()
       .then(campos => {
-      this.campos = campos
-        console.log(campos)
+        this.campos = campos
         console.log(this.campos)
       })
   }
 
   ngOnInit() {
-
-
-
   }
 
   eliminarCampo(idCampo) {
+    if (confirm("¿Está seguro que desea eliminar el campo?")) {
+      this.campos = null;
     this.campoService.eliminarCampo(idCampo);
-    this.buscarCamposService();
-
+   this.buscarCamposService();
+    
+   
+    }
+ 
+console.log(this.campos);
+    
   }
 
 

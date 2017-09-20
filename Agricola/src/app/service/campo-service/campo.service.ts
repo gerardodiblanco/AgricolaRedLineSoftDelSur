@@ -19,6 +19,7 @@ export class CampoService {
   }
 
   getcampos(): Promise<any> {
+    console.log(`${URL_BASE}${this.urlGetCampo}`);
     return this.http.get(`${URL_BASE}${this.urlGetCampo}`)
       .toPromise()
       .then(response => { return response.json() })

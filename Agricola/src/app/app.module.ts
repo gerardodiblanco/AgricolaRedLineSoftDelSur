@@ -16,6 +16,7 @@ import { MailComponent } from './components/common/mail/mail.component';
 import { SmallchatComponent } from './components/common/smallchat/smallchat.component';
 import { CampoComponent } from './components/campo/campo.component';
 import { MapaComponent } from './components/mapa/mapa.component';
+import {CuartelComponent} from './components/cuartel/cuartel.component'
 
 
 
@@ -47,7 +48,8 @@ import { ProveedorService } from './service/proveedor-service/poroveedor.service
     SmallchatComponent,
     CampoComponent,
     MapaComponent,
-    NuevoCampoComponent
+    NuevoCampoComponent,
+    CuartelComponent
   ],
   imports: [
 BrowserModule,

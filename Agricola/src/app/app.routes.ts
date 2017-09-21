@@ -6,6 +6,7 @@ import { MapaComponent } from './components/mapa/mapa.component';
 import { CampoComponent } from './components/campo/campo.component';
 import {NuevoCampoComponent} from './components/campo/nuevo-campo/nuevo-campo.component';
 import {CampoClass} from './class/campo'
+import{CuartelComponent} from './components/cuartel/cuartel.component'
 
 
 const APP_ROUTES: Routes = [
@@ -14,6 +15,7 @@ const APP_ROUTES: Routes = [
   {path: 'mapa', component: MapaComponent },
   {path: 'nuevo-campo/:id', component: NuevoCampoComponent},
   {path: 'nuevo-campo', component: NuevoCampoComponent},
+  {path: 'cuarteles', component: CuartelComponent},
   { path: '**', pathMatch: 'full', redirectTo: 'inicio' }
 ];
 

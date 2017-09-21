@@ -1,0 +1,35 @@
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="ibox float-e-margins">
+            <div class="ibox-title">
+              <h5>Cuarteles y Sub Cuarteles</h5>
+
+            </div>
+            <div class="ibox-content">
+              <div class="form-group">
+                
+                <select [(ngModel)]="campoSeleccionado" [ngModelOptions]="{standalone: true}" class="btn btn-primary">
+                  <option> - Seleccione un campo - </option>
+                  <option  *ngFor="let campo of campos"  >{{campo.nombre}}</option>
+                </select>
+
+            </div>
+
+            <div *ngIf="campoSeleccionado">
+
+
+              
+              
+
+
+
+
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+</div>

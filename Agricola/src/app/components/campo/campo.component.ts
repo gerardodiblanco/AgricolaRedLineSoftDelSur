@@ -22,11 +22,7 @@ export class CampoComponent implements OnInit {
   constructor(private campoService: CampoService, private route: ActivatedRoute,
     private mapaService: MapaService, private nuevoCampoService: NuevoCampoService
     , private router: Router) {
-
-
-
     this.buscarCamposService();
-
   }
 
   buscarCamposService() {

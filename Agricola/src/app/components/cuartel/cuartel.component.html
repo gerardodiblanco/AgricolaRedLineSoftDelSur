@@ -11,19 +11,84 @@
             <div class="ibox-content">
               <div class="form-group">
                 
-                <select [(ngModel)]="campoSeleccionado" [ngModelOptions]="{standalone: true}" class="btn btn-primary">
+                <select [(ngModel)]="selectorCampo"
+                 [ngModelOptions]="{standalone: true}" 
+                 class="btn btn-primary"
+                 (ngModelChange)="buscarCuarteles(selectorCampo)">
                   <option> - Seleccione un campo - </option>
                   <option  *ngFor="let campo of campos"  >{{campo.nombre}}</option>
                 </select>
 
             </div>
 
-            <div *ngIf="campoSeleccionado">
+            <div *ngIf="selectorCampo">
 
 
-              
-              
+              <div class="table-responsive"  *ngIf="cuarteles">
+                <table class="table table-hover toggle-arrow-tiny">
+                  <thead>
+                    <tr class="success">
+    
+                      <th>Nombre</th>
+                      <th>Hectareas</th>
+                      <th>codigo</th>
+                      <th>Campo</th>
+                      <th></th>
+                      <th></th>
+    
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let cuartel of cuarteles" >
+    
+                      <td>{{cuartel.nombre}}</td>
+                      <td>{{cuartel.hectarea}}</td>
+                      <td>{{cuartel.codigo}}</td>
+                      <td>{{cuartel.nombreCampo}}</td>
+                     
+                    <td> <button type="button" class="btn btn-info" [routerLink]="['/nuevo-cuartel', cuartel.idCuartel]">Ver cuartel</button></td>
+                      <td> <button type="button" class="btn btn-danger" (click)="eliminarCuartel(cuartel.idCuartel)" [routerLink]="['/campo']">Eliminar Cuartel</button>                    </td>
+                 
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td colspan="5">
+                        <ul class="pagination pull-right"></ul>
+                      </td>
+                    </tr>
+                  </tfoot>
+    
+                </table>
+                <button type="button" class="btn btn-primary" [routerLink]="['/nuevo-campo']">Crear Cuartel</button>
+        <p></p>
 
+
+
+
+
+
+
+
+              <div *ngIf="cuarteles" >
+                <agm-map (mapReady)="dfgfd()" [latitude]="latInicio" [longitude]="lngInicio" [zoom]="14" (mapClick)="mapClickeado($event)"
+                    (mapRightClick)="eliminarMarcador()">
+
+                    <!--
+                    <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="marcadorClicleado(m,i)" [latitude]="m.lati" [longitude]="m.longi"
+                        [markerDraggable]="editable" iconUrl="assets/img/iconoMarcador.png" (dragEnd)="posicionFinalMarcador(m,$event,i)">
+    
+                        <agm-polygon [paths]="paths" fillOpacity=0.1 fillColor=#21AF04>
+                        </agm-polygon>
+    
+                        <agm-info-window>
+                            <strong>{{m.nombre}}</strong>
+                        </agm-info-window>
+                    </agm-marker>
+                  -->
+                </agm-map>
+              </div>
+            </div>
 
 
 

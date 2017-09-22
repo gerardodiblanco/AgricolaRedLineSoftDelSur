@@ -17,6 +17,7 @@ import { SmallchatComponent } from './components/common/smallchat/smallchat.comp
 import { CampoComponent } from './components/campo/campo.component';
 import { MapaComponent } from './components/mapa/mapa.component';
 import {CuartelComponent} from './components/cuartel/cuartel.component'
+import {CuartelService} from './service/cuartel-service/cuartel.service';
 
 
 
@@ -64,7 +65,9 @@ BrowserModule,
     
 
   ],
-  providers: [CampoService, MapaService, NuevoCampoService,TipoCampoService,LocalidadService,ProveedorService],
+  providers: [CampoService, MapaService,
+     NuevoCampoService,TipoCampoService,
+     LocalidadService,ProveedorService,CuartelService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

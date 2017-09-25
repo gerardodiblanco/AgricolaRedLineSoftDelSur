@@ -51,6 +51,7 @@ import { ProveedorService } from './service/proveedor-service/poroveedor.service
     MapaComponent,
     NuevoCampoComponent,
     CuartelComponent
+  
   ],
   imports: [
 BrowserModule,

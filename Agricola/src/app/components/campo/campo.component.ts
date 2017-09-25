@@ -10,7 +10,6 @@ import { NuevoCampoService } from '../../service/campo-service/nuevo-campo.servi
 import { Router } from '@angular/router';
 
 
-
 @Component({
   selector: 'app-campo',
   templateUrl: './campo.component.html',
@@ -40,17 +39,11 @@ export class CampoComponent implements OnInit {
   eliminarCampo(idCampo) {
     if (confirm("¿Está seguro que desea eliminar el campo?")) {
       this.campos = null;
-    this.campoService.eliminarCampo(idCampo);
-   this.buscarCamposService();
-    
-   
+      this.campoService.eliminarCampo(idCampo);
+      this.buscarCamposService();
     }
- 
-console.log(this.campos);
-    
+    console.log(this.campos);
   }
-
-
 }
 
 

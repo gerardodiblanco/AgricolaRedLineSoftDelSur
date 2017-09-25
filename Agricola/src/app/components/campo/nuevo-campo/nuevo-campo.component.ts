@@ -13,6 +13,11 @@ import { Router } from '@angular/router';
 import { LocalidadService } from '../../../service/localidad-service/localidad.service'
 import { CampoService } from '../../../service/campo-service/campo.service';
 import { ProveedorService } from '../../../service/proveedor-service/poroveedor.service';
+import { ordenarArray } from '../../mapa/funciones.mapa';
+import { convertMarkerListToCoordenadaList } from '../../mapa/funciones.mapa';
+import { marker } from '../../mapa/funciones.mapa';
+import { convertCoordenadaListToMarkerList } from '../../mapa/funciones.mapa';
+import { convertMarkerListToPaths } from '../../mapa/funciones.mapa';
 
 @Component({
   selector: 'app-nuevo-campo',
@@ -31,7 +36,7 @@ export class NuevoCampoComponent implements OnInit {
   tipoCampo: any;
   tipoCampoSeleccionado: any;
   localidades: any;
-  proveedores:any;
+  proveedores: any;
 
   editable: boolean;
 
@@ -47,12 +52,9 @@ export class NuevoCampoComponent implements OnInit {
     private localidadService: LocalidadService,
     private _campoService: CampoService,
     private router: Router,
-  private proveedorService: ProveedorService) {
-
+    private proveedorService: ProveedorService) {
     this.editable = false;
-
     this.llamarServicios();
-
 
   }
 
@@ -77,41 +79,33 @@ export class NuevoCampoComponent implements OnInit {
     this.localidadService.getLocalidades()
       .then(localidad => { this.localidades = localidad })
 
-          // busca las proveedores
+    // busca las proveedores
     this.proveedorService.getProveedores()
-    .then(proveedor => { this.proveedores = proveedor })
+      .then(proveedor => { this.proveedores = proveedor })
   }
-
-
 
 
   ngOnInit() {
 
   }
 
-
-
   onSubmit() {
     if (confirm("confirmar")) {
       console.log("onSubmit");
-
       //llamar a nuevo-campoService para guardar el campo
       this.actualizarCoordenadas();
       this.nuevoCampoService.guardarCampo(this.campo);
       //confirm("confirmar");
       this._campoService.getcampos();
       this.router.navigate(['/campo']);
-
     }
   }
 
-
   marcadorClicleado(marcador: marker, index: number) {
     console.log("Marcador clickeado: " + marcador.nroOrden + " en el index: " + index);
-
   }
-  mapClickeado($event: any) {
 
+  mapClickeado($event: any) {
     console.log("Mapa Clickeado");
     if (this.editable) {
       var nuevoMarker = {
@@ -119,16 +113,12 @@ export class NuevoCampoComponent implements OnInit {
         lati: $event.coords.lat,
         longi: $event.coords.lng,
         id: $event.id,
-
       }
-
       this.markers.push(nuevoMarker);
       this.actualizarPaths();
-
     }
-
-
   }
+
   posicionFinalMarcador(m, $event, i) {
     this.markers[i].lati = $event.coords.lat;
     this.markers[i].longi = $event.coords.lng;
@@ -137,48 +127,22 @@ export class NuevoCampoComponent implements OnInit {
 
   actualizarPaths() {
     this.paths = [];
-    console.log("actualizarPaths");
-    for (let m of this.markers) {
-      console.log("dentro del for");
-      this.paths.push({ 'lat': m.lati, 'lng': m.longi });
-    }
+    this.paths = convertMarkerListToPaths(this.markers);
 
   }
 
   actualizarMarker() {
     if (this.campo.coordenadaList != []) {
       this.markers = [];
-      console.log("ACTUALIZAR MARKER");
-
-      for (let c of this.ordebarArray(this.campo.coordenadaList)) {
-        this.markers.push({ 'id': c.id, 'nroOrden': c.nroOrden, 'lati': c.latitud, 'longi': c.longitud })
-      }
+      this.markers = convertCoordenadaListToMarkerList(this.campo.coordenadaList);
       this.actualizarPaths();
     }
   }
 
-  ordebarArray(coord: CoordenadaClass[]) {
-
-    for (let i = 0; i < (coord.length - 1); i++) {
-      for (let j = i + 1; j < coord.length; j++) {
-        if (coord[i].nroOrden > coord[j].nroOrden) {
-          //Intercambiamos valores
-          this.coordAux = coord[i];
-          coord[i] = coord[j];
-          coord[j] = this.coordAux;
-
-        }
-      }
-    }
-    return coord;
-  }
 
   actualizarCoordenadas() {
     this.campo.coordenadaList = [];
-
-    for (let m of this.markers) {
-      this.campo.coordenadaList.push({ 'id': m.id, 'nroOrden': m.nroOrden, 'latitud': m.lati, 'longitud': m.longi });
-    }
+    this.campo.coordenadaList = convertMarkerListToCoordenadaList(this.markers);
   }
 
   eliminarMarcador() {
@@ -190,13 +154,5 @@ export class NuevoCampoComponent implements OnInit {
   editar() {
     this.editable = true;
   }
-
 }
 
-interface marker {
-  id: string
-  nroOrden: number;
-  lati: number;
-  longi: number;
-
-}

@@ -53,6 +53,16 @@ export function convertMarkerListToPaths(markers: any[]){
       return paths;
 }
 
+export function convertElementoConCoordenadasToArrayPaths(elemnetos: any[]){
+
+ let arrayPaths: any[] = [];
+  for (let z of  elemnetos) {
+   arrayPaths.push(convertCoordenadaListToPaths(z.coordenadaList));
+  }
+  return arrayPaths;
+
+}
+
 export interface marker {
     id: string
     nroOrden: number;

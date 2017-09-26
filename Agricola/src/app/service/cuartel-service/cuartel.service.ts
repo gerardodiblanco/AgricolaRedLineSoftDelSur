@@ -11,7 +11,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class CuartelService {
    
-    urlBuscarCuatel = "/cuartel/";
+    urlBuscarCuatel = "/cuartel/getCuartel/";
     urlGetCuateles = "/cuartel/getAll/";
 
     constructor(private http: Http, private router: Router,
@@ -30,8 +30,8 @@ export class CuartelService {
                 .catch(this.handleError);
         } else {
             return Promise.resolve({
-                calle: '', codigo: '', coordenadaList: [], cuartelList: [], cuit: "", hectarea: '', idCampo: null, localidad: "",
-                nombre: "", numeroDomicilio: '', tipo: ""
+                codigo: '', coordenadaList: [],hectarea: '', idCuartel: null,
+                descripcion: ""
             });
         }
 

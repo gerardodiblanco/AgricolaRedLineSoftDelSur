@@ -58,18 +58,18 @@ export class NuevoCampoComponent implements OnInit {
 
   }
 
-  llamarServicios() {
-    let id: Observable<string> = this.route.params.map(p => p.id);
-    console.log("id = " + id);
-    id.subscribe(id =>
-      this.nuevoCampoService
-        .buscarCampo(id)
-        .then(campo => {
-          this.campo = campo;
-          console.log(this.campo);
-          if (campo.idCampo == null) { this.editable = true; this.titulo = "Nuevo Campo" }
-          this.titulo += campo.nombre
-        }));
+    llamarServicios() {
+      let id: Observable<string> = this.route.params.map(p => p.id);
+      console.log("id = " + id);
+      id.subscribe(id =>
+        this.nuevoCampoService
+          .buscarCampo(id)
+          .then(campo => {
+            this.campo = campo;
+            console.log(this.campo);
+            if (campo.idCampo == null) { this.editable = true; this.titulo = "Nuevo Campo" }
+            this.titulo += campo.nombre
+          }));
 
 
     //busca los tipos de campo

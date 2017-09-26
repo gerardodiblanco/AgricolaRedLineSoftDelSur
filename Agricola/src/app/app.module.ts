@@ -35,6 +35,8 @@ import {TipoCampoService} from './service/tipoCampo-service/tipo-campo-service.s
 import {LocalidadService} from './service/localidad-service/localidad.service'
 import { ProveedorService } from './service/proveedor-service/poroveedor.service';
 
+import{NuevoCuartelComponent} from './components/cuartel/nuevo-cuartel/nuevo.cuartel.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +52,8 @@ import { ProveedorService } from './service/proveedor-service/poroveedor.service
     CampoComponent,
     MapaComponent,
     NuevoCampoComponent,
-    CuartelComponent
+    CuartelComponent,
+    NuevoCuartelComponent
   
   ],
   imports: [

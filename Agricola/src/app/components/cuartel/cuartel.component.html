@@ -37,7 +37,7 @@
                 <tbody>
                   <tr *ngFor="let cuartel of cuarteles">
 
-                    <td>{{cuartel.nombre}}</td>
+                    <td>{{cuartel.descripcion}}</td>
                     <td>{{cuartel.hectarea}}</td>
                     <td>{{cuartel.codigo}}</td>
                     <td>{{cuartel.nombreCampo}}</td>
@@ -56,29 +56,18 @@
                 </tfoot>
 
               </table>
-              <button type="button" class="btn btn-primary" [routerLink]="['/nuevo-campo']">Crear Cuartel</button>
+              <button type="button" class="btn btn-primary" [routerLink]="['/nuevo-cuartel']">Crear Cuartel</button>
               <p></p>
 
 
-
-
-
-
-
-
-              <div *ngIf="cuarteles">
+              <div *ngIf="campoSeleccionado">
                 <agm-map (mapReady)="actualizarAreas()" [latitude]="latInicio" [longitude]="lngInicio" [zoom]="14">
                   <!--
                      (mapClick)="mapClickeado($event)"
                     (mapRightClick)="eliminarMarcador()"
                   -->
-
-
-
-
                   <agm-polygon [paths]="arrayPaths" fillOpacity=0.6 fillColor=#21AF04>
                   </agm-polygon>
-
                   <agm-marker *ngFor="let m of markers" [latitude]="m.lati" [longitude]="m.longi" [markerDraggable]="false" iconUrl="assets/img/iconoMarcador.png">
                   </agm-marker>
                   <agm-polygon [paths]="pathsCampo" fillOpacity=0.2>
@@ -89,13 +78,9 @@
                         </agm-info-window>
                     
                   -->
-
                 </agm-map>
               </div>
             </div>
-
-
-
           </div>
         </div>
       </div>

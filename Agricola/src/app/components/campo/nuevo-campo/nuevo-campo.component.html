@@ -36,28 +36,28 @@
                         <label for="txtNombre">Nombre:</label>
                     </div>
 
-                    <input type="text"  class="input-sm"  required [(ngModel)]="campo.nombre" name="txtNombre" [disabled]="!editable" />
+                    <input type="text" class="input-sm" required [(ngModel)]="campo.nombre" name="txtNombre" [disabled]="!editable" />
 
                 </div>
                 <div class="form-group">
                     <div class="col-xs-1">
                         <label for="txtCuit">CUIT:</label>
                     </div>
-                    <input type="text"  class="input-sm" required [(ngModel)]="campo.cuit" name="txtCuit" [disabled]="!editable" />
+                    <input type="text" class="input-sm" required [(ngModel)]="campo.cuit" name="txtCuit" [disabled]="!editable" />
 
                 </div>
                 <div class="form-group">
                     <div class="col-xs-1">
                         <label for="txtHcta">Hectarea:</label>
                     </div>
-                    <input type="number"  class="input-sm" required [(ngModel)]="campo.hectarea" name="txtHcta" [disabled]="!editable" />
+                    <input type="number" class="input-sm" required [(ngModel)]="campo.hectarea" name="txtHcta" [disabled]="!editable" />
 
                 </div>
                 <div class="form-group">
                     <div class="col-xs-1">
                         <label for="txtCod">Codigo:</label>
                     </div>
-                    <input type="number"  class="input-sm" required [(ngModel)]="campo.codigo" name="numCod" [disabled]="!editable" />
+                    <input type="number" class="input-sm" required [(ngModel)]="campo.codigo" name="numCod" [disabled]="!editable" />
 
                 </div>
 
@@ -65,7 +65,7 @@
                     <div class="col-xs-1">
                         <label for="txtCod">Calle:</label>
                     </div>
-                    <input type="text"  class="input-sm" required [(ngModel)]="campo.calle" name="nroCalla" [disabled]="!editable" />
+                    <input type="text" class="input-sm" required [(ngModel)]="campo.calle" name="nroCalla" [disabled]="!editable" />
 
                 </div>
 
@@ -73,14 +73,15 @@
                     <div class="col-xs-1">
                         <label for="txtCod">Numero:</label>
                     </div>
-                    <input type="number"  class="input-sm" required [(ngModel)]="campo.numeroDomicilio" name="nroDomicilio" [disabled]="!editable" />
+                    <input type="number" class="input-sm" required [(ngModel)]="campo.numeroDomicilio" name="nroDomicilio" [disabled]="!editable"
+                    />
                 </div>
 
                 <div class="form-group">
                     <div class="col-xs-2">
                         <label for="tipoCampo">Tipo de Campo: </label>
                     </div>
-                    <select [(ngModel)]="campo.tipo" [ngModelOptions]="{standalone: true}" [disabled]="!editable"  class="btn btn-primary">
+                    <select [(ngModel)]="campo.tipo" [ngModelOptions]="{standalone: true}" [disabled]="!editable" class="btn btn-primary">
                               <option *ngFor="let tipo of tipoCampo"  [selected]="tipo.nombre == campo.tipo">{{tipo.nombre}}</option>
                             </select>
 
@@ -90,7 +91,7 @@
                     <div class="col-xs-2">
                         <label for="localidades">Localidad: </label>
                     </div>
-                    <select [(ngModel)]="campo.localidad" [ngModelOptions]="{standalone: true}" [disabled]="!editable"  class="btn btn-primary">
+                    <select [(ngModel)]="campo.localidad" [ngModelOptions]="{standalone: true}" [disabled]="!editable" class="btn btn-primary">
                               <option *ngFor="let localidad of localidades" [selected]="localidad.nombre == campo.localidad">{{localidad.nombre}}</option>
                             </select>
 
@@ -106,7 +107,6 @@
 
                 </div>
 
-
                 <div>
 
                     <div class="col-xs-1" [hidden]="!editable">
@@ -119,13 +119,8 @@
                     <div class="col-xs-1" [hidden]="editable">
                         <button (click)="editar()" class="btn btn-warning" [disabled]="editable">Editar</button>
                     </div>
-
                 </div>
-
             </form>
-
-
-
         </div>
     </div>
 </div>

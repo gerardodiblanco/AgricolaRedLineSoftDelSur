@@ -3,19 +3,21 @@
     <div class="panel panel-primary">
         <div class="panel-heading">{{titulo}}</div>
         <div *ngIf="campo">
-            <agm-map (mapReady)="actualizarMarker()" [latitude]="latInicio" [longitude]="lngInicio" [zoom]="14" (mapClick)="mapClickeado($event)"
+            <agm-map (mapReady)="actualizarAreas()" [latitude]="latInicio" [longitude]="lngInicio" [zoom]="14" (mapClick)="mapClickeado($event)"
                 (mapRightClick)="eliminarMarcador()">
                 <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="marcadorClicleado(m,i)" [latitude]="m.lati" [longitude]="m.longi"
                     [markerDraggable]="editable" iconUrl="assets/img/iconoMarcador.png" (dragEnd)="posicionFinalMarcador(m,$event,i)">
-                    <agm-polygon [paths]="paths" fillOpacity=0.1 fillColor=#21AF04>
+                    <agm-polygon [paths]="pathsCampo" fillOpacity=0.1>
                     </agm-polygon>
-              
                 </agm-marker>
+                <agm-polygon [paths]="arrayPathsCuarteles" fillOpacity=0.6 fillColor=#21AF04>
+                </agm-polygon>
+
             </agm-map>
         </div>
     </div>
 
-    <div class="panel panel-primary">
+<div class="panel panel-primary" *ngIf = "cuartelSeleccionado">
         <div class="panel-heading">Datos del Cuartel</div>
         <div class="panel-body">
             <form (ngSubmit)="onSubmit()" class="form-horizontal">
@@ -41,6 +43,26 @@
                     <input type="number" class="input-sm" required [(ngModel)]="cuartelSeleccionado.codigo" name="numCod" [disabled]="!editable" />
                 </div>
 
+                <div>
+                    
+                                        <div class="col-xs-1" [hidden]="!editable">
+                                            <button type="submit" class="btn btn-primary" [disabled]="!editable">Guardar</button>
+                                        </div>
+                    
+                                    </div>
+                                    <div>
+                    
+                                        <div class="col-xs-1" [hidden]="editable">
+                                            <button (click)="editar()" class="btn btn-warning" [disabled]="editable">Editar</button>
+                                        </div>
+                                    </div>
+
+
             </form>
         </div>
+    
     </div>
+        
+                
+
+</div>

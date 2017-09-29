@@ -3,14 +3,31 @@
     <div class="panel panel-primary">
         <div class="panel-heading">{{titulo}}</div>
         <div *ngIf="campo">
-            <agm-map (mapReady)="actualizarAreas()" [latitude]="latInicio" [longitude]="lngInicio" [zoom]="14" (mapClick)="mapClickeado($event)"
-                (mapRightClick)="eliminarMarcador()">
+            <agm-map  [latitude]="latInicio" [longitude]="lngInicio" [zoom]="14" (mapClick)="mapClickeado($event)"
+                (mapRightClick)="eliminarMarcador()"
+                (draggableCursor)="assets/img/iconoFlecha.png">
                 <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="marcadorClicleado(m,i)" [latitude]="m.lati" [longitude]="m.longi"
-                    [markerDraggable]="editable" iconUrl="assets/img/iconoMarcador.png" (dragEnd)="posicionFinalMarcador(m,$event,i)">
-                    <agm-polygon [paths]="pathsCampo" fillOpacity=0.1>
-                    </agm-polygon>
+                    [markerDraggable]="editable" iconUrl="assets/img/iconoMarcador.png" (dragEnd)="posicionFinalMarcador(m,$event,i)"
+                    (mouseOut)="mouseOut($event)"
+                    (mouseOver)="mouseOver($event)">
                 </agm-marker>
+
+                <agm-polygon [paths]="pathsCampo" fillOpacity=0.1 clickable="true"
+                (polyClick)="poligonClickeado($event)" (polyRightClick)="eliminarMarcador()"
+                (polyMouseDown)="polyMouseDown($event)"
+                (polyMouseMove)="polyMouseMove($event)"
+                (polyMouseOut)="polyMouseOut($event)"
+                (polyMouseOver)="polyMouseOver($event)"
+                (polyMouseUp)="polyMouseUp($event)"
+
+                >
+                </agm-polygon>
+
                 <agm-polygon [paths]="arrayPathsCuarteles" fillOpacity=0.6 fillColor=#21AF04>
+                </agm-polygon>
+
+                <agm-polygon [paths]="PathsCuartel" fillOpacity=0.6 fillColor=#FF4000
+               >
                 </agm-polygon>
 
             </agm-map>

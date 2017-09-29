@@ -10,6 +10,9 @@ import { convertCoordenadaListToMarkerList } from '../mapa/funciones.mapa';
 import { marker } from '../mapa/funciones.mapa';
 import { convertElementoConCoordenadasToArrayPaths } from '../mapa/funciones.mapa';
 
+import{NuevoCuartelComponent} from '../cuartel/nuevo-cuartel/nuevo.cuartel.component';
+
+
 @Component({
   selector: 'app-cuartel',
   templateUrl: './cuartel.component.html',
@@ -27,7 +30,7 @@ export class CuartelComponent implements OnInit {
   lngInicio = -68.83319;
 
   constructor(private campoService: CampoService, private nuevoCampoService: NuevoCampoService,
-    private cuartelService: CuartelService) {
+    private cuartelService: CuartelService, private nuevoCuartelComponent:NuevoCuartelComponent) {
     this.buscarCamposService()
   }
 
@@ -88,6 +91,8 @@ export class CuartelComponent implements OnInit {
     this.markers = [];
     this.markers = convertCoordenadaListToMarkerList(this.campoSeleccionado.coordenadaList)
   }
+
+
 }
 
 

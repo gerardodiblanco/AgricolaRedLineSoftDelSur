@@ -42,7 +42,7 @@
                     <td>{{cuartel.codigo}}</td>
                     <td>{{cuartel.nombreCampo}}</td>
 
-                    <td> <button type="button" class="btn btn-info" [routerLink]="['/nuevo-cuartel', cuartel.idCuartel]">Ver cuartel</button></td>
+                    <td> <button type="button" class="btn btn-info" [routerLink]="['/nuevo-cuartel',cuartel.idCampo, cuartel.idCuartel]">Ver cuartel</button></td>
                     <td> <button type="button" class="btn btn-danger" (click)="eliminarCuartel(cuartel.idCuartel)" [routerLink]="['/campo']">Eliminar Cuartel</button>                      </td>
 
                   </tr>

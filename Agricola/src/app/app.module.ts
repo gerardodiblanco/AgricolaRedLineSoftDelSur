@@ -71,7 +71,7 @@ BrowserModule,
   ],
   providers: [CampoService, MapaService,
      NuevoCampoService,TipoCampoService,
-     LocalidadService,ProveedorService,CuartelService],
+     LocalidadService,ProveedorService,CuartelService,NuevoCuartelComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

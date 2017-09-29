@@ -29,10 +29,10 @@ export class CuartelService {
                 .then(response => { return response.json() })
                 .catch(this.handleError);
         } else {
-            return Promise.resolve({
-                codigo: '', coordenadaList: [],hectarea: '', idCuartel: null,
-                descripcion: ""
-            });
+            return Promise.resolve({codigo:0, codigoCampo:0,coordenadaList:[], cuitCampo:"",
+            descripcion:"",domicilioCampo:"", estadoCampo:"",hectarea:0, hectareaCampo:0,
+            idCampo:"", idCuartel:"",nombreCampo:"", proveedorCampo:"",subcuarteles:[],tipoCampo:""
+          });
         }
 
     }

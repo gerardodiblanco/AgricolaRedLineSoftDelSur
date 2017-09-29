@@ -17,8 +17,8 @@ const APP_ROUTES: Routes = [
   {path: 'nuevo-campo/:id', component: NuevoCampoComponent},
   {path: 'nuevo-campo', component: NuevoCampoComponent},
   {path: 'cuarteles', component: CuartelComponent},
-  {path: 'nuevo-cuartel/:id', component: NuevoCuartelComponent},
-  {path: 'nuevo-cuartel', component: NuevoCuartelComponent},
+  {path: 'nuevo-cuartel/:idCampo', component: NuevoCuartelComponent},
+  {path: 'nuevo-cuartel/:idCampo/:idCuartel', component: NuevoCuartelComponent},
   { path: '**', pathMatch: 'full', redirectTo: 'inicio' }
 ];
 

@@ -13,6 +13,7 @@ export class CuartelService {
    
     urlBuscarCuatel = "/cuartel/getCuartel/";
     urlGetCuateles = "/cuartel/getAll/";
+    urlEliminarCuartel = "/cuartel/remove/"
 
     constructor(private http: Http, private router: Router,
      ) {
@@ -45,6 +46,19 @@ export class CuartelService {
           .catch(this.handleError);
     
       };
+
+      eliminarCuartel(idCuartel): Promise<any> {
+        
+            console.log(`${URL_BASE}${this.urlEliminarCuartel}${idCuartel}`);
+            return this.http.delete(`${URL_BASE}${this.urlEliminarCuartel}${idCuartel}`)
+              .toPromise()
+              .then(response => {
+              
+                return response.status
+              })
+              .catch(this.handleError);
+        
+          }
 
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only

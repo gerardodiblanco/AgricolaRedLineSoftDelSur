@@ -10,6 +10,7 @@ import { convertCoordenadaListToMarkerList } from '../mapa/funciones.mapa';
 import { marker } from '../mapa/funciones.mapa';
 import { convertElementoConCoordenadasToArrayPaths } from '../mapa/funciones.mapa';
 
+
 import{NuevoCuartelComponent} from '../cuartel/nuevo-cuartel/nuevo.cuartel.component';
 
 
@@ -30,7 +31,8 @@ export class CuartelComponent implements OnInit {
   lngInicio = -68.83319;
 
   constructor(private campoService: CampoService, private nuevoCampoService: NuevoCampoService,
-    private cuartelService: CuartelService, private nuevoCuartelComponent:NuevoCuartelComponent) {
+    private cuartelService: CuartelService, private nuevoCuartelComponent:NuevoCuartelComponent,
+    private router: Router) {
     this.buscarCamposService()
   }
 
@@ -92,7 +94,27 @@ export class CuartelComponent implements OnInit {
     this.markers = convertCoordenadaListToMarkerList(this.campoSeleccionado.coordenadaList)
   }
 
+  eliminarCuartel(idCuartel){
+    console.log("idCuartel");
+    console.log(idCuartel);
+    if (confirm("¿Está seguro que desea eliminar el cuartel?")) {
+       this.cuartelService.eliminarCuartel(idCuartel)
+       .then(rta => {
+         console.log(rta);
+        if(rta == 200){
+          for (var index = 0; index < this.cuarteles.length; index++) {
+            var element = this.cuarteles[index];
+            if(element.idCuartel = idCuartel){
+              this.cuarteles.splice(index,1);
+            }
+          }
+          this.actualizarAreas();
+        }
+     })
+
+   
+  }
 
 }
-
+}
 

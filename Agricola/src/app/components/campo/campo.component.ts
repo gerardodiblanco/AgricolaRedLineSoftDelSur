@@ -25,10 +25,11 @@ export class CampoComponent implements OnInit {
   }
 
   buscarCamposService() {
-    this.campos = [];
+    this.campos = null;
     this.campoService.getcampos()
       .then(campos => {
         this.campos = campos
+        console.log("campos")
         console.log(this.campos)
       })
   }
@@ -38,9 +39,11 @@ export class CampoComponent implements OnInit {
 
   eliminarCampo(idCampo) {
     if (confirm("¿Está seguro que desea eliminar el campo?")) {
-      this.campos = null;
-      this.campoService.eliminarCampo(idCampo);
-      this.buscarCamposService();
+    
+      this.campoService.eliminarCampo(idCampo)
+      .then(c =>{
+        this.buscarCamposService();
+      });
     }
     console.log(this.campos);
   }

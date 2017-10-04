@@ -50,7 +50,7 @@ export class NuevoCampoComponent implements OnInit {
   constructor(private nuevoCampoService: NuevoCampoService,
     private route: ActivatedRoute, private tipoCampoService: TipoCampoService,
     private localidadService: LocalidadService,
-    private _campoService: CampoService,
+   
     private router: Router,
     private proveedorService: ProveedorService) {
     this.editable = false;
@@ -60,7 +60,7 @@ export class NuevoCampoComponent implements OnInit {
 
     llamarServicios() {
       let id: Observable<string> = this.route.params.map(p => p.id);
-      console.log("id = " + id);
+      console.log(id);
       id.subscribe(id =>
         this.nuevoCampoService
           .buscarCampo(id)
@@ -94,10 +94,13 @@ export class NuevoCampoComponent implements OnInit {
       console.log("onSubmit");
       //llamar a nuevo-campoService para guardar el campo
       this.actualizarCoordenadas();
-      this.nuevoCampoService.guardarCampo(this.campo);
+      this.nuevoCampoService.guardarCampo(this.campo)
+      .then(c=>{
+        this.router.navigate(['/campo']);
+      });
       //confirm("confirmar");
-      this._campoService.getcampos();
-      this.router.navigate(['/campo']);
+    
+     
     }
   }
 

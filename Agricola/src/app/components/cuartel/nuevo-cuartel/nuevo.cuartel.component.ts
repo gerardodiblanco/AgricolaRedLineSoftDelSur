@@ -12,6 +12,7 @@ import { convertElementoConCoordenadasToArrayPaths } from '../../mapa/funciones.
 import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute } from '@angular/router';
 import { convertMarkerListToPaths } from '../../mapa/funciones.mapa';
+import { convertMarkerListToCoordenadaList } from '../../mapa/funciones.mapa';
 
 @Component({
   selector: 'app-nuevoCuartel',
@@ -35,7 +36,8 @@ export class NuevoCuartelComponent {
 
 
   constructor(private campoService: CampoService, private nuevoCampoService: NuevoCampoService,
-    private cuartelService: CuartelService, private route: ActivatedRoute) {
+    private cuartelService: CuartelService, private route: ActivatedRoute,
+    private router: Router) {
     this.editable = true;
     this.cuartelSeleccionado = {
       codigo: 0, codigoCampo: 0, coordenadaList: [], cuitCampo: "",
@@ -87,6 +89,21 @@ export class NuevoCuartelComponent {
     });
   }
 
+  onSubmit(){
+    console.log("onSubmit")
+    console.log("save cuartel");
+    console.log(this.cuartelSeleccionado);
+    this.cuartelSeleccionado.idCampo = this.campo.idCampo;
+    this.actualizarCoordenadas();
+    this.cuartelService.guardarCuartel(this.cuartelSeleccionado)
+    .then(rta => {
+      this.router.navigate(['/cuarteles']);
+    });
+    
+
+   
+  }
+
   buscarCuarteles(campo: any) {
     if (campo != null) {
       this.cuartelService.getCuarteles(campo.idCampo)
@@ -123,7 +140,6 @@ export class NuevoCuartelComponent {
     }
   }
 
-
   actualizarPathCuartel() {
     this.PathsCuartel = convertMarkerListToPaths(this.markers);
   }
@@ -147,6 +163,10 @@ export class NuevoCuartelComponent {
     this.editable = true;
   }
 
+  actualizarCoordenadas() {
+    this.cuartelSeleccionado.coordenadaList = [];
+    this.cuartelSeleccionado.coordenadaList = convertMarkerListToCoordenadaList(this.markers);
+  }
 
 
   mapClickeado() {
@@ -173,6 +193,7 @@ export class NuevoCuartelComponent {
     this.actualizarPathCuartel();
   }
 
+  
 
 
   mOut: boolean = false;

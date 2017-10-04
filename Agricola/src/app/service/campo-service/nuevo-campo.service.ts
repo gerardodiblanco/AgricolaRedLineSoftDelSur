@@ -46,12 +46,12 @@ export class NuevoCampoService {
 
 
 
-    guardarCampo(campo: any) {
+    guardarCampo(campo: any):Promise<any> {
         console.log(campo);
 
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-        this.http.post(`${URL_BASE}${this.urlSave}`, campo, options)
+       return  this.http.post(`${URL_BASE}${this.urlSave}`, campo, options)
             .map(this.extractData)
             .toPromise()
             .catch(this.handleErrorObservable);

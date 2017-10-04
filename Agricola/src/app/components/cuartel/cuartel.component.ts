@@ -57,6 +57,7 @@ export class CuartelComponent implements OnInit {
             this.cuarteles = cuarteles
             console.log("cuarteles : ");
             console.log(this.cuarteles);
+            this.actualizarAreas();
           })
  
       }
@@ -101,14 +102,24 @@ export class CuartelComponent implements OnInit {
        this.cuartelService.eliminarCuartel(idCuartel)
        .then(rta => {
          console.log(rta);
+         
         if(rta == 200){
-          for (var index = 0; index < this.cuarteles.length; index++) {
+      /*   for (var index = 0; index < this.cuarteles.length; index++) {
             var element = this.cuarteles[index];
             if(element.idCuartel = idCuartel){
               this.cuarteles.splice(index,1);
             }
           }
-          this.actualizarAreas();
+         */
+       
+          this.cuartelService.getCuarteles(this.campoSeleccionado.idCampo)
+          .then(cuarteles => {
+            this.cuarteles = cuarteles
+            console.log("cuarteles : ");
+            console.log(this.cuarteles);
+            this.actualizarAreas();
+          })
+          
         }
      })
 

@@ -31,6 +31,7 @@
                     <th>Campo</th>
                     <th></th>
                     <th></th>
+                    <th></th>
 
                   </tr>
                 </thead>
@@ -43,6 +44,7 @@
                     <td>{{cuartel.nombreCampo}}</td>
 
                     <td> <button type="button" class="btn btn-info" [routerLink]="['/nuevo-cuartel',cuartel.idCampo, cuartel.idCuartel]">Ver cuartel</button></td>
+                    <td> <button type="button" class="btn btn-info" [routerLink]="['/subCuarteles',cuartel.idCuartel]">Ver subCuarteles</button></td>
                     <td> <button type="button" class="btn btn-danger" (click)="eliminarCuartel(cuartel.idCuartel)">Eliminar Cuartel</button>                      </td>
 
                   </tr>

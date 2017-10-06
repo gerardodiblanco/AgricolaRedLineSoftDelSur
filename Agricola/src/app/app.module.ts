@@ -36,7 +36,8 @@ import {LocalidadService} from './service/localidad-service/localidad.service'
 import { ProveedorService } from './service/proveedor-service/poroveedor.service';
 
 import{NuevoCuartelComponent} from './components/cuartel/nuevo-cuartel/nuevo.cuartel.component';
-
+import{SubCuartelComponent} from './components/subCuartel/subcuartel.component'; 
+import {SubCuartelService} from './service/subCuartel-service/subCuartel.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,7 +54,8 @@ import{NuevoCuartelComponent} from './components/cuartel/nuevo-cuartel/nuevo.cua
     MapaComponent,
     NuevoCampoComponent,
     CuartelComponent,
-    NuevoCuartelComponent
+    NuevoCuartelComponent,
+    SubCuartelComponent
   
   ],
   imports: [
@@ -71,7 +73,7 @@ BrowserModule,
   ],
   providers: [CampoService, MapaService,
      NuevoCampoService,TipoCampoService,
-     LocalidadService,ProveedorService,CuartelService,NuevoCuartelComponent],
+     LocalidadService,ProveedorService,CuartelService,NuevoCuartelComponent,SubCuartelService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,83 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+    
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="ibox float-e-margins">
+            <div class="ibox-title">
+              <h5>Sub Cuarteles</h5>
+    
+            </div>
+            <div class="ibox-content">
+             
+              <div *ngIf="subcuarteles">
+    
+                <div class="table-responsive" *ngIf="subcuarteles">
+                  <table class="table table-hover toggle-arrow-tiny">
+                    <thead>
+                      <tr class="success">
+    
+                        <th>Nombre</th>
+                        <th>Hectareas</th>
+                        <th>codigo</th>
+                        <th>Cuartel</th>
+                        <th></th>
+                        <th></th>
+                    
+    
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let subcuartel of subcuarteles">
+    
+                        <td>{{subcuartel.descripcion}}</td>
+                        <td>{{subcuartel.hectarea}}</td>
+                        <td>{{subcuartel.codigo}}</td>
+                        <td>{{subcuartel.nombreSubcuartel}}</td>
+    
+                        <td> <button type="button" class="btn btn-info" [routerLink]="['/nuevo-cuartel']">Ver subcuartel</button></td>
+
+                        <td> <button type="button" class="btn btn-danger" (click)="eliminarCuartel()">Eliminar Cuartel</button>                      </td>
+    
+                      </tr>
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <td colspan="5">
+                          <ul class="pagination pull-right"></ul>
+                        </td>
+                      </tr>
+                    </tfoot>
+    
+                  </table>
+                  <button type="button" class="btn btn-primary" [routerLink]="['/nuevo-cuartel']">Crear Cuartel</button>
+                  <p></p>
+    
+    
+                  <div *ngIf="cuartel">
+                    <agm-map [latitude]="latInicio" [longitude]="lngInicio" [zoom]="14" (mapClick)="mapClickeado($event)" (mapRightClick)="eliminarMarcador()"
+                    (draggableCursor)="assets/img/iconoFlecha.png">
+                    <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="marcadorClicleado(m,i)" [latitude]="m.lati" [longitude]="m.longi"
+                        [markerDraggable]="editable" iconUrl="assets/img/iconoMarcador.png" (dragEnd)="posicionFinalMarcador(m,$event,i)"
+                        (mouseOut)="mouseOut($event)" (mouseOver)="mouseOver($event)">
+                    </agm-marker>
+    
+                    <agm-polygon [paths]="pathsCampo" fillOpacity=0.1 clickable="true" (polyClick)="poligonClickeado($event)" (polyRightClick)="eliminarMarcador()"
+                        (polyMouseDown)="polyMouseDown($event)" (polyMouseMove)="polyMouseMove($event)" (polyMouseOut)="polyMouseOut($event)"
+                        (polyMouseOver)="polyMouseOver($event)" (polyMouseUp)="polyMouseUp($event)">
+                    </agm-polygon>
+    
+                    <agm-polygon *ngFor="let paths of arrayPathsSubCuarteles"   [paths]="paths" fillOpacity=0.8 fillColor=#21AF04>
+                    </agm-polygon>
+    
+                    <agm-polygon [paths]="pathsCuartel" fillOpacity=0.3 fillColor=#21AF04>
+                    </agm-polygon>
+    
+                </agm-map>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

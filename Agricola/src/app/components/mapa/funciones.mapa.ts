@@ -54,7 +54,7 @@ export function convertMarkerListToPaths(markers: any[]){
 }
 
 export function convertElementoConCoordenadasToArrayPaths(elemnetos: any[]){
-
+console.log(elemnetos);
  let arrayPaths: any[] = [];
   for (let z of  elemnetos) {
    arrayPaths.push(convertCoordenadaListToPaths(z.coordenadaList));

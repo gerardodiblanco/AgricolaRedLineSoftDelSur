@@ -23,6 +23,7 @@ export class SubCuartelComponent implements OnInit {
     subcuarteles: any[] = [];
     cuartel: any = null;
     campo: any = null;
+    pathsCuartelConVariedad:Array<any> = [];
 
     pathsCuartel: Array<LatLngLiteral> = new Array<LatLngLiteral>();
     pathsCampo: Array<LatLngLiteral> = new Array<LatLngLiteral>();
@@ -61,12 +62,20 @@ export class SubCuartelComponent implements OnInit {
                             console.log(this.subcuarteles);
 
                             console.log("actualizar Areas Cuarteles ")
-                            this.arrayPathsSubCuarteles = [];
-                            this.arrayPathsSubCuarteles = convertElementoConCoordenadasToArrayPaths(sub);
+                     //       this.arrayPathsSubCuarteles = [];
+                     //       this.arrayPathsSubCuarteles = convertElementoConCoordenadasToArrayPaths(sub);
+                     //       console.log("arrayPathsSubCuarteles");
+                     //       console.log(this.arrayPathsSubCuarteles);
+for(var sc of sub){
+    this.pathsCuartelConVariedad.push(
+    {paths:convertCoordenadaListToPaths(sc.coordenadaList),
+        color:sc.colorVariedad
 
+    })
+}
 
-                            console.log("arrayPathsSubCuarteles");
-                            console.log(this.arrayPathsSubCuarteles);
+                            console.log("pathsCuartelConVariedad");
+                            console.log(this.pathsCuartelConVariedad);
                         })
 
                     this.nuevoCampoService
@@ -153,3 +162,7 @@ export class SubCuartelComponent implements OnInit {
     }
 }
 
+interface estruc{
+    pathsA:Array<LatLngLiteral>;
+    color:string;
+}

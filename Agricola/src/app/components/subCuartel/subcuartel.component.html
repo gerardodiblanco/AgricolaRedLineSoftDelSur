@@ -18,8 +18,9 @@
     
                         <th>Nombre</th>
                         <th>Hectareas</th>
-                        <th>codigo</th>
-                        <th>Cuartel</th>
+                        <th>Codigo</th>
+                        <th>Variedad</th>
+                        
                         <th></th>
                         <th></th>
                     
@@ -29,10 +30,10 @@
                     <tbody>
                       <tr *ngFor="let subcuartel of subcuarteles">
     
-                        <td>{{subcuartel.descripcion}}</td>
+                        <td >{{subcuartel.descripcion}}</td>
                         <td>{{subcuartel.hectarea}}</td>
                         <td>{{subcuartel.codigo}}</td>
-                        <td>{{subcuartel.nombreSubcuartel}}</td>
+                        <td>{{subcuartel.variedad}}</td>
     
                         <td> <button type="button" class="btn btn-info" [routerLink]="['/nuevo-cuartel']">Ver subcuartel</button></td>
 
@@ -58,22 +59,23 @@
                     (draggableCursor)="assets/img/iconoFlecha.png">
                     <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="marcadorClicleado(m,i)" [latitude]="m.lati" [longitude]="m.longi"
                         [markerDraggable]="editable" iconUrl="assets/img/iconoMarcador.png" (dragEnd)="posicionFinalMarcador(m,$event,i)"
-                        (mouseOut)="mouseOut($event)" (mouseOver)="mouseOver($event)">
+                        >
                     </agm-marker>
     
-                    <agm-polygon [paths]="pathsCampo" fillOpacity=0.1 clickable="true" (polyClick)="poligonClickeado($event)" (polyRightClick)="eliminarMarcador()"
-                        (polyMouseDown)="polyMouseDown($event)" (polyMouseMove)="polyMouseMove($event)" (polyMouseOut)="polyMouseOut($event)"
-                        (polyMouseOver)="polyMouseOver($event)" (polyMouseUp)="polyMouseUp($event)">
+                    <agm-polygon [paths]="pathsCampo" fillOpacity=0.1 
+                      >
                     </agm-polygon>
     
-                    <agm-polygon *ngFor="let paths of arrayPathsSubCuarteles"   [paths]="paths" fillOpacity=0.8 fillColor=#21AF04>
+                    <agm-polygon *ngFor="let es of pathsCuartelConVariedad"   [paths]="es.paths" fillOpacity=0.6 fillColor ="{{es.color}}">
+  
                     </agm-polygon>
     
-                    <agm-polygon [paths]="pathsCuartel" fillOpacity=0.3 fillColor=#21AF04>
+                    <agm-polygon [paths]="pathsCuartel" fillOpacity=0.3 fillColor=#0080FF>
                     </agm-polygon>
     
                 </agm-map>
                   </div>
+                
                 </div>
               </div>
             </div>

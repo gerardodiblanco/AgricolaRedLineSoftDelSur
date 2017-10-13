@@ -1,0 +1,79 @@
+<div class="container wrapper wrapper-content animated fadeInRight" *ngIf="cuartel">
+    <h1>{{titulo}}</h1>
+    <div class="panel panel-primary">
+        <div class="panel-heading">{{titulo}}</div>
+        <div *ngIf="cuartel">
+            <agm-map [latitude]="latInicio" [longitude]="lngInicio" [zoom]="14" (mapClick)="mapClickeado($event)" (mapRightClick)="eliminarMarcador()"
+                (draggableCursor)="assets/img/iconoFlecha.png">
+                <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="marcadorClicleado(m,i)" [latitude]="m.lati" [longitude]="m.longi"
+                    [markerDraggable]="editable" iconUrl="assets/img/iconoMarcador.png" (dragEnd)="posicionFinalMarcador(m,$event,i)"
+                    (mouseOut)="mouseOut($event)" (mouseOver)="mouseOver($event)">
+                </agm-marker>
+
+                <agm-polygon [paths]="pathsCuartel" fillOpacity=0.1 clickable="true" (polyClick)="poligonClickeado($event)" (polyRightClick)="eliminarMarcador()"
+                    (polyMouseDown)="polyMouseDown($event)" (polyMouseMove)="polyMouseMove($event)" (polyMouseOut)="polyMouseOut($event)"
+                    (polyMouseOver)="polyMouseOver($event)" (polyMouseUp)="polyMouseUp($event)">
+                </agm-polygon>
+
+                <agm-polygon [paths]="arrayPathsSubCuarteles" fillOpacity=0.6 fillColor=#6E6E6E>
+                </agm-polygon>
+
+                <agm-polygon [paths]="pathsSubCuartel" fillOpacity=0.6 fillColor=#FF4000>
+                </agm-polygon>
+
+            </agm-map>
+        </div>
+    </div>
+
+    <div class="panel panel-primary" *ngIf="subcuartelSeleccionado">
+        <div class="panel-heading">Datos del Cuartel</div>
+        <div class="panel-body">
+            <form (ngSubmit)="onSubmit()" class="form-horizontal">
+
+                <div class="form-group  ">
+                    <div class="col-xs-1">
+                        <label for="txtNombre">Nombre:</label>
+                    </div>
+                    <input type="text" class="input-sm" required [(ngModel)]="subcuartelSeleccionado.descripcion" name="txtNombre" [disabled]="!editable"
+                    />
+                </div>
+
+                <div class="form-group">
+                    <div class="col-xs-1">
+                        <label for="txtHcta">Hectarea:</label>
+                    </div>
+                    <input type="number" class="input-sm" required [(ngModel)]="subcuartelSeleccionado.hectarea" name="txtHcta" [disabled]="!editable"
+                    />
+                </div>
+
+                <div class="form-group">
+                    <div class="col-xs-1">
+                        <label for="txtCod">Codigo:</label>
+                    </div>
+                    <input type="number" class="input-sm" required [(ngModel)]="subcuartelSeleccionado.codigo" name="numCod" [disabled]="!editable"
+                    />
+                </div>
+
+                <div>
+
+                    <div class="col-xs-1" [hidden]="!editable">
+                        <button type="submit" class="btn btn-primary" [disabled]="!editable">Guardar</button>
+                    </div>
+
+                </div>
+                <div>
+
+                    <div class="col-xs-1" [hidden]="editable">
+                        <button (click)="editar()" class="btn btn-warning" [disabled]="editable">Editar</button>
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+
+    </div>
+
+
+
+</div>

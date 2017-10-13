@@ -13,8 +13,11 @@ export class SubCuartelService {
 
     urlBuscarSubCuatel = "/subCuartel/getSubCuartel/";
     urlGetSubCuateles = "/subCuartel/getAllByCuartel/";
+  //  urlGetSubCuatel = "/subCuartel/getSubCuartelById/";
+
+
   //  urlEliminarCuartel = "/cuartel/remove/"
-  // urlGuardarCuartel = "/cuartel/save/"
+   urlGuardarSubCuartel = "/subCuartel/save/"
 
     constructor(private http: Http, private router: Router,
     ) {
@@ -33,4 +36,28 @@ export class SubCuartelService {
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);
     }
+
+    getSubCuartel(idSubCuartel): Promise<any> {
+        console.log(`${URL_BASE}${this.urlBuscarSubCuatel}`);
+        return this.http.get(`${URL_BASE}${this.urlBuscarSubCuatel}${idSubCuartel}`)
+            .toPromise()
+            .then(response => { return response.json() })
+            .catch(this.handleError);
+
+    };
+
+    
+
+    guardarSubCuartel(subCuartel): Promise<any> {
+        
+                console.log(subCuartel);
+                console.log(`${URL_BASE}${this.urlGuardarSubCuartel}`);
+        
+                let headers = new Headers({ 'Content-Type': 'application/json' });
+                let options = new RequestOptions({ headers: headers });
+               return this.http.put(`${URL_BASE}${this.urlGuardarSubCuartel}`, subCuartel, options)
+                    // .map(this.extractData)
+                    .toPromise()
+                    .catch(this.handleError);
+            }
 }

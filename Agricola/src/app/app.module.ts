@@ -38,6 +38,9 @@ import { ProveedorService } from './service/proveedor-service/poroveedor.service
 import{NuevoCuartelComponent} from './components/cuartel/nuevo-cuartel/nuevo.cuartel.component';
 import{SubCuartelComponent} from './components/subCuartel/subcuartel.component'; 
 import {SubCuartelService} from './service/subCuartel-service/subCuartel.service';
+import {NuevoSubCuartelComponent} from './components/subCuartel/nuevo-SubCuartel/nuevo.subcuartel.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,8 +58,8 @@ import {SubCuartelService} from './service/subCuartel-service/subCuartel.service
     NuevoCampoComponent,
     CuartelComponent,
     NuevoCuartelComponent,
-    SubCuartelComponent
-  
+    SubCuartelComponent,
+    NuevoSubCuartelComponent
   ],
   imports: [
 BrowserModule,

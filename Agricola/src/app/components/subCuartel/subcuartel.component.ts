@@ -128,11 +128,11 @@ for(var sc of sub){
     }
 
 
-    eliminarCuartel(idCuartel) {
-        console.log("idCuartel");
-        console.log(idCuartel);
-        if (confirm("¿Está seguro que desea eliminar el cuartel?")) {
-            this.cuartelService.eliminarCuartel(idCuartel)
+    eliminarSubCuartel(idSubCuartel) {
+        console.log("idSubCuartel");
+        console.log(idSubCuartel);
+        if (confirm("¿Está seguro que desea eliminar el subCuartel?")) {
+            this.subCuartelService.eliminarSubCuartel(idSubCuartel)
                 .then(rta => {
                     console.log(rta);
 
@@ -143,16 +143,25 @@ for(var sc of sub){
                                 this.cuarteles.splice(index,1);
                               }
                             }
-                         
-
-                        this.cuartelService.getCuarteles(this.campoSeleccionado.idCampo)
-                            .then(cuarteles => {
-                                this.cuarteles = cuarteles
-                                console.log("cuarteles : ");
-                                console.log(this.cuarteles);
-                                this.actualizarAreas();
-                            })
 */
+
+                        this.subCuartelService.getSubCuarteles(this.cuartel.idCuartel)
+                            .then(subCuarteles => {
+                                this.subcuarteles = subCuarteles
+                                console.log("subCuarteles : ");
+                                console.log(this.subcuarteles);
+                                this.actualizarAreas();
+
+this.pathsCuartelConVariedad = [];
+                                for(var sc of subCuarteles){
+                                    this.pathsCuartelConVariedad.push(
+                                    {paths:convertCoordenadaListToPaths(sc.coordenadaList),
+                                        color:sc.colorVariedad
+
+                                    })
+                                }
+                            })
+
                     }
                 })
 

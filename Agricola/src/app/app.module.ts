@@ -36,10 +36,11 @@ import {LocalidadService} from './service/localidad-service/localidad.service'
 import { ProveedorService } from './service/proveedor-service/poroveedor.service';
 
 import{NuevoCuartelComponent} from './components/cuartel/nuevo-cuartel/nuevo.cuartel.component';
-import{SubCuartelComponent} from './components/subCuartel/subcuartel.component'; 
+import{SubCuartelComponent} from './components/subCuartel/subcuartel.component';
 import {SubCuartelService} from './service/subCuartel-service/subCuartel.service';
 import {NuevoSubCuartelComponent} from './components/subCuartel/nuevo-SubCuartel/nuevo.subcuartel.component';
-
+import { VariedadComponent } from '../app/components/variedad/variedad.component';
+import{VariedadService} from './service/variedad-service/variedad.service';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import {NuevoSubCuartelComponent} from './components/subCuartel/nuevo-SubCuartel
     CuartelComponent,
     NuevoCuartelComponent,
     SubCuartelComponent,
-    NuevoSubCuartelComponent
+    NuevoSubCuartelComponent,
+    VariedadComponent
   ],
   imports: [
 BrowserModule,
@@ -71,12 +73,12 @@ BrowserModule,
     }),
     BrowserModule,
     APP_ROUTING,
-    
+
 
   ],
   providers: [CampoService, MapaService,
      NuevoCampoService,TipoCampoService,
-     LocalidadService,ProveedorService,CuartelService,NuevoCuartelComponent,SubCuartelService],
+     LocalidadService,ProveedorService,CuartelService,NuevoCuartelComponent,SubCuartelService,VariedadService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

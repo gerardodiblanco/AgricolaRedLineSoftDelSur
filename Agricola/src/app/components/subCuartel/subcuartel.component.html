@@ -35,7 +35,7 @@
                     <td>{{subcuartel.codigo}}</td>
                     <td>{{subcuartel.variedad}}</td>
                     <td> <button type="button" class="btn btn-info" [routerLink]="['/nuevo-subCuartel',subcuartel.idSubCuartel]">Ver subcuartel</button></td>
-                    <td> <button type="button" class="btn btn-danger" (click)="eliminarCuartel()">Eliminar Cuartel</button> </td>
+                    <td> <button type="button" class="btn btn-danger" (click)="eliminarSubCuartel(subcuartel.idSubCuartel)">Eliminar Cuartel</button> </td>
 
                   </tr>
                 </tbody>

@@ -14,9 +14,7 @@ export class SubCuartelService {
     urlBuscarSubCuatel = "/subCuartel/getSubCuartel/";
     urlGetSubCuateles = "/subCuartel/getAllByCuartel/";
   //  urlGetSubCuatel = "/subCuartel/getSubCuartelById/";
-
-
-  //  urlEliminarCuartel = "/cuartel/remove/"
+    urlEliminarSubCuartel = "/subCuartel/remove/"
    urlGuardarSubCuartel = "/subCuartel/save/"
 
     constructor(private http: Http, private router: Router,
@@ -46,18 +44,32 @@ export class SubCuartelService {
 
     };
 
-    
+
 
     guardarSubCuartel(subCuartel): Promise<any> {
-        
+
                 console.log(subCuartel);
                 console.log(`${URL_BASE}${this.urlGuardarSubCuartel}`);
-        
+
                 let headers = new Headers({ 'Content-Type': 'application/json' });
                 let options = new RequestOptions({ headers: headers });
-               return this.http.put(`${URL_BASE}${this.urlGuardarSubCuartel}`, subCuartel, options)
+               return this.http.post(`${URL_BASE}${this.urlGuardarSubCuartel}`, subCuartel, options)
                     // .map(this.extractData)
                     .toPromise()
                     .catch(this.handleError);
+            }
+
+
+            eliminarSubCuartel(idSubCuartel): Promise<any> {
+
+                console.log(`${URL_BASE}${this.urlEliminarSubCuartel}${idSubCuartel}`);
+                return this.http.delete(`${URL_BASE}${this.urlEliminarSubCuartel}${idSubCuartel}`)
+                    .toPromise()
+                    .then(response => {
+
+                        return response.status
+                    })
+                    .catch(this.handleError);
+
             }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {VariedadService} from '../../service/variedad-service/variedad.service';
 
+
 @Component({
   selector: 'app-variedad',
   templateUrl: './variedad.component.html',
@@ -8,6 +9,7 @@ import {VariedadService} from '../../service/variedad-service/variedad.service';
 })
 export class VariedadComponent implements OnInit {
 
+ private color: string = "#127bdc";
 variedades:any[]=[];
 
   constructor(private variedadService: VariedadService) {
@@ -16,6 +18,10 @@ variedades:any[]=[];
 
   ngOnInit() {
 
+this.getVariedad();
+  }
+
+  getVariedad(){
     this.variedadService.getVariedades()
     .then(vs => {
       this.variedades = vs;
@@ -25,6 +31,16 @@ variedades:any[]=[];
     })
 
 
+  }
+
+
+  eliminarVariedad(idVariedad){
+    this.variedadService.eliminarVariedad(idVariedad)
+    .then(v =>{
+
+      this.getVariedad();
+
+    })
   }
 
 }

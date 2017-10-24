@@ -1,0 +1,33 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">Atributo</div>
+    <div class="panel-body">
+
+
+        <form (ngSubmit)="onSubmit()" class="form-horizontal">
+
+
+            <div class="form-group  ">
+                <div class="col-xs-3">
+                    <label for="txtNombre">Nombre Atributo:</label>
+                </div>
+
+                <input type="text" class="input-sm" required [(ngModel)]="atributo.nombre" name="txtNombre" [disabled]="!editable" />
+
+            </div>
+
+              <div>
+
+                <div class="col-xs-1" [hidden]="!editable">
+                    <button type="submit" class="btn btn-primary" [disabled]="!editable">Guardar</button>
+                </div>
+
+            </div>
+            <div>
+
+                <div class="col-xs-1" [hidden]="editable">
+                    <button (click)="editar()" class="btn btn-warning" [disabled]="editable">Editar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -11,6 +11,10 @@ import{NuevoCuartelComponent} from './components/cuartel/nuevo-cuartel/nuevo.cua
 import{SubCuartelComponent} from './components/subCuartel/subcuartel.component';
 import{NuevoSubCuartelComponent} from './components/subCuartel/nuevo-SubCuartel/nuevo.subcuartel.component';
 import { VariedadComponent } from '../app/components/variedad/variedad.component';
+import {AtributoComponent} from '../app/components/atributo/atributo.component';
+import {OpcionesAtributoComponent} from '../app/components/atributo/opciones-atributo/opciones-atributo.component';
+import {NuevoAtributoComponent} from '../app/components/atributo/nuevo-atributo/nuevo-atributo.component';
+import {NuevaOpcionComponent} from '../app/components/atributo/opciones-atributo/nueva-opcion/nueva-opcion.component';
 
 
 const APP_ROUTES: Routes = [
@@ -25,6 +29,13 @@ const APP_ROUTES: Routes = [
   {path: 'nuevo-cuartel/:idCampo/:idCuartel', component: NuevoCuartelComponent},
   {path: 'nuevo-subCuartel/:idSubCuartel', component: NuevoSubCuartelComponent},
   {path: 'configurar/variedades', component: VariedadComponent},
+  {path: 'configurar/atributos', component: AtributoComponent},
+  {path: 'configurar/atributos/opcionesAtributo', component: OpcionesAtributoComponent},
+  {path: 'configurar/atributos/opcionesAtributo/nueva-opcion', component: NuevaOpcionComponent},
+  {path: 'configurar/atributos/nuevo-atributo', component: NuevoAtributoComponent},
+
+
+
   { path: '**', pathMatch: 'full', redirectTo: 'inicio' }
 ];
 

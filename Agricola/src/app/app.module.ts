@@ -41,6 +41,14 @@ import {SubCuartelService} from './service/subCuartel-service/subCuartel.service
 import {NuevoSubCuartelComponent} from './components/subCuartel/nuevo-SubCuartel/nuevo.subcuartel.component';
 import { VariedadComponent } from '../app/components/variedad/variedad.component';
 import{VariedadService} from './service/variedad-service/variedad.service';
+import { AtributoComponent } from './components/atributo/atributo.component';
+import { OpcionesAtributoComponent } from './components/atributo/opciones-atributo/opciones-atributo.component';
+import { NuevoAtributoComponent } from './components/atributo/nuevo-atributo/nuevo-atributo.component';
+import { NuevaOpcionComponent } from './components/atributo/opciones-atributo/nueva-opcion/nueva-opcion.component';
+import {AtributoService} from './service/atributo-service/atributo.service';
+import {OpcionAtributoService} from './service/atributo-service/opcion-atriburo.service';
+
+
 
 @NgModule({
   declarations: [
@@ -61,12 +69,17 @@ import{VariedadService} from './service/variedad-service/variedad.service';
     NuevoCuartelComponent,
     SubCuartelComponent,
     NuevoSubCuartelComponent,
-    VariedadComponent
+    VariedadComponent,
+    AtributoComponent,
+    OpcionesAtributoComponent,
+    NuevoAtributoComponent,
+    NuevaOpcionComponent,
   ],
   imports: [
 BrowserModule,
     CommonModule,
     FormsModule,
+
     HttpModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCt5d9j8H1Im0mG4N__TG7s30PenkB7cbg'
@@ -78,7 +91,8 @@ BrowserModule,
   ],
   providers: [CampoService, MapaService,
      NuevoCampoService,TipoCampoService,
-     LocalidadService,ProveedorService,CuartelService,NuevoCuartelComponent,SubCuartelService,VariedadService],
+     LocalidadService,ProveedorService,CuartelService,NuevoCuartelComponent,SubCuartelService,VariedadService,
+   OpcionAtributoService,AtributoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

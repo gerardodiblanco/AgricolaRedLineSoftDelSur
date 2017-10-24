@@ -1,11 +1,9 @@
 <div class="wrapper wrapper-content animated fadeInRight">
-
   <div class="row">
     <div class="col-lg-12">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
-          <h5>Variedades</h5>
-
+          <h5>Atributos</h5>
           <div class="ibox-tools">
             <a class="collapse-link">
                  <i class="fa fa-chevron-up"></i>
@@ -23,28 +21,22 @@
           </div>
         </div>
         <div class="ibox-content">
-
-          <div class="table-responsive">
+        <div class="table-responsive">
             <table class="table table-hover toggle-arrow-tiny">
               <thead>
                 <tr class="success">
-
                   <th>Nombre</th>
-                  <th>Codigo Color</th>
-
+                <th></th>
                   <th></th>
                   <th></th>
-
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let variedad of variedades" >
-
-                  <td>{{variedad.nombre}}</td>
-                  <td><font color="{{variedad.colorVariedad}}" >{{variedad.colorVariedad}}</font></td>
-
+                <tr *ngFor="let atributo of atributos" >
+                <td>{{atributo.nombre}}</td>
+                  <td> <button type="button" class="btn btn-primary"[routerLink]="['/configurar/atributos/opcionesAtributo' ]">Ver Opciones</button></td>
                   <td> <button type="button" class="btn btn-info" [routerLink]="['/nuevo-campo' ]">Editar</button></td>
-                  <td> <button type="button" class="btn btn-danger" (click)="eliminarVariedad(variedad.id)">Eliminar Variedad</button>                    </td>
+                  <td> <button type="button" class="btn btn-danger" (click)="eliminarVariedad(atributo.id)">Eliminar Atributo</button>                    </td>
                 </tr>
               </tbody>
               <tfoot>
@@ -54,19 +46,11 @@
                   </td>
                 </tr>
               </tfoot>
-
             </table>
-            <button type="button" class="btn btn-primary" [routerLink]="['/nuevo-campo']">Crear Variedad</button>
+            <button type="button" class="btn btn-primary" [routerLink]="['/configurar/atributos/nuevo-atributo']">Crear Atributo</button>
           </div>
         </div>
-
-
-
-
-
       </div>
     </div>
   </div>
-
-
 </div>

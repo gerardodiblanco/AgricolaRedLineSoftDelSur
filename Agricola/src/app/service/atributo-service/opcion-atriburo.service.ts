@@ -5,7 +5,7 @@ import { URL_BASE } from '../../config/url.sevice';
 
 @Injectable()
 export class OpcionAtributoService {
-  urlGetOpcionesAtributo = '/opcion/all';
+  urlGetOpcionesAtributo = '/opcion/allActivos';
   urlEliminarOpcion = '/opcion/remove/';
   urlGuardarOpcion = '/opcion/save';
 
@@ -21,8 +21,8 @@ export class OpcionAtributoService {
   }
 
   eliminarOpcion(idOpcion): Promise<any> {
-    console.log(`${URL_BASE}${this.eliminarOpcion}${idOpcion}`);
-    return this.http.delete(`${URL_BASE}${this.eliminarOpcion}${idOpcion}`)
+    console.log(`${URL_BASE}${this.urlEliminarOpcion}${idOpcion}`);
+    return this.http.delete(`${URL_BASE}${this.urlEliminarOpcion}${idOpcion}`)
       .toPromise()
       .then((response) => {
         return response.status;

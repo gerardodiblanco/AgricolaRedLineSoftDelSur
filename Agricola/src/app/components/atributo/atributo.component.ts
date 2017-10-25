@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AtributoService} from '../../service/atributo-service/atributo.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-atributo',
@@ -6,10 +8,31 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./atributo.component.css'],
 })
 export class AtributoComponent implements OnInit {
-atributos: any[] = [{nombre: 'nombre', id: '1234'}];
-  constructor() { }
+atributos: any[];
+
+  constructor(
+    private atributoService: AtributoService,
+    private router: Router) {
+   }
 
   ngOnInit() {
+  this.buscarAtributos();
+  }
+
+  buscarAtributos() {
+    this.atributoService.getAtributos()
+    .then((atributo) => {
+      this.atributos = atributo;
+      console.log(atributo);
+    });
+  }
+
+  eliminarAtributo(idAtributo: string) {
+    this.atributoService.eliminarAtributo(idAtributo)
+    .then((atributo) => {
+      console.log(atributo);
+      this.buscarAtributos();
+    });
   }
 
 }

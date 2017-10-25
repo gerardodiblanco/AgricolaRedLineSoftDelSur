@@ -1,28 +1,32 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, RequestMethod } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
+import { Observable } from 'rxjs/Observable';
 import { URL_BASE } from '../../config/url.sevice';
 
 @Injectable()
 export class AtributoService {
-  urlGetAtributos = '/atributo/all';
+  urlGetAtributos = '/atributo/allActivos';
   urlEliminarAtributo = '/atributo/remove/';
   urlGuardarAtributo = '/atributo/save';
 
   constructor(private http: Http) { }
 
   getAtributos(): Promise<any> {
-    return this.http.get(`${URL_BASE}${this.getAtributos}`)
+    console.log(URL_BASE + this.urlGetAtributos);
+    return this.http.get(`${URL_BASE}${this.urlGetAtributos}`)
       .toPromise()
       .then((response) => {
+        console.log(response);
         return response.json();
+
       })
       .catch(this.handleError);
   }
 
   eliminarAtributo(idAtributo): Promise<any> {
-    console.log(`${URL_BASE}${this.eliminarAtributo}${idAtributo}`);
-    return this.http.delete(`${URL_BASE}${this.eliminarAtributo}${idAtributo}`)
+    console.log(`${URL_BASE}${this.urlEliminarAtributo}${idAtributo}`);
+    return this.http.delete(`${URL_BASE}${this.urlEliminarAtributo}${idAtributo}`)
       .toPromise()
       .then((response) => {
         return response.status;
@@ -37,7 +41,7 @@ export class AtributoService {
     const headers = new Headers({ 'Content-Type': 'application/json' });
     const options = new RequestOptions({ 'headers': headers });
 
-    return this.http.post(`${URL_BASE}${this.guardarAtributo}`, atributo, options)
+    return this.http.post(`${URL_BASE}${this.urlGuardarAtributo}`, atributo, options)
       .map(this.extractData)
       .toPromise()
       .catch(this.handleError);

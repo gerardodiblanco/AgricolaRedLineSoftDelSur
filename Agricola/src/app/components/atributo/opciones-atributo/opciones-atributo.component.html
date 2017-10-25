@@ -33,10 +33,11 @@
               </thead>
               <tbody>
                 <tr *ngFor="let opcion of opciones" >
-                <td>{{opcion.nombre}}</td>
+                <td>{{opcion.nombreOpcion}}</td>
 
-                  <td> <button type="button" class="btn btn-info" [routerLink]="['/nuevo-campo' ]">Editar</button></td>
-                  <td> <button type="button" class="btn btn-danger" (click)="eliminarVariedad(atributo.id)">Eliminar</button>                    </td>
+                <!--  <td> <button type="button" class="btn btn-info" [routerLink]="['/nuevo-campo' ]">Editar</button></td>
+-->
+                  <td> <button type="button" class="btn btn-danger" (click)="eliminarOpcion(opcion.id)">Eliminar</button>                    </td>
                 </tr>
               </tbody>
               <tfoot>

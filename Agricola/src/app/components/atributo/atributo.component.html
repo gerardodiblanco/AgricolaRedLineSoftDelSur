@@ -33,10 +33,10 @@
               </thead>
               <tbody>
                 <tr *ngFor="let atributo of atributos" >
-                <td>{{atributo.nombre}}</td>
+                <td>{{atributo.nombreAtributo}}</td>
                   <td> <button type="button" class="btn btn-primary"[routerLink]="['/configurar/atributos/opcionesAtributo' ]">Ver Opciones</button></td>
-                  <td> <button type="button" class="btn btn-info" [routerLink]="['/nuevo-campo' ]">Editar</button></td>
-                  <td> <button type="button" class="btn btn-danger" (click)="eliminarVariedad(atributo.id)">Eliminar Atributo</button>                    </td>
+                  <td> <button type="button" class="btn btn-info">Editar</button></td>
+                  <td> <button type="button" class="btn btn-danger" (click)="eliminarAtributo(atributo.id)">Eliminar Atributo</button>                    </td>
                 </tr>
               </tbody>
               <tfoot>

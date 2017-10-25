@@ -5,9 +5,9 @@ import { MapaComponent } from './components/mapa/mapa.component';
 
 import { CampoComponent } from './components/campo/campo.component';
 import {NuevoCampoComponent} from './components/campo/nuevo-campo/nuevo-campo.component';
-import {CampoClass} from './class/campo'
-import{CuartelComponent} from './components/cuartel/cuartel.component'
-import{NuevoCuartelComponent} from './components/cuartel/nuevo-cuartel/nuevo.cuartel.component'
+import {CampoClass} from './class/campo';
+import{CuartelComponent} from './components/cuartel/cuartel.component';
+import{NuevoCuartelComponent} from './components/cuartel/nuevo-cuartel/nuevo.cuartel.component';
 import{SubCuartelComponent} from './components/subCuartel/subcuartel.component';
 import{NuevoSubCuartelComponent} from './components/subCuartel/nuevo-SubCuartel/nuevo.subcuartel.component';
 import { VariedadComponent } from '../app/components/variedad/variedad.component';
@@ -33,10 +33,7 @@ const APP_ROUTES: Routes = [
   {path: 'configurar/atributos/opcionesAtributo', component: OpcionesAtributoComponent},
   {path: 'configurar/atributos/opcionesAtributo/nueva-opcion', component: NuevaOpcionComponent},
   {path: 'configurar/atributos/nuevo-atributo', component: NuevoAtributoComponent},
-
-
-
-  { path: '**', pathMatch: 'full', redirectTo: 'inicio' }
+  { path: '**', pathMatch: 'full', redirectTo: 'inicio' },
 ];
 
 export const APP_ROUTING = RouterModule.forRoot(APP_ROUTES);

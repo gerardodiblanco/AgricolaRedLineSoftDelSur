@@ -5,7 +5,7 @@ import { CampoService } from './campo.service';
 describe('CampoService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [CampoService]
+      providers: [CampoService],
     });
   });
 

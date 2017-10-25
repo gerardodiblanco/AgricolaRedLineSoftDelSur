@@ -7,7 +7,7 @@ import { LatLng, LatLngLiteral } from '../../../../../node_modules/@agm/core';
 import { ordenarArray } from '../../mapa/funciones.mapa';
 import { convertCoordenadaListToPaths } from '../../mapa/funciones.mapa';
 import { convertCoordenadaListToMarkerList } from '../../mapa/funciones.mapa';
-import { marker } from '../../mapa/funciones.mapa';
+import { Marker } from '../../mapa/funciones.mapa';
 import { convertElementoConCoordenadasToArrayPaths } from '../../mapa/funciones.mapa';
 import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute } from '@angular/router';
@@ -16,104 +16,108 @@ import { convertMarkerListToCoordenadaList } from '../../mapa/funciones.mapa';
 import { SubCuartelService } from '../../../service/subCuartel-service/subCuartel.service';
 
 @Component({
-  selector: 'app-nuevoSubCuartel',
+  selector: 'app-nuevosubcuartel',
   templateUrl: './nuevo.subcuartel.component.html',
-  styleUrls: ['./nuevo.subcuartel.component.css']
+  styleUrls: ['./nuevo.subcuartel.component.css'],
 })
-export class NuevoSubCuartelComponent {
-  titulo: string = "Sub Cuartel - ";
+export class NuevoSubCuartelComponent implements OnInit {
+  titulo: string = 'Sub Cuartel - ';
   cuartel: any = null;
   subcuarteles: any[] = [];
 
   subcuartelSeleccionado: any = null;
-  pathsCuartel: Array<LatLngLiteral> = new Array<LatLngLiteral>();
+  pathsCuartel: LatLngLiteral[] = new Array<LatLngLiteral>();
   arrayPathsSubCuarteles: Array<Array<LatLngLiteral>> = [];
-  pathsSubCuartel: Array<LatLngLiteral> = new Array<LatLngLiteral>();
-  markers: marker[] = [];
+  pathsSubCuartel: LatLngLiteral[] = new Array<LatLngLiteral>();
+  markers: Marker[] = [];
   latInicio = -32.880913;
   lngInicio = -68.83319;
   editable: boolean;
-  idCuartel: any = "";
-  idSubCuartel: any = "";
+  idCuartel: any = '';
+  idSubCuartel: any = '';
 
 
-  constructor(private campoService: CampoService, private nuevoCampoService: NuevoCampoService,
-    private cuartelService: CuartelService, private route: ActivatedRoute, private subCuartelService: SubCuartelService,
+  constructor(
+    private campoService: CampoService,
+    private nuevoCampoService: NuevoCampoService,
+    private cuartelService: CuartelService,
+    private route: ActivatedRoute,
+    private subCuartelService: SubCuartelService,
     private router: Router) {
     this.editable = true;
 
-    //falta 
+    // falta
     this.subcuartelSeleccionado = {
-      codigo: 0, codigoCampo: 0, coordenadaList: [], cuitCampo: "",
-      descripcion: "", domicilioCampo: "", estadoCampo: "", hectarea: 0, hectareaCampo: 0,
-      idCampo: "", idCuartel: "", nombreCampo: "", proveedorCampo: "", subcuarteles: [], tipoCampo: ""
-    }
+      codigo: 0, codigoCampo: 0, coordenadaList: [], cuitCampo: '',
+      descripcion: '', domicilioCampo: '', estadoCampo: '', hectarea: 0, hectareaCampo: 0,
+      idCampo: '', idCuartel: '', nombreCampo: '', proveedorCampo: '', subcuarteles: [], tipoCampo: '',
+    };
   }
 
   ngOnInit() {
     // Recogemos los parametros de la URL
-    this.route.params.subscribe(params => {
-      console.log("params");
+    this.route.params.subscribe((params) => {
+      console.log('params');
       console.log(params);
-      if (params['idSubCuartel'] != null) {
+      if (params['idSubCuartel'] !== null) {
         this.idSubCuartel = params['idSubCuartel'];
         this.subCuartelService
           .getSubCuartel(params['idSubCuartel'])
-          .then(sc => {
+          .then((sc) => {
             this.subcuartelSeleccionado = sc;
-            console.log("subcuartelSeleccionado")
+            console.log('subcuartelSeleccionado');
             console.log(this.subcuartelSeleccionado);
- //buscar todos los subCuarteles
- console.log("buscar todos los sub cuarteles por idCuartel");
-             this.subCuartelService.getSubCuarteles(sc.idCuartel)
-              .then(sub => {
+            // buscar todos los subCuarteles
+            console.log('buscar todos los sub cuarteles por idCuartel');
+            this.subCuartelService.getSubCuarteles(sc.idCuartel)
+              .then((sub) => {
                 this.subcuarteles = sub;
-                console.log("subCuarteles");
+                console.log('subCuarteles');
                 console.log(this.subcuarteles);
-this.cuartelService.buscarCuartel(sc.idCuartel)
-                .then(cuart => {
-                  this.cuartel = cuart;
-                  console.log("cuartel");
-                  console.log(cuart);
-                  this.actualizarAreaCuartel();
-                });
+                this.cuartelService.buscarCuartel(sc.idCuartel)
+                  .then((cuart) => {
+                    this.cuartel = cuart;
+                    console.log('cuartel');
+                    console.log(cuart);
+                    this.actualizarAreaCuartel();
+                  });
                 this.actualizarAreaSubCuarteles();
               });
-              this.actualizarMarker();
-              this.actualizarPathCuartel();
+            this.actualizarMarker();
+            this.actualizarPathCuartel();
           });
       }
     });
   }
 
-//guardar 
+  // guardar
   onSubmit() {
-    console.log("onSubmit")
-    console.log("save subCuartel");
+    console.log('onSubmit');
+    console.log('save subCuartel');
     console.log(this.subcuartelSeleccionado);
     this.actualizarCoordenadas();
     this.subCuartelService.guardarSubCuartel(this.subcuartelSeleccionado)
-      .then(rta => {
+      .then((rta) => {
         this.router.navigate(['/cuarteles']);
       });
   }
 
   actualizarAreaSubCuarteles() {
-    console.log("actualizar Areas Sub Cuarteles ")
+    console.log('actualizar Areas Sub Cuarteles ');
     this.arrayPathsSubCuarteles = [];
     this.elimiarSubCuartel();
     this.arrayPathsSubCuarteles = convertElementoConCoordenadasToArrayPaths(this.subcuarteles);
     console.log(this.arrayPathsSubCuarteles);
   }
 
-  //eliminar cuartel seleccionado de cuarteles
+  // eliminar cuartel seleccionado de cuarteles
   elimiarSubCuartel() {
-    for (var index = 0; index < this.subcuarteles.length; index++) {
-      var element = this.subcuarteles[index];
+    for (let index = 0; index < this.subcuarteles.length; index++) {
+      const element = this.subcuarteles[index];
       console.log(element.idCuartel);
       console.log(this.subcuartelSeleccionado.idSubCuartel);
-      if (element.idSubCuartel == this.subcuartelSeleccionado.idSubCuartel) {
-        console.log("es igual");
+      if (element.idSubCuartel === this.subcuartelSeleccionado.idSubCuartel) {
+        console.log('es igual');
         console.log(element.descripcion);
         this.subcuarteles.splice(index, 1);
       }
@@ -126,7 +130,7 @@ this.cuartelService.buscarCuartel(sc.idCuartel)
 
 
   actualizarAreaCuartel() {
-    console.log("actualizar Area Cuartel");
+    console.log('actualizar Area Cuartel');
     this.pathsCuartel = [];
     this.pathsCuartel = convertCoordenadaListToPaths(this.cuartel.coordenadaList);
     console.log(this.pathsCuartel);
@@ -135,7 +139,7 @@ this.cuartelService.buscarCuartel(sc.idCuartel)
 
   actualizarMarker() {
     this.markers = [];
-    this.markers = convertCoordenadaListToMarkerList(this.subcuartelSeleccionado.coordenadaList)
+    this.markers = convertCoordenadaListToMarkerList(this.subcuartelSeleccionado.coordenadaList);
     this.actualizarPathCuartel();
   }
 
@@ -150,92 +154,88 @@ this.cuartelService.buscarCuartel(sc.idCuartel)
 
 
   mapClickeado() {
-    alert("FUERA DEL CUARTEL");
+    alert('FUERA DEL CUARTEL');
   }
   polyClickeado($event: any) {
-    console.log("poligono clickeado");
+    console.log('poligono clickeado');
     if (this.editable) {
-      var nuevoMarker = {
+      const nuevoMarker = {
         nroOrden: this.markers.length + 1,
         lati: $event.coords.lat,
         longi: $event.coords.lng,
         id: $event.id,
-      }
+      };
       this.markers.push(nuevoMarker);
-      //this.actualizarPaths();
+      // this.actualizarPaths();
     }
   }
 
 
   eliminarMarcador() {
-    console.log("click derecho");
+    console.log('click derecho');
     this.markers.pop();
     this.actualizarPathCuartel();
   }
 
-
-
-
   mOut: boolean = false;
 
   mouseOut($event: any) {
-    console.log("mouseOut");
+    console.log('mouseOut');
     this.mOut = true;
   }
 
   mouseOver($event: any) {
-    console.log("mouseOver");
+    console.log('mouseOver');
 
   }
 
-  //cambio de lugar de marcador dentro del poligono
+  // cambio de lugar de marcador dentro del poligono
   posicionFinalMarcador(m, $event, i) {
     this.markers[i].lati = $event.coords.lat;
     this.markers[i].longi = $event.coords.lng;
-    this.actualizarPathCuartel()
-    console.log("posicionFinalMarcador");
+    this.actualizarPathCuartel();
+    console.log('posicionFinalMarcador');
   }
 
   polyMouseOver($event: any) {
-    console.log("polyMouseOver");
+    console.log('polyMouseOver');
   }
 
   polyMouseUp() {
-    console.log("polyMouseUp");
+    console.log('polyMouseUp');
   }
 
   polyMouseMove($event: any) {
-    console.log("polyMouseMove");
+    console.log('polyMouseMove');
   }
 
-  //marcador fuera del campo con espacio libre
+  // marcador fuera del campo con espacio libre
 
   polyMouseOut($event: any) {
-    console.log("polyMouseOut");
+    console.log('polyMouseOut');
   }
-  //posicionFinalMarcador()
+  // posicionFinalMarcador()
 
-  //click dentro del poligono
+  // click dentro del poligono
 
   polyMouseDown($event: any) {
-    console.log("polyMouseDown($event)");
+    console.log('polyMouseDown($event)');
   }
-  //polyMouseUp
+  // polyMouseUp
 
 
   poligonClickeado($event: any) {
-    console.log("clikeado");
+    console.log('clikeado');
     if (this.editable) {
-      var nuevoMarker = {
+      const nuevoMarker = {
         nroOrden: this.markers.length + 1,
         lati: $event.latLng.lat(),
         longi: $event.latLng.lng(),
         id: null,
-      }
+      };
       this.markers.push(nuevoMarker);
       this.actualizarPathCuartel();
     }
   }
-
 
 }

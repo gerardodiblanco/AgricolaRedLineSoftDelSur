@@ -5,7 +5,7 @@
         <div *ngIf="campo">
             <agm-map [latitude]="latInicio" [longitude]="lngInicio" [zoom]="14" (mapClick)="mapClickeado($event)" (mapRightClick)="eliminarMarcador()"
                 (draggableCursor)="assets/img/iconoFlecha.png">
-                <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="marcadorClicleado(m,i)" [latitude]="m.lati" [longitude]="m.longi"
+                <agm-marker *ngFor="let m of markers; let i = index" [latitude]="m.lati" [longitude]="m.longi"
                     [markerDraggable]="editable" iconUrl="assets/img/iconoMarcador.png" (dragEnd)="posicionFinalMarcador(m,$event,i)"
                     (mouseOut)="mouseOut($event)" (mouseOver)="mouseOver($event)">
                 </agm-marker>
@@ -18,7 +18,7 @@
                 <agm-polygon [paths]="arrayPathsCuarteles" fillOpacity=0.6 fillColor=#21AF04>
                 </agm-polygon>
 
-                <agm-polygon [paths]="PathsCuartel" fillOpacity=0.6 fillColor=#FF4000>
+                <agm-polygon [paths]="pathsCuartel" fillOpacity=0.6 fillColor=#FF4000>
                 </agm-polygon>
 
             </agm-map>

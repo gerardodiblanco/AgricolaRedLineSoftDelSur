@@ -13,41 +13,41 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-campo',
   templateUrl: './campo.component.html',
-  styleUrls: ['./campo.component.css']
+  styleUrls: ['./campo.component.css'],
 })
 export class CampoComponent implements OnInit {
   campos: any[] = [];
 
-  constructor(private campoService: CampoService, private route: ActivatedRoute,
-    private mapaService: MapaService, private nuevoCampoService: NuevoCampoService
-    , private router: Router) {
+  constructor(
+    private campoService: CampoService,
+    private route: ActivatedRoute,
+    private mapaService: MapaService,
+    private nuevoCampoService: NuevoCampoService,
+    private router: Router) {
     this.buscarCamposService();
   }
 
   buscarCamposService() {
     this.campos = null;
     this.campoService.getcampos()
-      .then(campos => {
-        this.campos = campos
-        console.log("campos")
-        console.log(this.campos)
-      })
+      .then((campos) => {
+        this.campos = campos;
+        console.log('campos');
+        console.log(this.campos);
+      });
   }
 
   ngOnInit() {
   }
 
   eliminarCampo(idCampo) {
-    if (confirm("¿Está seguro que desea eliminar el campo?")) {
-    
+    if (confirm('¿Está seguro que desea eliminar el campo?')) {
+
       this.campoService.eliminarCampo(idCampo)
-      .then(c =>{
-        this.buscarCamposService();
-      });
+        .then((c) => {
+          this.buscarCamposService();
+        });
     }
     console.log(this.campos);
   }
 }
-
-
-

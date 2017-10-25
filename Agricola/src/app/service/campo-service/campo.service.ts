@@ -5,14 +5,12 @@ import { Observable } from 'rxjs/Observable';
 import { CampoDTO } from '../../components/campo/campo';
 import { URL_BASE } from '../../config/url.sevice';
 
-
-
 @Injectable()
 export class CampoService {
   camposDTO: CampoDTO[] = [];
 
-  urlGetCampo = "/campo/allActivos";
-  urlEliminarCampo = "/campo/remove/"
+  urlGetCampo = '/campo/allActivos';
+  urlEliminarCampo = '/campo/remove/';
 
   constructor(private http: Http) {
 
@@ -22,20 +20,18 @@ export class CampoService {
     console.log(`${URL_BASE}${this.urlGetCampo}`);
     return this.http.get(`${URL_BASE}${this.urlGetCampo}`)
       .toPromise()
-      .then(response => { return response.json() })
+      .then((response) => {
+      return response.json(); })
       .catch(this.handleError);
-
-  };
-
+  }
 
   eliminarCampo(idCampo): Promise<any> {
-
     console.log(`${URL_BASE}${this.urlEliminarCampo}${idCampo}`);
     return this.http.delete(`${URL_BASE}${this.urlEliminarCampo}${idCampo}`)
       .toPromise()
-      .then(response => {
+      .then((response) => {
         this.getcampos();
-        return response
+        return response;
       })
       .catch(this.handleError);
 
@@ -46,6 +42,3 @@ export class CampoService {
     return Promise.reject(error.message || error);
   }
 }
-
-
-

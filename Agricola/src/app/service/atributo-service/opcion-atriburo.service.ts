@@ -5,15 +5,16 @@ import { URL_BASE } from '../../config/url.sevice';
 
 @Injectable()
 export class OpcionAtributoService {
-  urlGetOpcionesAtributo = '/opcion/allActivos';
+  urlGetOpcionesAtributo = '/opcion/allActivos/';
   urlEliminarOpcion = '/opcion/remove/';
   urlGuardarOpcion = '/opcion/save';
 
   constructor(private http: Http) { }
 
 
-  getOpciones(): Promise<any> {
-    return this.http.get(`${URL_BASE}${this.urlGetOpcionesAtributo}`)
+  getOpciones(idAtributo: string): Promise<any> {
+    console.log(`${URL_BASE}${this.urlGetOpcionesAtributo}${idAtributo}`);
+    return this.http.get(`${URL_BASE}${this.urlGetOpcionesAtributo}${idAtributo}`)
       .toPromise()
       .then((response) => {
         return response.json(); })

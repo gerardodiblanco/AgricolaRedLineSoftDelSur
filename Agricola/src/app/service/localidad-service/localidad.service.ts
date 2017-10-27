@@ -5,7 +5,7 @@ import { URL_BASE } from '../../config/url.sevice';
 
 @Injectable()
 export class LocalidadService {
-    urlGetLocalidades = '/localidad/al';
+    urlGetLocalidades = '/localidad/all';
 
     constructor(private http: Http) { }
     // busca todas las localidades

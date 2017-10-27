@@ -30,8 +30,8 @@ const APP_ROUTES: Routes = [
   {path: 'nuevo-subCuartel/:idSubCuartel', component: NuevoSubCuartelComponent},
   {path: 'configurar/variedades', component: VariedadComponent},
   {path: 'configurar/atributos', component: AtributoComponent},
-  {path: 'configurar/atributos/opcionesAtributo', component: OpcionesAtributoComponent},
-  {path: 'configurar/atributos/opcionesAtributo/nueva-opcion', component: NuevaOpcionComponent},
+  {path: 'configurar/atributos/opcionesAtributo/:idAtributo', component: OpcionesAtributoComponent},
+  {path: 'configurar/atributos/opcionesAtributo/nueva-opcion/:idAtributo', component: NuevaOpcionComponent},
   {path: 'configurar/atributos/nuevo-atributo', component: NuevoAtributoComponent},
   { path: '**', pathMatch: 'full', redirectTo: 'inicio' },
 ];

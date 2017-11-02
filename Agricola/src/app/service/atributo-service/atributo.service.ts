@@ -7,6 +7,8 @@ import { URL_BASE } from '../../config/url.sevice';
 @Injectable()
 export class AtributoService {
   urlGetAtributos = '/atributo/allActivos';
+urlGetAtributosConOpciones = '/atributo//allActivosConOpciones';
+
   urlEliminarAtributo = '/atributo/remove/';
   urlGuardarAtributo = '/atributo/save';
 
@@ -15,6 +17,18 @@ export class AtributoService {
   getAtributos(): Promise<any> {
     console.log(URL_BASE + this.urlGetAtributos);
     return this.http.get(`${URL_BASE}${this.urlGetAtributos}`)
+      .toPromise()
+      .then((response) => {
+        console.log(response);
+        return response.json();
+
+      })
+      .catch(this.handleError);
+  }
+
+  getAtributosConOpciones(): Promise<any> {
+    console.log(URL_BASE + this.urlGetAtributosConOpciones);
+    return this.http.get(`${URL_BASE}${this.urlGetAtributosConOpciones}`)
       .toPromise()
       .then((response) => {
         console.log(response);

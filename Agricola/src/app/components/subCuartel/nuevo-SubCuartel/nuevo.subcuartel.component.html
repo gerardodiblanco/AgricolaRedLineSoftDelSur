@@ -1,78 +1,136 @@
 <div class="container wrapper wrapper-content animated fadeInRight" *ngIf="cuartel">
-    <h1>{{titulo}}</h1>
-    <div class="panel panel-primary">
-        <div class="panel-heading">{{titulo}}</div>
-        <div *ngIf="cuartel">
-            <agm-map [latitude]="latInicio" [longitude]="lngInicio" [zoom]="14" (mapClick)="mapClickeado($event)" (mapRightClick)="eliminarMarcador()"
-                (draggableCursor)="assets/img/iconoFlecha.png">
-                <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="marcadorClicleado(m,i)" [latitude]="m.lati" [longitude]="m.longi"
-                    [markerDraggable]="editable" iconUrl="assets/img/iconoMarcador.png" (dragEnd)="posicionFinalMarcador(m,$event,i)"
-                    (mouseOut)="mouseOut($event)" (mouseOver)="mouseOver($event)">
-                </agm-marker>
+  <h1>{{titulo}}</h1>
+  <div class="panel panel-primary">
+    <div class="panel-heading">{{titulo}}</div>
+    <div *ngIf="cuartel">
+      <agm-map [latitude]="latInicio" [longitude]="lngInicio" [zoom]="14" (mapClick)="mapClickeado($event)" (mapRightClick)="eliminarMarcador()" (draggableCursor)="assets/img/iconoFlecha.png">
+        <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="marcadorClicleado(m,i)" [latitude]="m.lati" [longitude]="m.longi" [markerDraggable]="editable" iconUrl="assets/img/iconoMarcador.png" (dragEnd)="posicionFinalMarcador(m,$event,i)" (mouseOut)="mouseOut($event)"
+          (mouseOver)="mouseOver($event)">
+        </agm-marker>
 
-                <agm-polygon [paths]="pathsCuartel" fillOpacity=0.1 clickable="true" (polyClick)="poligonClickeado($event)" (polyRightClick)="eliminarMarcador()"
-                    (polyMouseDown)="polyMouseDown($event)" (polyMouseMove)="polyMouseMove($event)" (polyMouseOut)="polyMouseOut($event)"
-                    (polyMouseOver)="polyMouseOver($event)" (polyMouseUp)="polyMouseUp($event)">
-                </agm-polygon>
+        <agm-polygon [paths]="pathsCuartel" fillOpacity=0.1 clickable="true" (polyClick)="poligonClickeado($event)" (polyRightClick)="eliminarMarcador()" (polyMouseDown)="polyMouseDown($event)" (polyMouseMove)="polyMouseMove($event)" (polyMouseOut)="polyMouseOut($event)"
+          (polyMouseOver)="polyMouseOver($event)" (polyMouseUp)="polyMouseUp($event)">
+        </agm-polygon>
 
-                <agm-polygon [paths]="arrayPathsSubCuarteles" fillOpacity=0.6 fillColor=#6E6E6E>
-                </agm-polygon>
+        <agm-polygon [paths]="arrayPathsSubCuarteles" fillOpacity=0.6 fillColor=#6E6E6E>
+        </agm-polygon>
 
-                <agm-polygon [paths]="pathsSubCuartel" fillOpacity=0.6 fillColor=#FF4000>
-                </agm-polygon>
+        <agm-polygon [paths]="pathsSubCuartel" fillOpacity=0.6 fillColor=#FF4000>
+        </agm-polygon>
 
-            </agm-map>
-        </div>
+      </agm-map>
     </div>
+  </div>
 
-    <div class="panel panel-primary" *ngIf="subcuartelSeleccionado">
-        <div class="panel-heading">Datos del Cuartel</div>
-        <div class="panel-body">
-            <form (ngSubmit)="onSubmit()" class="form-horizontal">
+  <div class="panel panel-primary" *ngIf="subcuartelSeleccionado">
+    <div class="panel-heading">Datos del Cuartel</div>
+    <div class="panel-body">
+      <form (ngSubmit)="onSubmit()" class="form-horizontal">
 
-                <div class="form-group  ">
-                    <div class="col-xs-1">
-                        <label for="txtNombre">Nombre:</label>
-                    </div>
-                    <input type="text" class="input-sm" required [(ngModel)]="subcuartelSeleccionado.descripcion" name="txtNombre" [disabled]="!editable"
-                    />
-                </div>
-
-                <div class="form-group">
-                    <div class="col-xs-1">
-                        <label for="txtHcta">Hectarea:</label>
-                    </div>
-                    <input type="number" class="input-sm" required [(ngModel)]="subcuartelSeleccionado.hectarea" name="txtHcta" [disabled]="!editable"
-                    />
-                </div>
-
-                <div class="form-group">
-                    <div class="col-xs-1">
-                        <label for="txtCod">Codigo:</label>
-                    </div>
-                    <input type="number" class="input-sm" required [(ngModel)]="subcuartelSeleccionado.codigo" name="numCod" [disabled]="!editable"
-                    />
-                </div>
-
-                <div>
-
-                    <div class="col-xs-1" [hidden]="!editable">
-                        <button type="submit" class="btn btn-primary" [disabled]="!editable">Guardar</button>
-                    </div>
-
-                </div>
-                <div>
-
-                    <div class="col-xs-1" [hidden]="editable">
-                        <button (click)="editar()" class="btn btn-warning" [disabled]="editable">Editar</button>
-                    </div>
-                </div>
-
-
-            </form>
+        <div class="form-group  ">
+          <div class="col-xs-2">
+            <label for="txtNombre">Nombre:</label>
+          </div>
+          <input type="text" class="input-sm" required [(ngModel)]="subcuartelSeleccionado.descripcion" name="txtNombre" [disabled]="!editable" />
         </div>
 
+        <div class="form-group">
+          <div class="col-xs-2">
+            <label for="txtHcta">Hectarea:</label>
+          </div>
+          <input type="number" class="input-sm" required [(ngModel)]="subcuartelSeleccionado.hectarea" name="txtHcta" [disabled]="!editable" />
+        </div>
+
+        <div class="form-group">
+          <div class="col-xs-2">
+            <label for="txtCod">Codigo:</label>
+          </div>
+          <input type="number" class="input-sm" required [(ngModel)]="subcuartelSeleccionado.codigo" name="numCod" [disabled]="!editable" />
+        </div>
+
+        <div class="row">
+          <div class="col-lg-9">
+            <div class="tabs-container">
+              <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#tab-1"> Atributos</a></li>
+                <li class=""><a data-toggle="tab" href="#tab-2">Mas Atributos </a></li>
+              </ul>
+              <div class="tab-content">
+                <div id="tab-1" class="tab-pane active">
+                  <div class="panel-body">
+                    <div *ngFor="let atributo of subcuartelSeleccionado.atributosSubCuartel">
+<br>
+                      <div class="row">
+                        <div class="col-sm-3"><label>{{atributo.nombreAtributo}}</label></div>
+                        <div class="col-sm-2">
+                          <select [(ngModel)]="atributo.nombreOpcion" [ngModelOptions]="{standalone: true}" [disabled]="!editable" class="btn btn-info">
+                                <option *ngFor="let opcion of atributo.atributoOpcionModelList"  >{{opcion.nombreOpcion}}</option>
+                          </select>
+                        </div>
+                        <div class="col-sm-1">
+                          <button (click)="quitarAtributo(atributo)" type="button" class="btn btn-danger">Quitar Atributo</button>
+                        </div>
+                      </div>
+
+
+                    </div>
+
+                  </div>
+                </div>
+                <div id="tab-2" class="tab-pane">
+                  <div class="panel-body">
+                    <h3>Nuevos Atributos encontrados</h3>
+<br>
+                    <div *ngFor="let atributo of nuevosAtributos">
+
+
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <label>{{atributo.nombreAtributo}}</label>
+                        </div>
+                        <div class="col-sm-2">
+                          <select [(ngModel)]="atributo.opcionSeleccionada" [ngModelOptions]="{standalone: true}" [disabled]="!editable" class="btn btn-info">
+                              <option *ngFor="let opcion of atributo.opciones" >{{opcion.nombreOpcion}}</option>
+                          </select>
+                        </div>
+                        <div class="col-sm-1" [hidden]="!atributo.opcionSeleccionada">
+                          <button (click)="agregarAtributo(atributo.opcionSeleccionada,atributo)" type="button" class="btn btn-warning">Agregar Atributo</button>
+                        </div>
+
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+
+
+        <br>
+
+        <div>
+
+          <div class="col-xs-1" [hidden]="!editable">
+            <button type="submit" class="btn btn-primary" [disabled]="!editable">Guardar</button>
+          </div>
+
+        </div>
+        <div>
+
+          <div class="col-xs-1" [hidden]="editable">
+            <button (click)="editar()" class="btn btn-warning" [disabled]="editable">Editar</button>
+          </div>
+        </div>
+
+
+      </form>
     </div>
+
+  </div>
 
 
 

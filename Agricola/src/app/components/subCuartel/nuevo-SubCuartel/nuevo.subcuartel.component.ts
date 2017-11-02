@@ -15,6 +15,8 @@ import { convertMarkerListToPaths } from '../../mapa/funciones.mapa';
 import { convertMarkerListToCoordenadaList } from '../../mapa/funciones.mapa';
 import { SubCuartelService } from '../../../service/subCuartel-service/subCuartel.service';
 
+import { AtributoService } from '../../../service/atributo-service/atributo.service';
+
 @Component({
   selector: 'app-nuevosubcuartel',
   templateUrl: './nuevo.subcuartel.component.html',
@@ -35,9 +37,13 @@ export class NuevoSubCuartelComponent implements OnInit {
   editable: boolean;
   idCuartel: any = '';
   idSubCuartel: any = '';
+  atributos: any[];
+  atributoSeleccionado: any[];
+  nuevosAtributos: any[];
 
 
   constructor(
+    private atributoService: AtributoService,
     private campoService: CampoService,
     private nuevoCampoService: NuevoCampoService,
     private cuartelService: CuartelService,
@@ -52,6 +58,8 @@ export class NuevoSubCuartelComponent implements OnInit {
       descripcion: '', domicilioCampo: '', estadoCampo: '', hectarea: 0, hectareaCampo: 0,
       idCampo: '', idCuartel: '', nombreCampo: '', proveedorCampo: '', subcuarteles: [], tipoCampo: '',
     };
+
+    this.atributoSeleccionado = [{ nombreOpcion: '' }];
   }
 
   ngOnInit() {
@@ -80,6 +88,7 @@ export class NuevoSubCuartelComponent implements OnInit {
                     console.log('cuartel');
                     console.log(cuart);
                     this.actualizarAreaCuartel();
+                    this.buscarAtributos();
                   });
                 this.actualizarAreaSubCuarteles();
               });
@@ -88,6 +97,58 @@ export class NuevoSubCuartelComponent implements OnInit {
           });
       }
     });
+  }
+
+
+  buscarAtributos() {
+    this.atributos = [];
+    this.atributoService.getAtributosConOpciones()
+      .then((atributo) => {
+        this.atributos = atributo;
+        console.log('Atributos con opciones ');
+        console.log(atributo);
+        this.actualizarAtributosNuevos();
+      });
+  }
+
+  actualizarAtributosNuevos() {
+    this.nuevosAtributos = [];
+    this.nuevosAtributos = this.atributos;
+
+    for (const atributo of this.atributos) {
+      // eliminar de this.atributos los atributos que ya contiene el subCartel
+      for (const atributosViejos of this.subcuartelSeleccionado.atributosSubCuartel) {
+        if (atributo.id === atributosViejos.idAtributo) {
+          const pos = this.nuevosAtributos.indexOf(atributo);
+          const eliminado = this.nuevosAtributos.splice(pos, 1);
+        }
+      }
+    }
+  }
+
+  agregarAtributo(op: any, a: any) {
+    console.log(a);
+    console.log(op);
+    const atributo = {
+      atributoOpcionModelList: a.opciones,
+      fechaInicioAsignacion: null,
+      idAtributo: a.id,
+      idAtributoSubCuartel: null,
+      idOpcion: null,
+      nombreAtributo: a.nombreAtributo,
+      nombreOpcion: a.opcionSeleccionada,
+    };
+    this.subcuartelSeleccionado.atributosSubCuartel.push(atributo);
+    console.log(atributo);
+    this.actualizarAtributosNuevos();
+  }
+
+  quitarAtributo(a: any) {
+    const pos = this.subcuartelSeleccionado.atributosSubCuartel.indexOf(a);
+    this.subcuartelSeleccionado.atributosSubCuartel.splice(pos, 1);
+    this.buscarAtributos();
+    console.log(this.nuevosAtributos);
+    console.log(this.atributos);
   }
 
   // guardar

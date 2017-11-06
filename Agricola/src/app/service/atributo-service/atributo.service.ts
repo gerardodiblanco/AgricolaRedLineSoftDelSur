@@ -31,7 +31,8 @@ urlGetAtributosConOpciones = '/atributo//allActivosConOpciones';
     return this.http.get(`${URL_BASE}${this.urlGetAtributosConOpciones}`)
       .toPromise()
       .then((response) => {
-        console.log(response);
+        console.log('RESPUESTA ATRIBUTOS EN EL SERVVICIO');
+        console.log(response.json());
         return response.json();
 
       })

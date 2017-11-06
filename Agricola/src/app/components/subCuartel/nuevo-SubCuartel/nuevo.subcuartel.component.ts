@@ -37,9 +37,10 @@ export class NuevoSubCuartelComponent implements OnInit {
   editable: boolean;
   idCuartel: any = '';
   idSubCuartel: any = '';
-  atributos: any[];
   atributoSeleccionado: any[];
   nuevosAtributos: any[];
+
+  atributos: any[];
 
 
   constructor(
@@ -103,24 +104,41 @@ export class NuevoSubCuartelComponent implements OnInit {
   buscarAtributos() {
     this.atributos = [];
     this.atributoService.getAtributosConOpciones()
-      .then((atributo) => {
-        this.atributos = atributo;
+      .then((atr) => {
+
+        //    const atr = a;
+
         console.log('Atributos con opciones ');
-        console.log(atributo);
-        this.actualizarAtributosNuevos();
+        console.log(atr);
+
+        this.atributos = (atr);
+        console.log(this.atributos);
+        this.actualizarAtributosNuevos(this.atributos);
       });
   }
 
-  actualizarAtributosNuevos() {
+  actualizarAtributosNuevos(atr: any[]) {
+    //  this.nuevosAtributos = [];
+    //  this.nuevosAtributos = atr;
     this.nuevosAtributos = [];
-    this.nuevosAtributos = this.atributos;
+    for (const a of atr) {
+      this.nuevosAtributos.push(a);
+    }
 
-    for (const atributo of this.atributos) {
+    for (const atributo of atr) {
+      console.log('ATRIBUTO');
+      console.log(atributo);
       // eliminar de this.atributos los atributos que ya contiene el subCartel
-      for (const atributosViejos of this.subcuartelSeleccionado.atributosSubCuartel) {
-        if (atributo.id === atributosViejos.idAtributo) {
-          const pos = this.nuevosAtributos.indexOf(atributo);
-          const eliminado = this.nuevosAtributos.splice(pos, 1);
+      for (const atributoSubCuartel of this.subcuartelSeleccionado.atributosSubCuartel) {
+        console.log('ATRIBUTO SUB CUARTEL');
+        console.log(atributoSubCuartel);
+        console.log('IDs');
+        console.log(atributo.id);
+        console.log(atributoSubCuartel.idAtributo);
+        if (atributo.id === atributoSubCuartel.idAtributo) {
+          console.log('SON IGUALES');
+
+          this.nuevosAtributos.splice(this.nuevosAtributos.indexOf(atributo), 1);
         }
       }
     }
@@ -129,18 +147,19 @@ export class NuevoSubCuartelComponent implements OnInit {
   agregarAtributo(op: any, a: any) {
     console.log(a);
     console.log(op);
-    const atributo = {
+    const atrib = {
       atributoOpcionModelList: a.opciones,
       fechaInicioAsignacion: null,
       idAtributo: a.id,
       idAtributoSubCuartel: null,
       idOpcion: null,
+      idSubCuartel: this.subcuartelSeleccionado.idSubCuartel,
       nombreAtributo: a.nombreAtributo,
       nombreOpcion: a.opcionSeleccionada,
     };
-    this.subcuartelSeleccionado.atributosSubCuartel.push(atributo);
-    console.log(atributo);
-    this.actualizarAtributosNuevos();
+    this.subcuartelSeleccionado.atributosSubCuartel.push(atrib);
+    console.log(atrib);
+    this.actualizarAtributosNuevos(this.atributos);
   }
 
   quitarAtributo(a: any) {

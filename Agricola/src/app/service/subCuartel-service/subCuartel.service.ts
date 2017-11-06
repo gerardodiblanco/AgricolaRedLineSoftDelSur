@@ -45,7 +45,7 @@ export class SubCuartelService {
   }
 
   guardarSubCuartel(subCuartel): Promise<any> {
-
+    console.log('guardar sub Cuartel ');
     console.log(subCuartel);
     console.log(`${URL_BASE}${this.urlGuardarSubCuartel}`);
 

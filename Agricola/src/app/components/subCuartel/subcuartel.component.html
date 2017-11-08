@@ -34,7 +34,7 @@
                     <td>{{subcuartel.hectarea}}</td>
                     <td>{{subcuartel.codigo}}</td>
                     <td>{{subcuartel.variedad}}</td>
-                    <td> <button type="button" class="btn btn-info" [routerLink]="['/nuevo-subCuartel',subcuartel.idSubCuartel]">Ver subcuartel</button></td>
+                    <td> <button type="button" class="btn btn-info" [routerLink]="['/nuevo-subCuartel',subcuartel.idCuartel,subcuartel.idSubCuartel]">Ver subcuartel</button></td>
                     <td> <button type="button" class="btn btn-danger" (click)="eliminarSubCuartel(subcuartel.idSubCuartel)">Eliminar Cuartel</button> </td>
 
                   </tr>
@@ -48,15 +48,15 @@
                 </tfoot>
 
               </table>
-              <button type="button" class="btn btn-primary" [routerLink]="['/nuevo-cuartel']">Crear Cuartel</button>
+              <div *ngIf="cuartel">
+                <button type="button" class="btn btn-primary" [routerLink]="['/nuevo-subCuartel',cuartel.idCuartel]">Crear SubCuartel</button>
+              </div>
               <p></p>
 
 
               <div *ngIf="cuartel">
-                <agm-map [latitude]="latInicio" [longitude]="lngInicio" [zoom]="14" (mapClick)="mapClickeado($event)" (mapRightClick)="eliminarMarcador()"
-                  (draggableCursor)="assets/img/iconoFlecha.png">
-                  <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="marcadorClicleado(m,i)" [latitude]="m.lati" [longitude]="m.longi"
-                    [markerDraggable]="editable" iconUrl="assets/img/iconoMarcador.png" (dragEnd)="posicionFinalMarcador(m,$event,i)">
+                <agm-map [latitude]="latInicio" [longitude]="lngInicio" [zoom]="14" (mapClick)="mapClickeado($event)" (mapRightClick)="eliminarMarcador()" (draggableCursor)="assets/img/iconoFlecha.png">
+                  <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="marcadorClicleado(m,i)" [latitude]="m.lati" [longitude]="m.longi" [markerDraggable]="editable" iconUrl="assets/img/iconoMarcador.png" (dragEnd)="posicionFinalMarcador(m,$event,i)">
                   </agm-marker>
 
                   <agm-polygon [paths]="pathsCampo" fillOpacity=0.1>

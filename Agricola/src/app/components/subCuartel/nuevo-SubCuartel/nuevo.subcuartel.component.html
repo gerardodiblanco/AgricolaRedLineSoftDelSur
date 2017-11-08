@@ -8,8 +8,7 @@
           (mouseOver)="mouseOver($event)">
         </agm-marker>
 
-        <agm-polygon [paths]="pathsCuartel" fillOpacity=0.1 clickable="true" (polyClick)="poligonClickeado($event)" (polyRightClick)="eliminarMarcador()" (polyMouseDown)="polyMouseDown($event)" (polyMouseMove)="polyMouseMove($event)" (polyMouseOut)="polyMouseOut($event)"
-          (polyMouseOver)="polyMouseOver($event)" (polyMouseUp)="polyMouseUp($event)">
+        <agm-polygon [paths]="pathsCuartel" fillOpacity=0.1 clickable="true" (polyClick)="poligonClickeado($event)" (polyRightClick)="eliminarMarcador()">
         </agm-polygon>
 
         <agm-polygon [paths]="arrayPathsSubCuarteles" fillOpacity=0.6 fillColor=#6E6E6E>
@@ -23,7 +22,7 @@
   </div>
 
   <div class="panel panel-primary" *ngIf="subcuartelSeleccionado">
-    <div class="panel-heading">Datos del Cuartel</div>
+    <div class="panel-heading">Datos del SubCuartel</div>
     <div class="panel-body">
       <form (ngSubmit)="onSubmit()" class="form-horizontal">
 
@@ -47,6 +46,19 @@
           </div>
           <input type="number" class="input-sm" required [(ngModel)]="subcuartelSeleccionado.codigo" name="numCod" [disabled]="!editable" />
         </div>
+
+
+
+        <div class="form-group">
+          <div class="col-xs-2">
+            <label for="variedad">Variedad: </label>
+          </div>
+          <select [(ngModel)]="subcuartelSeleccionado.variedad" [ngModelOptions]="{standalone: true}" [disabled]="!editable" class="btn btn-primary">
+            <option *ngFor="let variedad of variedades"  >{{variedad.nombre}}</option>
+          </select>
+
+        </div>
+
 
         <div class="row">
           <div class="col-lg-9">

@@ -7,6 +7,7 @@ import { URL_BASE } from '../../config/url.sevice';
 export class VariedadService {
     urlGetVariedades = '/variedad/all';
     urlEliminarVariedad = '/variedad/remove/';
+    urlGuardarVariedad = '/variedad/save/';
 
     constructor(private http: Http) { }
 
@@ -33,4 +34,22 @@ export class VariedadService {
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);
     }
+
+    guardarVariedad(variedad: any): Promise<any> {
+      console.log(variedad);
+
+      const headers = new Headers({ 'Content-Type': 'application/json' });
+      const options = new RequestOptions({ 'headers': headers });
+
+      return this.http.post(`${URL_BASE}${this.urlGuardarVariedad}`, variedad, options)
+        .map(this.extractData)
+        .toPromise()
+        .catch(this.handleError);
+
+    }
+    private extractData(res: Response) {
+      const body = res.text();
+      return body || {};
+    }
+
 }

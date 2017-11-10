@@ -15,7 +15,7 @@ import {AtributoComponent} from '../app/components/atributo/atributo.component';
 import {OpcionesAtributoComponent} from '../app/components/atributo/opciones-atributo/opciones-atributo.component';
 import {NuevoAtributoComponent} from '../app/components/atributo/nuevo-atributo/nuevo-atributo.component';
 import {NuevaOpcionComponent} from '../app/components/atributo/opciones-atributo/nueva-opcion/nueva-opcion.component';
-
+import { NuevaVariedadComponent } from '../app/components/variedad/nueva-variedad/nueva.variedad.component';
 
 const APP_ROUTES: Routes = [
   { path: 'inicio', component: InicioComponent },
@@ -30,6 +30,7 @@ const APP_ROUTES: Routes = [
   {path: 'nuevo-subCuartel/:idCuartel/:idSubCuartel', component: NuevoSubCuartelComponent},
   {path: 'nuevo-subCuartel/:idCuartel', component: NuevoSubCuartelComponent},
   {path: 'configurar/variedades', component: VariedadComponent},
+  {path: 'configurar/variedad/nueva-variedad', component: NuevaVariedadComponent},
   {path: 'configurar/atributos', component: AtributoComponent},
   {path: 'configurar/atributos/opcionesAtributo/:idAtributo', component: OpcionesAtributoComponent},
   {path: 'configurar/atributos/opcionesAtributo/nueva-opcion/:idAtributo', component: NuevaOpcionComponent},

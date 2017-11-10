@@ -44,6 +44,8 @@ import { NuevoAtributoComponent } from './components/atributo/nuevo-atributo/nue
 import { NuevaOpcionComponent } from './components/atributo/opciones-atributo/nueva-opcion/nueva-opcion.component';
 import {AtributoService} from './service/atributo-service/atributo.service';
 import {OpcionAtributoService} from './service/atributo-service/opcion-atriburo.service';
+import { NuevaVariedadComponent } from '../app/components/variedad/nueva-variedad/nueva.variedad.component';
+
 
 @NgModule({
   declarations: [
@@ -69,6 +71,7 @@ import {OpcionAtributoService} from './service/atributo-service/opcion-atriburo.
     OpcionesAtributoComponent,
     NuevoAtributoComponent,
     NuevaOpcionComponent,
+    NuevaVariedadComponent,
   ],
   imports: [
 BrowserModule,

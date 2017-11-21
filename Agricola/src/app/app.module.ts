@@ -45,7 +45,18 @@ import { NuevaOpcionComponent } from './components/atributo/opciones-atributo/nu
 import {AtributoService} from './service/atributo-service/atributo.service';
 import {OpcionAtributoService} from './service/atributo-service/opcion-atriburo.service';
 import { NuevaVariedadComponent } from '../app/components/variedad/nueva-variedad/nueva.variedad.component';
-
+import {TratoComponent} from './components/trato/trato.component';
+import {TratoService} from './service/trato-service/trato.service';
+import {NuevoTratoComponent} from './components/trato/nuevo-trato/nuevo.trato.componenet';
+import {TareaComponent} from './components/tarea/tarea.component';
+import {TareaService} from './service/tarea-service/tarea.service';
+import {NuevaTareaComponent} from './components/tarea/nueva-tarea/nueva.tarea.component';
+import {MaquinariaComponent} from './components/maquinaria/maquinaria.component';
+import {NuevaMaquinariaComponent} from './components/maquinaria/nueva-maquinaria/nueva.maquinaria.component';
+import  {MaquinariaService} from './service/maquinaria-service/maquinaria.service';
+import {InsumoComponent} from './components/insumo/insumo.component';
+import {InsumoService} from './service/insumo-service/insumo.service';
+import {NuevoInsumoComponent} from './components/insumo/nuevo-insumo/nuevo.insumo.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +83,14 @@ import { NuevaVariedadComponent } from '../app/components/variedad/nueva-varieda
     NuevoAtributoComponent,
     NuevaOpcionComponent,
     NuevaVariedadComponent,
+    TratoComponent,
+    NuevoTratoComponent,
+    TareaComponent,
+    NuevaTareaComponent,
+    MaquinariaComponent,
+    NuevaMaquinariaComponent,
+    InsumoComponent,
+    NuevoInsumoComponent,
   ],
   imports: [
 BrowserModule,
@@ -92,7 +111,9 @@ BrowserModule,
      LocalidadService, ProveedorService,
      CuartelService, NuevoCuartelComponent,
      SubCuartelService, VariedadService,
-     OpcionAtributoService, AtributoService],
+     OpcionAtributoService, AtributoService,
+     TratoService, TareaService, MaquinariaService,
+   InsumoService ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

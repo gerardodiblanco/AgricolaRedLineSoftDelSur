@@ -1,0 +1,32 @@
+
+<div class="panel panel-primary">
+  <div class="panel-heading">Maquinarias</div>
+  <div class="panel-body">
+
+    <form (ngSubmit)="onSubmit()" class="form-horizontal">
+
+      <div class="form-group  ">
+        <div class="col-xs-3">
+          <label for="numCodigo">Codigo:</label>
+        </div>
+        <input type="number" class="input-sm" required [(ngModel)]="maquinaria.codigo" name="numCodigo" [disabled]="!editable" />
+      </div>
+
+      <div class="form-group  ">
+        <div class="col-xs-3">
+          <label for="txtDescripcion">Descripcion:</label>
+        </div>
+        <input type="text" class="input-sm" required [(ngModel)]="maquinaria.descripcion" name="txtDescripcion" [disabled]="!editable" />
+      </div>
+
+
+      <div>
+        <div class="col-xs-1" [hidden]="!editable">
+          <button type="submit" class="btn btn-primary" [disabled]="!editable">Guardar</button>
+        </div>
+      </div>
+      <div>
+      </div>
+    </form>
+  </div>
+</div>

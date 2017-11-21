@@ -16,6 +16,14 @@ import {OpcionesAtributoComponent} from '../app/components/atributo/opciones-atr
 import {NuevoAtributoComponent} from '../app/components/atributo/nuevo-atributo/nuevo-atributo.component';
 import {NuevaOpcionComponent} from '../app/components/atributo/opciones-atributo/nueva-opcion/nueva-opcion.component';
 import { NuevaVariedadComponent } from '../app/components/variedad/nueva-variedad/nueva.variedad.component';
+import {TratoComponent} from './components/trato/trato.component';
+import {NuevoTratoComponent} from './components/trato/nuevo-trato/nuevo.trato.componenet';
+import {TareaComponent} from './components/tarea/tarea.component';
+import {NuevaTareaComponent} from './components/tarea/nueva-tarea/nueva.tarea.component';
+import {MaquinariaComponent} from './components/maquinaria/maquinaria.component';
+import {NuevaMaquinariaComponent} from './components/maquinaria/nueva-maquinaria/nueva.maquinaria.component';
+import {InsumoComponent} from './components/insumo/insumo.component';
+import {NuevoInsumoComponent} from './components/insumo/nuevo-insumo/nuevo.insumo.component';
 
 const APP_ROUTES: Routes = [
   { path: 'inicio', component: InicioComponent },
@@ -35,6 +43,16 @@ const APP_ROUTES: Routes = [
   {path: 'configurar/atributos/opcionesAtributo/:idAtributo', component: OpcionesAtributoComponent},
   {path: 'configurar/atributos/opcionesAtributo/nueva-opcion/:idAtributo', component: NuevaOpcionComponent},
   {path: 'configurar/atributos/nuevo-atributo', component: NuevoAtributoComponent},
+  {path: 'configurar/tratos', component: TratoComponent},
+  {path: 'configurar/tratos/nuevo-trato', component: NuevoTratoComponent},
+  {path: 'configurar/tareas', component: TareaComponent},
+  {path: 'configurar/tareas/nueva-tarea', component: NuevaTareaComponent},
+  {path: 'configurar/maquinarias', component: MaquinariaComponent},
+  {path: 'configurar/maquinarias/nueva-maquinaria', component: NuevaMaquinariaComponent},
+  {path: 'configurar/insumos', component: InsumoComponent},
+  {path: 'configurar/insumos/nuevo-insumo', component: NuevoInsumoComponent},
+
+
   { path: '**', pathMatch: 'full', redirectTo: 'inicio' },
 ];
 

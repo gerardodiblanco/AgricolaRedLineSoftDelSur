@@ -30,7 +30,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let insumo of insumosSeleccionados" >
+                  <tr *ngFor="let insumo of insumosSeleccionados">
                     <td>{{insumo.codigo}}</td>
                     <td>{{insumo.descripcion}}</td>
                   </tr>
@@ -44,7 +44,7 @@
                 </tfoot>
               </table>
             </div>
-            <button type="button" class="btn" [disabled]="!editable" (click)="buscarInsumos()"   data-toggle="modal" data-target="#insumoModal">Añadir Insumos</button>
+            <button type="button" class="btn" [disabled]="!editable" (click)="buscarInsumos()" data-toggle="modal" data-target="#insumoModal">Añadir Insumos</button>
           </div>
 
           <div class="col-sm-4">
@@ -59,10 +59,9 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let maquinaria of maquinariasSeleccionadas" >
+                  <tr *ngFor="let maquinaria of maquinariasSeleccionadas">
                     <td>{{maquinaria.codigo}}</td>
                     <td>{{maquinaria.descripcion}}</td>
-                    <td> <button type="button" class="btn btn-danger" (click)="eliminarMaquinaria(maquinaria.id)">Eliminar</button>                    </td>
                   </tr>
                 </tbody>
                 <tfoot>
@@ -74,7 +73,7 @@
                 </tfoot>
               </table>
             </div>
-            <button type="button" class="btn" (click)="buscarMaquinarias()"   data-toggle="modal" data-target="#maquinariaModal" [disabled]="!editable">Añadir Maquinaria</button>
+            <button type="button" class="btn" (click)="buscarMaquinarias()" data-toggle="modal" data-target="#maquinariaModal" [disabled]="!editable">Añadir Maquinaria</button>
           </div>
 
           <div class="col-sm-4">
@@ -85,13 +84,13 @@
                   <tr class="success">
                     <th>Codigo</th>
                     <th>Descripcio</th>
-                  
+
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let trato of tratosSeleccionados" >
+                  <tr *ngFor="let trato of tratosSeleccionados">
                     <td>{{trato.codigo}}</td>
-                    <td>{{trato.descripcion}}</td>
+                    <td>{{trato.nombre}}</td>
                   </tr>
                 </tbody>
                 <tfoot>
@@ -103,10 +102,10 @@
                 </tfoot>
               </table>
             </div>
-            <button type="button" class="btn" (click)="buscarTratos()"   data-toggle="modal" data-target="#tratoModal" [disabled]="!editable">Añadir Trato</button>
+            <button type="button" class="btn" (click)="buscarTratos()" data-toggle="modal" data-target="#tratoModal" [disabled]="!editable">Añadir Trato</button>
           </div>
         </div>
-<br>
+        <br>
 
         <div class="col-xs-1" [hidden]="!editable">
           <button type="submit" class="btn btn-primary" [disabled]="!editable">Guardar</button>
@@ -119,144 +118,142 @@
 </div>
 
 
-  <!-- Modal Insumos-->
-  <div class="modal fade" id="insumoModal" role="dialog">
-    <div class="modal-dialog">
+<!-- Modal Insumos-->
+<div class="modal fade" id="insumoModal" role="dialog">
+  <div class="modal-dialog">
 
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Insumos</h4>
-        </div>
-        <div class="modal-body">
-          <table class="table table-hover toggle-arrow-tiny">
-            <thead>
-              <tr class="success">
-                <th>Seleccion</th>
-                <th>Codigo</th>
-                <th>Descripcio</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let insumo of insumos" >
-                <td> <label><input type="checkbox"  [(checked)]="insumo.checkbox" (change)="insumo.checkbox = !insumo.checkbox ;actualizarInsumosSeleccionados(insumo)"></label></td>
-                <td>{{insumo.codigo}}</td>
-                <td>{{insumo.descripcion}}</td>
-              </tr>
-            </tbody>
-            <tfoot>
-              <tr>
-                <td colspan="5">
-                  <ul class="pagination pull-right"></ul>
-                </td>
-              </tr>
-            </tfoot>
-          </table>
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-        </div>
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Insumos</h4>
       </div>
+      <div class="modal-body">
+        <table class="table table-hover toggle-arrow-tiny">
+          <thead>
+            <tr class="success">
+              <th>Seleccion</th>
+              <th>Codigo</th>
+              <th>Descripcio</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let insumo of insumos">
+              <td> <label><input type="checkbox"  [(checked)]="insumo.checkbox" (change)="insumo.checkbox = !insumo.checkbox ;actualizarInsumosSeleccionados(insumo)"></label></td>
+              <td>{{insumo.codigo}}</td>
+              <td>{{insumo.descripcion}}</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="5">
+                <ul class="pagination pull-right"></ul>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
 
-    </div>
-  </div>
-
-
-
-  <!-- Modal Maquinaia-->
-  <div class="modal fade" id="maquinariaModal" role="dialog">
-    <div class="modal-dialog">
-
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Maquinaria</h4>
-        </div>
-        <div class="modal-body">
-
-
-          <table class="table table-hover toggle-arrow-tiny">
-            <thead>
-              <tr class="success">
-                <th>Seleccion</th>
-                <th>Codigo</th>
-                <th>Descripcio</th>
-
-
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let maquinaria of maquinarias" >
-                <td> <label><input type="checkbox" value="">{{maquinaria.checkbox}}</label></td>
-                <td>{{maquinaria.codigo}}</td>
-                <td>{{maquinaria.descripcion}}</td>
-              </tr>
-            </tbody>
-            <tfoot>
-              <tr>
-                <td colspan="5">
-                  <ul class="pagination pull-right"></ul>
-                </td>
-              </tr>
-            </tfoot>
-          </table>
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-        </div>
       </div>
-
-    </div>
-  </div>
-
-  <!-- Modal Tratos-->
-  <div class="modal fade" id="tratoModal" role="dialog">
-    <div class="modal-dialog">
-
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Tratos</h4>
-        </div>
-        <div class="modal-body">
-
-
-          <table class="table table-hover toggle-arrow-tiny">
-            <thead>
-              <tr class="success">
-                <th>Seleccion</th>
-                <th>Codigo</th>
-                <th>Descripcio</th>
-
-
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let trato of tratos" >
-                <td> <label><input type="checkbox" [(checked)]="trato.checkbox" (change)="trato.checkbox = !trato.checkbox ;actualizarTratosSeleccionados(trato)"></label></td>
-                <td>{{trato.codigo}}</td>
-                <td>{{trato.descripcion}}</td>
-              </tr>
-            </tbody>
-            <tfoot>
-              <tr>
-                <td colspan="5">
-                  <ul class="pagination pull-right"></ul>
-                </td>
-              </tr>
-            </tfoot>
-          </table>
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" >Cerrar</button>
       </div>
-
     </div>
+
   </div>
+</div>
+
+
+
+<!-- Modal Maquinaia-->
+<div class="modal fade" id="maquinariaModal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Maquinaria</h4>
+      </div>
+      <div class="modal-body">
+
+
+        <table class="table table-hover toggle-arrow-tiny">
+          <thead>
+            <tr class="success">
+              <th>Seleccion</th>
+              <th>Codigo</th>
+              <th>Descripcio</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let maquinaria of maquinarias">
+              <td> <label><input type="checkbox" [(checked)]="maquinaria.checkbox" (change)="maquinaria.checkbox = !maquinaria.checkbox ;actualizarMaquinariasSeleccionadas(maquinaria)"></label></td>
+              <td>{{maquinaria.codigo}}</td>
+              <td>{{maquinaria.descripcion}}</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="5">
+                <ul class="pagination pull-right"></ul>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modal Tratos-->
+<div class="modal fade" id="tratoModal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Tratos</h4>
+      </div>
+      <div class="modal-body">
+
+
+        <table class="table table-hover toggle-arrow-tiny">
+          <thead>
+            <tr class="success">
+              <th>Seleccion</th>
+              <th>Codigo</th>
+              <th>Descripcio</th>
+
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let trato of tratos">
+              <td> <label><input type="checkbox" [(checked)]="trato.checkbox" (change)="trato.checkbox = !trato.checkbox ;actualizarTratosSeleccionados(trato)"></label></td>
+              <td>{{trato.codigo}}</td>
+              <td>{{trato.nombre}}</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="5">
+                <ul class="pagination pull-right"></ul>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+
+  </div>
+</div>

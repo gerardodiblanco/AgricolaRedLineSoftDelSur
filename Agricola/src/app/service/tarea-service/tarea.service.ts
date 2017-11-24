@@ -5,14 +5,24 @@ import { URL_BASE } from '../../config/url.sevice';
 
 @Injectable()
 export class TareaService {
-    urlGetTarea = '/tarea/all';
+    urlGetTareas = '/tarea/all';
+    urlGetTarea = '/tarea/findTarea/';
     urlEliminarTarea = '/tarea/remove/';
     urlGuardarTarea = '/tarea/save/';
 
     constructor(private http: Http) { }
 
     getTareas(): Promise<any> {
-        return this.http.get(`${URL_BASE}${this.urlGetTarea}`)
+        return this.http.get(`${URL_BASE}${this.urlGetTareas}`)
+            .toPromise()
+            .then((response) => { return response.json();
+             })
+            .catch(this.handleError);
+    }
+
+
+    getTarea(id: any): Promise<any> {
+        return this.http.get(`${URL_BASE}${this.urlGetTarea}${id}`)
             .toPromise()
             .then((response) => { return response.json();
              })

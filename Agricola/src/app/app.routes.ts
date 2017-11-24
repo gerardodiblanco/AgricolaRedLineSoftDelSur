@@ -47,6 +47,7 @@ const APP_ROUTES: Routes = [
   {path: 'configurar/tratos/nuevo-trato', component: NuevoTratoComponent},
   {path: 'configurar/tareas', component: TareaComponent},
   {path: 'configurar/tareas/nueva-tarea', component: NuevaTareaComponent},
+  {path: 'configurar/tareas/nueva-tarea/:id', component: NuevaTareaComponent},
   {path: 'configurar/maquinarias', component: MaquinariaComponent},
   {path: 'configurar/maquinarias/nueva-maquinaria', component: NuevaMaquinariaComponent},
   {path: 'configurar/insumos', component: InsumoComponent},

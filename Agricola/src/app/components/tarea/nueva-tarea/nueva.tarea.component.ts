@@ -26,17 +26,40 @@ export class NuevaTareaComponent implements OnInit {
     private insumoService: InsumoService,
     private maquinariaService: MaquinariaService,
     private tratoService: TratoService,
+    private route: ActivatedRoute,
     private router: Router) {
     this.tarea = { 'descripcion': '', 'id': null, 'codigo': 0 };
     this.editable = true;
   }
 
   ngOnInit() {
+
+
+    this.route.params.subscribe((params) => {
+      console.log('params');
+      console.log(params);
+
+      if (params['id']) {
+        console.log('buscar tarea por id');
+        this.tareaService.getTarea(params['id'])
+          .then((tarea) => {
+            console.log(tarea);
+            this.tarea = tarea;
+            this.insumosSeleccionados = this.tarea.insumos;
+            this.maquinariasSeleccionadas = this.tarea.maquinarias;
+            this.tratosSeleccionados = this.tarea.tratos;
+          });
+      }
+    });
+
   }
 
   onSubmit() {
     console.log(this.tarea);
     console.log('onSubmit');
+    this.tarea.insumos = this.insumosSeleccionados;
+    this.tarea.maquinarias = this.maquinariasSeleccionadas;
+    this.tarea.tratos = this.tratosSeleccionados;
     this.tareaService.guardarTarea(this.tarea)
       .then((tarea) => {
         console.log(tarea);
@@ -47,6 +70,7 @@ export class NuevaTareaComponent implements OnInit {
     this.insumoService.getInsumos()
       .then((insumos) => {
         this.insumos = insumos;
+        console.log('buscar insumos');
         console.log(insumos);
         this.actualizarInsumos();
       });
@@ -66,19 +90,39 @@ export class NuevaTareaComponent implements OnInit {
   actualizarInsumosSeleccionados(insumo: any) {
     let isNuevo: boolean = true;
     for (const i of this.insumosSeleccionados) {
-      if (insumo.idInsumo === i.idInsumo) {
+      if (insumo.id === i.id) {
         isNuevo = false;
-        const index: number = this.insumosSeleccionados.indexOf(insumo);
+        console.log('antes de buscar indice');
+        const index = this.buscarIndice(this.insumosSeleccionados, insumo);
+        console.log(index);
+        // this.insumosSeleccionados.indexOf(insumo);
         this.insumosSeleccionados.splice(index, 1);
 
       }
     }
     if (isNuevo) {
       this.insumosSeleccionados.push(insumo);
+
     }
+    console.log('arreglo');
+    console.log(this.insumosSeleccionados);
+
   }
 
-  buscarMaquinaria() {
+  buscarIndice(arreglo: any[], elemento: any) {
+    let index = 0;
+    for (const elementoArreglo of arreglo) {
+      console.log(elementoArreglo.id);
+      console.log(elemento.id);
+      if (elementoArreglo.id === elemento.id) {
+        return index;
+      }
+      index++;
+    }
+    return -1;
+  }
+
+  buscarMaquinarias() {
     this.maquinariaService.getMaquinarias()
       .then((maquinarias) => {
         this.maquinarias = maquinarias;
@@ -88,22 +132,22 @@ export class NuevaTareaComponent implements OnInit {
   }
 
   actualizarMaquinarias() {
-    for (const maquinariaSeleccionada of this.insumosSeleccionados) {
+    for (const maquinariaSeleccionada of this.maquinariasSeleccionadas) {
       for (const maquinaria of this.maquinarias) {
-        if (maquinariaSeleccionada.idMaquinaria === maquinaria.idMaquinaria) {
+        if (maquinariaSeleccionada.idMaquina === maquinaria.idMaquina) {
           maquinaria.checkbox = true;
         }
       }
     }
-    console.log(this.insumos);
+    console.log(this.maquinarias);
   }
 
-  actualizarMaquinariaSeleccionados(maquinaria: any) {
+  actualizarMaquinariasSeleccionadas(maquinaria: any) {
     let isNuevo: boolean = true;
     for (const m of this.maquinariasSeleccionadas) {
-      if (maquinaria.idMaquinaria === m.idMaquinaria) {
+      if (maquinaria.idMaquina === m.idMaquina) {
         isNuevo = false;
-        const index: number = this.maquinariasSeleccionadas.indexOf(maquinaria);
+        const index: number = this.buscarIndice(this.maquinariasSeleccionadas, maquinaria);
         this.maquinariasSeleccionadas.splice(index, 1);
       }
     }
@@ -122,29 +166,29 @@ export class NuevaTareaComponent implements OnInit {
   }
 
 
-    actualizarTratos() {
-      for (const tratoSeleccionado of this.tratosSeleccionados) {
-        for (const trato of this.tratos) {
-          if (tratoSeleccionado.id === trato.id) {
-            trato.checkbox = true;
-          }
+  actualizarTratos() {
+    for (const tratoSeleccionado of this.tratosSeleccionados) {
+      for (const trato of this.tratos) {
+        if (tratoSeleccionado.id === trato.id) {
+          trato.checkbox = true;
         }
       }
-      console.log(this.tratos);
     }
+    console.log(this.tratos);
+  }
 
-    actualizarTratosSeleccionados(trato: any) {
-      let isNuevo: boolean = true;
-      for (const t of this.tratosSeleccionados) {
-        if (trato.id === t.id) {
-          isNuevo = false;
-          const index: number = this.tratosSeleccionados.indexOf(trato);
-          this.tratosSeleccionados.splice(index, 1);
-        }
-      }
-      if (isNuevo) {
-        this.tratosSeleccionados.push(trato);
+  actualizarTratosSeleccionados(trato: any) {
+    let isNuevo: boolean = true;
+    for (const t of this.tratosSeleccionados) {
+      if (trato.id === t.id) {
+        isNuevo = false;
+        const index: number = this.buscarIndice(this.tratosSeleccionados, trato);
+        this.tratosSeleccionados.splice(index, 1);
       }
     }
+    if (isNuevo) {
+      this.tratosSeleccionados.push(trato);
+    }
+  }
 
 }

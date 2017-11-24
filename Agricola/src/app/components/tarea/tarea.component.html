@@ -34,6 +34,7 @@
                   <th>Descripcio</th>
 
                   <th></th>
+                  <th></th>
 
 
                 </tr>
@@ -45,6 +46,7 @@
                   <td>{{tarea.codigo}}</td>
                   <td>{{tarea.descripcion}}</td>
 
+                  <td> <button type="button" class="btn btn-info" [routerLink]="['/configurar/tareas/nueva-tarea/', tarea.id]">Ver Tarea</button></td>
 
                   <td> <button type="button" class="btn btn-danger" (click)="eliminarTarea(tarea.id)">Eliminar Tarea</button>                    </td>
                 </tr>

@@ -30,11 +30,14 @@ insumos: any[];
   }
 
   eliminarInsumo(idInsumo: string) {
+    if (confirm('¿Está seguro que desea eliminar?')) {
+
     this.insumoService.eliminarInsumo(idInsumo)
     .then((insumo) => {
       console.log(insumo);
+
       this.buscarInsumos();
     });
   }
-
+}
 }

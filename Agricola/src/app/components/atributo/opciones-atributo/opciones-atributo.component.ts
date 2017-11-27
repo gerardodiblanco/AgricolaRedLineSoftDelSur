@@ -26,7 +26,7 @@ export class OpcionesAtributoComponent implements OnInit {
     });
   }
   crearOpcion() {
-    
+
     this.router.navigate(['configurar/atributos/opcionesAtributo/nueva-opcion/', this.idAtributo]);
   }
 
@@ -39,11 +39,13 @@ export class OpcionesAtributoComponent implements OnInit {
       }
 
   eliminarOpcion(idOpcion: string) {
+    if (confirm('¿Está seguro que desea eliminar?')) {
+
         this.opcionAtributoService.eliminarOpcion(idOpcion)
           .then((opciones) => {
             console.log(opciones);
             this.buscarOpcionesAtributo(this.idAtributo);
           });
       }
-
+}
 }

@@ -28,14 +28,12 @@
                   <th>Nombre</th>
                 <th></th>
                   <th></th>
-                  <th></th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let atributo of atributos" >
                 <td>{{atributo.nombreAtributo}}</td>
                   <td> <button type="button" class="btn btn-primary"[routerLink]="['/configurar/atributos/opcionesAtributo',atributo.id ]">Ver Opciones</button></td>
-                  <td> <button type="button" class="btn btn-info">Editar</button></td>
                   <td> <button type="button" class="btn btn-danger" (click)="eliminarAtributo(atributo.id)">Eliminar Atributo</button>                    </td>
                 </tr>
               </tbody>

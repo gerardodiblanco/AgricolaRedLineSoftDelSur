@@ -28,11 +28,13 @@ atributos: any[];
   }
 
   eliminarAtributo(idAtributo: string) {
+    if (confirm('¿Está seguro que desea eliminar')) {
+
     this.atributoService.eliminarAtributo(idAtributo)
     .then((atributo) => {
       console.log(atributo);
       this.buscarAtributos();
     });
   }
-
+}
 }

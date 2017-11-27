@@ -79,7 +79,7 @@ export class NuevaTareaComponent implements OnInit {
   actualizarInsumos() {
     for (const insumoseleccionado of this.insumosSeleccionados) {
       for (const insumo of this.insumos) {
-        if (insumoseleccionado.idInsumo === insumo.idInsumo) {
+        if (insumoseleccionado.id === insumo.id) {
           insumo.checkbox = true;
         }
       }
@@ -134,7 +134,7 @@ export class NuevaTareaComponent implements OnInit {
   actualizarMaquinarias() {
     for (const maquinariaSeleccionada of this.maquinariasSeleccionadas) {
       for (const maquinaria of this.maquinarias) {
-        if (maquinariaSeleccionada.idMaquina === maquinaria.idMaquina) {
+        if (maquinariaSeleccionada.id === maquinaria.id) {
           maquinaria.checkbox = true;
         }
       }
@@ -145,7 +145,7 @@ export class NuevaTareaComponent implements OnInit {
   actualizarMaquinariasSeleccionadas(maquinaria: any) {
     let isNuevo: boolean = true;
     for (const m of this.maquinariasSeleccionadas) {
-      if (maquinaria.idMaquina === m.idMaquina) {
+      if (maquinaria.id === m.id) {
         isNuevo = false;
         const index: number = this.buscarIndice(this.maquinariasSeleccionadas, maquinaria);
         this.maquinariasSeleccionadas.splice(index, 1);

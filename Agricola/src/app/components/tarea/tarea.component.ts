@@ -30,11 +30,14 @@ tareas: any[];
   }
 
   eliminarTarea(idTarea: string) {
+    if (confirm('¿Está seguro que desea eliminar?')) {
+
     this.tareaService.eliminarTarea(idTarea)
     .then((tarea) => {
       console.log(tarea);
       this.buscarTareas();
     });
+  }
   }
 
 }

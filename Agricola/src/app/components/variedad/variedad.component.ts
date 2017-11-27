@@ -31,9 +31,12 @@ this.getVariedad();
     });
   }
   eliminarVariedad(idVariedad) {
+    if (confirm('¿Está seguro que desea eliminar?')) {
+
     this.variedadService.eliminarVariedad(idVariedad)
     .then((v) => {
       this.getVariedad();
     });
   }
+}
 }

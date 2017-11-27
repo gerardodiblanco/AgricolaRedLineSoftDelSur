@@ -28,11 +28,13 @@ tratos: any[];
   }
 
   eliminarTrato(idTrato: string) {
+    if (confirm('¿Está seguro que desea eliminar?')) {
+
     this.tratoService.eliminarTrato(idTrato)
     .then((trato) => {
       console.log(trato);
       this.buscarTratos();
     });
   }
-
+}
 }

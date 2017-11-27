@@ -29,11 +29,13 @@ maquinarias: any[];
   }
 
   eliminarMaquinaria(idMaquinaria: string) {
+    if (confirm('¿Está seguro que desea eliminar?')) {
+
     this.maquinariaService.eliminarMaquinaria(idMaquinaria)
     .then((maquinaria) => {
       console.log(maquinaria);
       this.buscarMaquinaria();
     });
   }
-
+}
 }

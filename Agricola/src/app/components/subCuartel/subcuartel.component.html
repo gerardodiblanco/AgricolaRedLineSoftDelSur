@@ -34,8 +34,8 @@
                     <td>{{subcuartel.hectarea}}</td>
                     <td>{{subcuartel.codigo}}</td>
                     <td>{{subcuartel.variedad}}</td>
-                    <td> <button type="button" class="btn btn-info" [routerLink]="['/nuevo-subCuartel',subcuartel.idCuartel,subcuartel.idSubCuartel]">Ver subcuartel</button></td>
-                    <td> <button type="button" class="btn btn-danger" (click)="eliminarSubCuartel(subcuartel.idSubCuartel)">Eliminar Cuartel</button> </td>
+                    <td> <button type="button" class="btn btn-info" [routerLink]="['/nuevo-subCuartel',subcuartel.idCuartel,subcuartel.id]">Ver subcuartel</button></td>
+                    <td> <button type="button" class="btn btn-danger" (click)="eliminarSubCuartel(subcuartel.id)">Eliminar Cuartel</button> </td>
 
                   </tr>
                 </tbody>

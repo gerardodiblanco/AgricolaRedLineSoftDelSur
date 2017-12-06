@@ -24,6 +24,9 @@ import {MaquinariaComponent} from './components/maquinaria/maquinaria.component'
 import {NuevaMaquinariaComponent} from './components/maquinaria/nueva-maquinaria/nueva.maquinaria.component';
 import {InsumoComponent} from './components/insumo/insumo.component';
 import {NuevoInsumoComponent} from './components/insumo/nuevo-insumo/nuevo.insumo.component';
+import {UnidadTrabajoComponent} from './components/unidadTrabajo/unidadTrabajo.component';
+import {NuevaUnidadTrabajoComponent} from './components/unidadTrabajo/nueva-unidadTrabajo/nueva.unidadTrabajo.component';
+
 
 const APP_ROUTES: Routes = [
   { path: 'inicio', component: InicioComponent },
@@ -52,6 +55,8 @@ const APP_ROUTES: Routes = [
   {path: 'configurar/maquinarias/nueva-maquinaria', component: NuevaMaquinariaComponent},
   {path: 'configurar/insumos', component: InsumoComponent},
   {path: 'configurar/insumos/nuevo-insumo', component: NuevoInsumoComponent},
+  {path: 'configurar/unidadTrabajo', component: UnidadTrabajoComponent},
+  {path: 'configurar/unidadTrabajo/nueva-unidadTrabajo/:id', component: NuevaUnidadTrabajoComponent},
 
 
   { path: '**', pathMatch: 'full', redirectTo: 'inicio' },

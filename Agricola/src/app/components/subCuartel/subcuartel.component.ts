@@ -124,11 +124,11 @@ export class SubCuartelComponent implements OnInit {
   }
 
 
-  eliminarSubCuartel(idSubCuartel) {
+  eliminarSubCuartel(id) {
     console.log('idSubCuartel');
-    console.log(idSubCuartel);
+    console.log(id);
     if (confirm('¿Está seguro que desea eliminar el subCuartel?')) {
-      this.subCuartelService.eliminarSubCuartel(idSubCuartel)
+      this.subCuartelService.eliminarSubCuartel(id)
         .then((rta) => {
           console.log(rta);
 

@@ -1,0 +1,270 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">Unidad de Trabajo</div>
+  <div class="panel-body">
+    <form (ngSubmit)="onSubmit()" class="form-horizontal">
+
+      <div class="form-group  ">
+        <div class="col-xs-3">
+          <label for="txtDescripcion">Nombre:</label>
+        </div>
+        <input type="text" class="input-sm" required [(ngModel)]="unidadTrabajo.nombre" name="txtDescripcion" [disabled]="!editable" />
+      </div>
+      <div>
+
+        <div class="row">
+          <div class="col-sm-4">
+            <h2>Personal</h2>
+            <div class="table-responsive">
+              <table class="table table-hover toggle-arrow-tiny">
+                <thead>
+                  <tr class="success">
+                    <th>Nombre</th>
+                    <th>DNI</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let persona of personalSeleccionados">
+                    <td>{{persona.nombre}}</td>
+                    <td>{{persona.dni}}</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="5">
+                      <ul class="pagination pull-right"></ul>
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+            <button type="button" class="btn" [disabled]="!editable" (click)="buscarPersonal()" data-toggle="modal" data-target="#personalModal">Añadir Personal</button>
+          </div>
+
+          <div class="col-sm-4">
+            <h2>Depositos</h2>
+            <div class="table-responsive">
+              <table class="table table-hover toggle-arrow-tiny">
+                <thead>
+                  <tr class="success">
+                    <th>Codigo</th>
+                    <th>Descripcio</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let deposito of depositosSeleccionados">
+                    <td>{{deposito.codigo}}</td>
+                    <td>{{deposito.descripcion}}</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="5">
+                      <ul class="pagination pull-right"></ul>
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+            <button type="button" class="btn" (click)="buscarDepositos()" data-toggle="modal" data-target="#depositoModal" [disabled]="!editable">Añadir Maquinaria</button>
+          </div>
+
+          <div class="col-sm-4">
+            <h2>Sub Cuarteles</h2>
+            <div class="table-responsive">
+              <table class="table table-hover toggle-arrow-tiny">
+                <thead>
+                  <tr class="success">
+                    <th>Codigo</th>
+                    <th>Descripcion</th>
+                    <th>Cuartel</th>
+                    <th>Campo</th>
+
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let subcuartel of subCuartelesSeleccionados">
+                    <td>{{subcuartel.codigoSubCuartel}}</td>
+                    <td>{{subcuartel.descripcion}}</td>
+                    <td>{{subcuartel.nombreCuartel}}</td>
+                    <td>{{subcuartel.nombreCampo}}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="5">
+                      <ul class="pagination pull-right"></ul>
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+            <button type="button" class="btn" (click)="buscarSubCuarteles()" data-toggle="modal" data-target="#subCuartelModal" [disabled]="!editable">Añadir Sub Cuartel</button>
+          </div>
+        </div>
+        <br>
+
+        <div class="col-xs-1" [hidden]="!editable">
+          <button type="submit" class="btn btn-primary" [disabled]="!editable">Guardar</button>
+        </div>
+        <div class="col-xs-1" [hidden]="!editable">
+          <button type="submit" class="btn btn-info" [routerLink]="['/configurar/unidadTrabajo']">Volver</button>
+        </div>
+      </div>
+      <div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<!-- Modal Personal-->
+<div class="modal fade" id="personalModal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Personal</h4>
+      </div>
+      <div class="modal-body">
+        <table class="table table-hover toggle-arrow-tiny">
+          <thead>
+            <tr class="success">
+              <th>Seleccion</th>
+              <th>Nombre</th>
+              <th>DNI</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let persona of personal">
+              <td> <label><input type="checkbox"  [(checked)]="persona.checkbox" (change)="persona.checkbox = !persona.checkbox ;actualizarPersonalSeleccionados(persona)"></label></td>
+              <td>{{persona.nombre}}</td>
+              <td>{{persona.dni}}</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="5">
+                <ul class="pagination pull-right"></ul>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" >Cerrar</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+<!-- Modal Deposito-->
+<div class="modal fade" id="depositoModal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Depositos</h4>
+      </div>
+      <div class="modal-body">
+
+
+        <table class="table table-hover toggle-arrow-tiny">
+          <thead>
+            <tr class="success">
+              <th>Seleccion</th>
+              <th>Codigo</th>
+              <th>Descripcio</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let deposito of depositos">
+              <td> <label><input type="checkbox" [(checked)]="deposito.checkbox" (change)="deposito.checkbox = !deposito.checkbox ;actualizarDepositosSeleccionados(deposito)"></label></td>
+              <td>{{deposito.codigo}}</td>
+              <td>{{deposito.descripcion}}</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="5">
+                <ul class="pagination pull-right"></ul>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modal Sub Cuartel-->
+<div class="modal fade" id="subCuartelModal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Sub Cuarteles</h4>
+      </div>
+      <br>
+      <div class="modal-body">
+
+
+        <table class="table table-hover toggle-arrow-tiny">
+          <thead>
+            <tr class="success">
+              <th>Seleccion</th>
+              <th>Codigo</th>
+              <th>Descripcion</th>
+              <th>Hectarea</th>
+              <th>Variedad</th>
+              <th>Cuartel</th>
+              <th>Campo</th>
+
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let subcuartel of subCuarteles">
+              <td> <label><input type="checkbox" [(checked)]="subcuartel.checkbox" (change)="subcuartel.checkbox = !subcuartel.checkbox ;actualizarSubCuartelesSeleccionados(subcuartel)"></label></td>
+              <td>{{subcuartel.codigoSubCuartel}}</td>
+              <td>{{subcuartel.descripcion}}</td>
+              <td>{{subcuartel.hectarea}}</td>
+              <td>{{subcuartel.variedad}}</td>
+              <td>{{subcuartel.nombreCuartel}}</td>
+              <td>{{subcuartel.nombreCampo}}</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="5">
+                <ul class="pagination pull-right"></ul>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+
+  </div>
+</div>

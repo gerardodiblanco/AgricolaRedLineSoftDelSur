@@ -57,6 +57,11 @@ import  {MaquinariaService} from './service/maquinaria-service/maquinaria.servic
 import {InsumoComponent} from './components/insumo/insumo.component';
 import {InsumoService} from './service/insumo-service/insumo.service';
 import {NuevoInsumoComponent} from './components/insumo/nuevo-insumo/nuevo.insumo.component';
+import {UnidadTrabajoComponent} from './components/unidadTrabajo/unidadTrabajo.component';
+import {NuevaUnidadTrabajoComponent} from './components/unidadTrabajo/nueva-unidadTrabajo/nueva.unidadTrabajo.component';
+import {UnidadTrabajoService} from './service/unidadTrabajo-service/unidadTrabajo.service';
+import {DepositoService} from './service/deposito-service/deposito-service';
+import {PersonalService} from './service/personal-service/personal.service';
 
 @NgModule({
   declarations: [
@@ -91,6 +96,8 @@ import {NuevoInsumoComponent} from './components/insumo/nuevo-insumo/nuevo.insum
     NuevaMaquinariaComponent,
     InsumoComponent,
     NuevoInsumoComponent,
+    UnidadTrabajoComponent,
+    NuevaUnidadTrabajoComponent,
   ],
   imports: [
 BrowserModule,
@@ -113,7 +120,8 @@ BrowserModule,
      SubCuartelService, VariedadService,
      OpcionAtributoService, AtributoService,
      TratoService, TareaService, MaquinariaService,
-   InsumoService ],
+     InsumoService, UnidadTrabajoService, DepositoService,
+     PersonalService ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

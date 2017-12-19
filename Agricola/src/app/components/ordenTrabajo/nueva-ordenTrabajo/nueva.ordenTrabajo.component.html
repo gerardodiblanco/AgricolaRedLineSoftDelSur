@@ -1,0 +1,341 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">Orden de Trabajo</div>
+  <div class="panel-body">
+    <form (ngSubmit)="onSubmit()" class="form-horizontal">
+      <div class="form-group  ">
+        <div class="col-xs-3">
+          <label for="txtDescripcion">Nombre:</label>
+        </div>
+        <input type="text" class="input-sm" required [(ngModel)]="ordenTrabajo.descripcion" name="txtDescripcion" [disabled]="!editable" />
+      </div>
+      <div class="form-group">
+        <!-- Selector de unidad de trabajo -->
+        <select [(ngModel)]="nombreUnidadTrabajoSeleccionada" [ngModelOptions]="{standalone: true}" class="btn btn-primary" (ngModelChange)="seleccionUnidadTrabajo()">
+           <option> - Seleccione una Unidad de Trabajo - </option>
+           <option  *ngFor="let ut of unidadesTrabajo"  >{{ut.nombre}}</option>
+        </select>
+      </div>
+      <!-- unidad de trabajo -->
+      <div *ngIf="unidadTrabajoSeleccionada">
+        <div class="row">
+          <div class="col-sm-4">
+            <h2>Personal</h2>
+            <div class="table-responsive">
+              <table class="table table-hover toggle-arrow-tiny">
+                <thead>
+                  <tr class="success">
+                    <td> <label><input type="checkbox" [(checked)]="personaCheckbox" (change)="personaCheckbox = !personaCheckbox; cambioCheckboxPersona()"></label></td>
+
+                    <th>Nombre</th>
+                    <th>DNI</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let persona of unidadTrabajoSeleccionada.personaless">
+                    <td> <label><input type="checkbox" [(checked)]="persona.checkbox" (change)="persona.checkbox = !persona.checkbox"></label></td>
+                    <td>{{persona.nombre}}</td>
+                    <td>{{persona.dni}}</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="5">
+                      <ul class="pagination pull-right"></ul>
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!--      <button type="button" class="btn" [disabled]="!editable" (click)="buscarPersonal()" data-toggle="modal" data-target="#personalModal">Añadir Personal</button>
+      --></div>
+
+          <div class="col-sm-4">
+            <h2>Depositos</h2>
+            <div class="table-responsive">
+              <table class="table table-hover toggle-arrow-tiny">
+                <thead>
+                  <tr class="success">
+                    <th> <label><input type="checkbox" [(checked)]="depositoCheckbox" (change)="depositoCheckbox = !depositoCheckbox; cambioCheckboxDeposito()"></label></th>
+
+                    <th>Codigo</th>
+                    <th>Descripcio</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let deposito of unidadTrabajoSeleccionada.depositos">
+                    <td> <label><input type="checkbox" [(checked)]="deposito.checkbox" (change)="deposito.checkbox = !deposito.checkbox"></label></td>
+
+                    <td>{{deposito.codigo}}</td>
+                    <td>{{deposito.descripcion}}</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="5">
+                      <ul class="pagination pull-right"></ul>
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!--        <button type="button" class="btn" (click)="buscarDepositos()" data-toggle="modal" data-target="#depositoModal" [disabled]="!editable">Añadir Maquinaria</button>
+    --></div>
+
+          <div class="col-sm-4">
+            <h2>Sub Cuarteles</h2>
+            <div class="table-responsive">
+              <table class="table table-hover toggle-arrow-tiny">
+                <thead>
+                  <tr class="success">
+                    <th> <label><input type="checkbox" [(checked)]="subcuartelCheckbox" (change)="subcuartelCheckbox = !subcuartelCheckbox; cambioCheckboxSubCuartel()"></label></th>
+                    <th>Codigo</th>
+                    <th>Descripcion</th>
+                    <th>Cuartel</th>
+                    <th>Campo</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let subcuartel of unidadTrabajoSeleccionada.subCuarteles">
+                    <td> <label><input type="checkbox" [(checked)]="subcuartel.checkbox" (change)="subcuartel.checkbox = !subcuartel.checkbox"></label></td>
+                    <td>{{subcuartel.codigoSubCuartel}}</td>
+                    <td>{{subcuartel.descripcion}}</td>
+                    <td>{{subcuartel.nombreCuartel}}</td>
+                    <td>{{subcuartel.nombreCampo}}</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="5">
+                      <ul class="pagination pull-right"></ul>
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!--      <button type="button" class="btn" (click)="buscarSubCuarteles()" data-toggle="modal" data-target="#subCuartelModal" [disabled]="!editable">Añadir Sub Cuartel</button>
+      --></div>
+        </div>
+        <br>
+        <br>
+        <br>
+
+        <!-- Lista de tareas seleccionadas -->
+        <div class="table-responsive" *ngIf="verListaTarea">
+          <div class="panel panel-info">
+            <div class="panel-heading">Tareas</div>
+            <div class="panel-body">
+
+              <table class="table table-hover toggle-arrow-tiny">
+                <thead>
+                  <tr class="success">
+                    <th>Codigo</th>
+                    <th>Descripcio</th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let tarea of listaTareas">
+                    <td>{{tarea.codigo}}</td>
+                    <td>{{tarea.descripcion}}</td>
+                    <td> <button type="button" class="btn btn-info" (click)="seleccionarTarea(tarea)" data-dismiss="modal">Ver</button></td>
+                    <td> <button type="button" class="btn btn-danger" (click)="eliminarTarea(tarea)" data-dismiss="modal">Eliminar</button></td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="5">
+                      <ul class="pagination pull-right"></ul>
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+              <br>
+              <div class="col-xs-1" [hidden]="!editable">
+                <button type="button" *ngIf="verListaTarea" class="btn btn-default" [disabled]="!editable" data-toggle="modal" data-target="#tareasModal" (click)="buscarTareas()">Añadir Tarea</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Edicion de una tarea seleccionada -->
+
+        <br>
+        <div class="panel panel-warning" *ngIf="!verListaTarea">
+          <div class="panel-heading">Tarea</div>
+          <div class="panel-body">
+            <form (ngSubmit)="onSubmit()" class="form-horizontal">
+              <div class="form-group  ">
+                <div class="col-xs-3">
+                  <label for="numCodigo">Codigo:</label>
+                </div>
+                <input type="number" class="input-sm" required [(ngModel)]="tareaSeleccionada.codigo" name="numCodigo" [disabled]="true" />
+              </div>
+              <div class="form-group  ">
+                <div class="col-xs-3">
+                  <label for="txtDescripcion">Descripcion:</label>
+                </div>
+                <input type="text" class="input-sm" required [(ngModel)]="tareaSeleccionada.descripcion" name="txtDescripcion" [disabled]="true" />
+              </div>
+              <div class="form-group">
+                <div class="col-sx-3">
+                  <!-- Selector de tratos -->
+                  <select [(ngModel)]="nombreTratoSeleccionado" [ngModelOptions]="{standalone: true}" class="btn btn-info" (ngModelChange)="seleccionTrato()">
+                      <option> - Seleccione un trato - </option>
+                      <option  *ngFor="let trato of tareaSeleccionada.tratos"  >{{trato.nombre}}</option>
+                    </select>
+                </div>
+              </div>
+              <div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <h2>Insumos</h2>
+                    <div class="table-responsive">
+                      <table class="table table-hover toggle-arrow-tiny">
+                        <thead>
+                          <tr class="success">
+                            <th>Codigo</th>
+                            <th>Descripcio</th>
+                            <th>Cantidad</th>
+
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let insumo of tareaSeleccionada.insumos; let i = index">
+                            <td>{{insumo.codigo}}</td>
+                            <td>{{insumo.descripcion}}</td>
+                            <td><input type="number" class="col-xs-4" [(ngModel)]="tareaSeleccionada.insumos[i].cantidad" [ngModelOptions]="{standalone: true}"> </td>
+
+                      </tr>
+                        </tbody>
+                        <tfoot>
+                          <tr>
+                            <td colspan="5">
+                              <ul class="pagination pull-right"></ul>
+                            </td>
+                          </tr>
+                        </tfoot>
+                      </table>
+                    </div>
+                    <!--          <button type="button" class="btn" [disabled]="!editable" (click)="buscarInsumos()" data-toggle="modal" data-target="#insumoModal">Añadir Insumos</button>
+          --></div>
+
+                  <div class="col-sm-6">
+                    <h2>Maquinarias</h2>
+                    <div class="table-responsive">
+                      <table class="table table-hover toggle-arrow-tiny">
+                        <thead>
+                          <tr class="success">
+                            <th>Codigo</th>
+                            <th>Descripcio</th>
+                            <th>Cantidad</th>
+
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let maquinaria of tareaSeleccionada.maquinarias; let i = index">
+                            <td>{{maquinaria.codigo}}</td>
+                            <td>{{maquinaria.descripcion}}</td>
+                            <td><input type="number" class="col-xs-4" [(ngModel)]="tareaSeleccionada.maquinarias[i].cantidad"  [ngModelOptions]="{standalone: true}"> </td>
+
+                          </tr>
+                        </tbody>
+                        <tfoot>
+                          <tr>
+                            <td colspan="5">
+                              <ul class="pagination pull-right"></ul>
+
+                            </td>
+                          </tr>
+                        </tfoot>
+                      </table>
+                    </div>
+                    <!--            <button type="button" class="btn" (click)="buscarMaquinarias()" data-toggle="modal" data-target="#maquinariaModal" [disabled]="!editable">Añadir Maquinaria</button>
+        --></div>
+              </div>
+              <!-- cantidad de personal necesario para realizar la tarea -->
+                      <div class="form-group">
+                        <div class="col-sx-3">
+              <h4>Ingrese la cantidad de personal necesario para realizar la tarea</h4>
+              <input type="number" class="col-xs-2" min="1" [(ngModel)] = "tareaSeleccionada.cantidadPersonal" [ngModelOptions]="{standalone: true}">
+                        </div>
+                      </div>
+                <br>
+                <div class="col-sx-1" [hidden]="!editable">
+                  <button type="button" class="btn btn-warning" (click)="cambiarListaEdicion(true); agregarTarea()" [disabled]="!editable">Guardar</button>
+
+                  <button type="button" class="btn btn-default" (click)="cambiarListaEdicion(true)" [disabled]="!editable">Volver</button>
+                </div>
+              </div>
+              <div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- botones -->
+
+        <br>
+        <div class="col-sx-1" [hidden]="!editable">
+          <button type="submit" class="btn btn-primary" [disabled]="!editable">Guardar</button>
+
+          <button type="button" class="btn btn-info" [routerLink]="['/ordenTrabajo']">Volver</button>
+        </div>
+
+      </div>
+      <div>
+      </div>
+    </form>
+
+  </div>
+  <br>
+  <br>
+</div>
+
+
+<!-- Modal Tarea-->
+<div class="modal fade" id="tareasModal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Tareas</h4>
+      </div>
+      <div class="modal-body">
+        <div class="table-responsive">
+          <table class="table table-hover toggle-arrow-tiny">
+            <thead>
+              <tr class="success">
+                <th>Codigo</th>
+                <th>Descripcio</th>
+                <th></th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let tarea of tareas">
+                <td>{{tarea.codigo}}</td>
+                <td>{{tarea.descripcion}}</td>
+                <td> <button type="button" class="btn btn-info" (click)="seleccionarTarea(tarea)" data-dismiss="modal">Seleccionar</button></td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="5">
+                  <ul class="pagination pull-right"></ul>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>

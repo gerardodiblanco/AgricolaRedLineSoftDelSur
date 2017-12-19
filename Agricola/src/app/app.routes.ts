@@ -26,6 +26,8 @@ import {InsumoComponent} from './components/insumo/insumo.component';
 import {NuevoInsumoComponent} from './components/insumo/nuevo-insumo/nuevo.insumo.component';
 import {UnidadTrabajoComponent} from './components/unidadTrabajo/unidadTrabajo.component';
 import {NuevaUnidadTrabajoComponent} from './components/unidadTrabajo/nueva-unidadTrabajo/nueva.unidadTrabajo.component';
+import {OrdenTrabajoComponent} from './components/ordenTrabajo/ordenTrabajo.component';
+import {NuevaOrdenTrabajoComponent} from './components/ordenTrabajo/nueva-ordenTrabajo/nueva.ordenTrabajo.component';
 
 
 const APP_ROUTES: Routes = [
@@ -57,7 +59,8 @@ const APP_ROUTES: Routes = [
   {path: 'configurar/insumos/nuevo-insumo', component: NuevoInsumoComponent},
   {path: 'configurar/unidadTrabajo', component: UnidadTrabajoComponent},
   {path: 'configurar/unidadTrabajo/nueva-unidadTrabajo/:id', component: NuevaUnidadTrabajoComponent},
-
+  {path: 'ordenTrabajo', component: OrdenTrabajoComponent},
+  {path: 'nueva-ordenTrabajo/:id', component: NuevaOrdenTrabajoComponent},
 
   { path: '**', pathMatch: 'full', redirectTo: 'inicio' },
 ];

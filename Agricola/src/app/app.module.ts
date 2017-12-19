@@ -62,6 +62,10 @@ import {NuevaUnidadTrabajoComponent} from './components/unidadTrabajo/nueva-unid
 import {UnidadTrabajoService} from './service/unidadTrabajo-service/unidadTrabajo.service';
 import {DepositoService} from './service/deposito-service/deposito-service';
 import {PersonalService} from './service/personal-service/personal.service';
+import {OrdenTrabajoService} from './service/ordenTrabajo-service/ordenTrabajo.service';
+import {OrdenTrabajoComponent} from './components/ordenTrabajo/ordenTrabajo.component';
+import {NuevaOrdenTrabajoComponent} from './components/ordenTrabajo/nueva-ordenTrabajo/nueva.ordenTrabajo.component';
+
 
 @NgModule({
   declarations: [
@@ -98,6 +102,8 @@ import {PersonalService} from './service/personal-service/personal.service';
     NuevoInsumoComponent,
     UnidadTrabajoComponent,
     NuevaUnidadTrabajoComponent,
+    OrdenTrabajoComponent,
+    NuevaOrdenTrabajoComponent,
   ],
   imports: [
 BrowserModule,
@@ -121,7 +127,7 @@ BrowserModule,
      OpcionAtributoService, AtributoService,
      TratoService, TareaService, MaquinariaService,
      InsumoService, UnidadTrabajoService, DepositoService,
-     PersonalService ],
+     PersonalService, OrdenTrabajoService ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

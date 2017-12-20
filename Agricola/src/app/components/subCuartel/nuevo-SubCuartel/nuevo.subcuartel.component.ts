@@ -190,7 +190,7 @@ export class NuevoSubCuartelComponent implements OnInit {
     this.actualizarCoordenadas();
     this.subCuartelService.guardarSubCuartel(this.subcuartelSeleccionado)
       .then((rta) => {
-        this.router.navigate(['/cuarteles']);
+        this.router.navigate(['/subCuarteles', this.subcuartelSeleccionado.idCuartel]);
       });
   }
 

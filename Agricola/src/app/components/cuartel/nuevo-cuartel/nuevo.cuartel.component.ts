@@ -104,12 +104,14 @@ export class NuevoCuartelComponent implements OnInit {
   onSubmit() {
     console.log('onSubmit');
     console.log('save cuartel');
+    console.log('campo');
+    console.log(this.campo);
     console.log(this.cuartelSeleccionado);
     this.cuartelSeleccionado.idCampo = this.campo.idCampo;
     this.actualizarCoordenadas();
     this.cuartelService.guardarCuartel(this.cuartelSeleccionado)
       .then((rta) => {
-        this.router.navigate(['/cuarteles']);
+        this.router.navigate(['/cuarteles', this.campo.nombre]);
       });
   }
 

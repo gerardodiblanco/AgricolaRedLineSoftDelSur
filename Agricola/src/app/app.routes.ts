@@ -37,6 +37,7 @@ const APP_ROUTES: Routes = [
   {path: 'nuevo-campo/:id', component: NuevoCampoComponent},
   {path: 'nuevo-campo', component: NuevoCampoComponent},
   {path: 'cuarteles', component: CuartelComponent},
+  {path: 'cuarteles/:nombreCampo', component: CuartelComponent},
   {path: 'nuevo-cuartel/:idCampo', component: NuevoCuartelComponent},
   {path: 'subCuarteles/:idCuartel', component: SubCuartelComponent},
   {path: 'nuevo-cuartel/:idCampo/:idCuartel', component: NuevoCuartelComponent},

@@ -9,7 +9,7 @@ import { convertCoordenadaListToPaths } from '../mapa/funciones.mapa';
 import { convertCoordenadaListToMarkerList } from '../mapa/funciones.mapa';
 import { Marker } from '../mapa/funciones.mapa';
 import { convertElementoConCoordenadasToArrayPaths } from '../mapa/funciones.mapa';
-
+import { ActivatedRoute } from '@angular/router';
 
 import{NuevoCuartelComponent} from '../cuartel/nuevo-cuartel/nuevo.cuartel.component';
 
@@ -35,8 +35,10 @@ export class CuartelComponent implements OnInit {
     private nuevoCampoService: NuevoCampoService,
     private cuartelService: CuartelService,
     private nuevoCuartelComponent: NuevoCuartelComponent,
-    private router: Router) {
+    private router: Router,
+    private route: ActivatedRoute) {
     this.buscarCamposService();
+
   }
 
   buscarCamposService() {
@@ -44,10 +46,21 @@ export class CuartelComponent implements OnInit {
     this.campoService.getcampos()
       .then((campos) => {
         this.campos = campos;
+        this.buscarCuarteles(this.selectorCampo);
       });
   }
 
   ngOnInit() {
+    this.route.params.subscribe((params) => {
+      console.log('params');
+      console.log(params);
+      if ( params['nombreCampo']) {
+        this.selectorCampo = params['nombreCampo'];
+        console.log('dentro del if');
+        console.log(this.selectorCampo);
+        this.buscarCamposService();
+      }
+    });
   }
 
    buscarCuarteles(nombreCampo) {
@@ -62,7 +75,6 @@ export class CuartelComponent implements OnInit {
             console.log(this.cuarteles);
             this.actualizarAreas();
           });
-
       }
     }
 
